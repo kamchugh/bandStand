@@ -7,6 +7,9 @@ import javax.persistence.Id;
 public class User {
 	@Id
 	private int id;
+
 	private String userName;
+
+
 
 }
