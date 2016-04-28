@@ -9,6 +9,9 @@
 		<class>entities.User</class> 
 		<class>entities.Artist</class>
 		<class>entities.Recording</class>
+		<class>entities.Booking</class>
+		<class>entities.Photo</class>
+
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/awesomebandsdb"/>
 				<property name="javax.persistence.jdbc.user" value="root" />
