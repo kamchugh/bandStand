@@ -7,6 +7,8 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
 		<class>entities.User</class> 
+		<class>entities.Artist</class>
+		<class>entities.Recording</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/awesomebandsdb"/>
 				<property name="javax.persistence.jdbc.user" value="root" />
