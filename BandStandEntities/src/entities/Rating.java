@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "RATING")
-class Rating {
+public class Rating {
 	@Id
 	@GeneratedValue
 	private int id;
