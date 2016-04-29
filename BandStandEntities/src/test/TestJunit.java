@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import entities.Artist;
 import entities.Booking;
+import entities.GenreType;
 import entities.User;
 
 public class TestJunit {
@@ -33,7 +34,8 @@ public class TestJunit {
 		Artist a = em.find(Artist.class, 1);
 		assertEquals("HankyPanky", a.getName());
 		assertEquals(1, a.getId());
-		assertEquals("Country", a.getGenres());
+		System.out.println(a.getGenres().get(0));
+		//assertEquals(GenreType.Country, a.getGenres().get(1));
 
 	}
 
@@ -41,13 +43,14 @@ public class TestJunit {
 	public void testUser() {
 
 		User u = em.find(User.class, 1);
-		assertEquals("Test", u.getFirstName());
+		assertEquals("test", u.getFirstName());
 	}
 	
 	@Test
 	public void testBooking() {
 		
 		Booking b = em.find(Booking.class, 1);
+		assertEquals(1, b.getArtist().getId());
 		
 	}
 
