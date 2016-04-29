@@ -41,8 +41,8 @@ public class Photo {
 		this.url = url;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getArtistId() {
+		return artistId;
 	}
 
 }
