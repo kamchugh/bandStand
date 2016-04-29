@@ -19,8 +19,6 @@ public class Recording {
 	
 	private String url;
 	
-	@Column(name="artist_id")
-	private int artistId;
 	
 	@ManyToOne
 	@JoinColumn(name="ARTIST_ID")
@@ -46,13 +44,7 @@ public class Recording {
 		this.url = url;
 	}
 
-	public int getArtistId() {
-		return artistId;
-	}
 
-	public void setArtistId(int artistId) {
-		this.artistId = artistId;
-	}
 
 	public Artist getArtist() {
 		return artist;
@@ -61,6 +53,8 @@ public class Recording {
 	public void setArtist(Artist artist) {
 		this.artist = artist;
 	}
+
+
 	
 	
 
