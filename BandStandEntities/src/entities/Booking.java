@@ -6,13 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "booking")
+@Table(name = "BOOKING")
 public class Booking {
 	@Id
 	@GeneratedValue
@@ -22,21 +23,17 @@ public class Booking {
 	@Temporal(TemporalType.DATE)
 	private Date bookingDate;
 
-	@Column(name = "artist_id")
+	@JoinColumn(name = "artist_id")
 	@ManyToOne
-	private int artistId;
+	private Artist artist;
 
 	private Boolean confirmed;
 
 	@ManyToOne
-	@Column(name = "user_id")
-	private int userId;
+	@JoinColumn(name = "user_id")
+	private User user;
 
-	@Override
-	public String toString() {
-		return "Booking [id=" + id + ", bookingDate=" + bookingDate + ", artistId=" + artistId + ", confirmed="
-				+ confirmed + ", userId=" + userId + "]";
-	}
+	
 
 	public Booking() {
 		super();
@@ -59,12 +56,12 @@ public class Booking {
 		this.bookingDate = bookingDate;
 	}
 
-	public int getArtistId() {
-		return artistId;
+	public Artist getArtist() {
+		return artist;
 	}
 
-	public void setArtistId(int artistId) {
-		this.artistId = artistId;
+	public void setArtist(Artist artist) {
+		this.artist = artist;
 	}
 
 	public Boolean getConfirmed() {
@@ -75,8 +72,8 @@ public class Booking {
 		this.confirmed = confirmed;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
 }

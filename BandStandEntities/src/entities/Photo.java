@@ -1,14 +1,14 @@
 package entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "photo")
+@Table(name = "PHOTO")
 public class Photo {
 	@Id
 	@GeneratedValue
@@ -17,8 +17,8 @@ public class Photo {
 	private String url;
 
 	@ManyToOne
-	@Column(name = "user_id")
-	private int userId;
+	@JoinColumn(name = "artist_id")
+	private Artist artist;
 
 	public Photo() {
 		super();
@@ -41,8 +41,8 @@ public class Photo {
 		this.url = url;
 	}
 
-	public int getUserId() {
-		return userId;
+	public Artist getArtist() {
+		return artist;
 	}
 
 }

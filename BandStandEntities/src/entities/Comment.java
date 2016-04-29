@@ -2,39 +2,43 @@ package entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "RATING")
-class Rating {
+@Table(name = "COMMENTS")
+public class Comment {
+
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private int number;
+//	@Column(name = "artist_id")
+//	private int artistId;
+
+	private String body;
+
+//	@Column(name = "user_id")
+//	private int userId;
 
 	@ManyToOne
 	@JoinColumn(name = "artist_id")
 	private Artist artist;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-
-	public Rating() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	
-	@Override
-	public String toString() {
-		return "Rating [id=" + id + ", number=" + number + ", artist=" + artist + ", user=" + user + "]";
-	}
+	
+	
+	
 
+	public Comment() {
+		super();
+	}
 
 	public int getId() {
 		return id;
@@ -44,24 +48,31 @@ class Rating {
 		this.id = id;
 	}
 
-	public int getNumber() {
-		return number;
+	public String getBody() {
+		return body;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
+	public void setBody(String body) {
+		this.body = body;
 	}
 
 	public Artist getArtist() {
 		return artist;
 	}
 
-	public void setArtistId(Artist artist) {
+	public void setArtist(Artist artist) {
 		this.artist = artist;
 	}
 
 	public User getUser() {
 		return user;
 	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
+	
 
 }
