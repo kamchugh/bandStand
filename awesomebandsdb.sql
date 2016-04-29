@@ -1,3 +1,5 @@
+
+
 -- phpMyAdmin SQL Dump
 -- version 4.4.10
 -- http://www.phpmyadmin.net
@@ -19,7 +21,15 @@ SET time_zone = "+00:00";
 --
 -- Database: `awesomebandsdb`
 --
+DROP DATABASE IF EXISTS `awesomebandsdb`;
 
+CREATE DATABASE IF NOT EXISTS `awesomebandsdb` DEFAULT CHARACTER SET latin1;
+
+ DROP USER `guest`@`localhost`; /* Uncomment to run script again */
+CREATE USER `guest`@`localhost` IDENTIFIED BY 'guest';
+GRANT ALL PRIVILEGES ON awesomebandsdb.* TO `guest`@`localhost`;
+
+USE `awesomebandsdb`;
 -- --------------------------------------------------------
 
 --
