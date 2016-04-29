@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "booking")
+@Table(name = "BOOKING")
 public class Booking {
 	@Id
 	@GeneratedValue

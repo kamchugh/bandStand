@@ -7,6 +7,9 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
 		<class>entities.User</class> 
+		<class>entities.Comment</class> 
+		<class>entities.Artist</class>
+		<class>entities.Recording</class>
 		<class>entities.Booking</class>
 		<class>entities.Photo</class>
 		<class>entities.Rating</class>
