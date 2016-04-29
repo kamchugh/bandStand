@@ -1,7 +1,5 @@
 package entities;
 
-// I ADDED THIS NOTE
-
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -43,8 +41,6 @@ public class Artist {
 	private List<Photo> photos;
 	
 	
-	
- 	
 	
 	public Artist() {
 		
