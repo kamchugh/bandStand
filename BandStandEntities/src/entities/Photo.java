@@ -17,8 +17,8 @@ public class Photo {
 	private String url;
 
 	@ManyToOne
-	@Column(name = "user_id")
-	private int userId;
+	@Column(name = "artist_id")
+	private int artistId;
 
 	public Photo() {
 		super();
