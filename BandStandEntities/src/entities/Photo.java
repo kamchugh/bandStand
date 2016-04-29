@@ -18,7 +18,7 @@ public class Photo {
 
 	@ManyToOne
 	@Column(name = "artist_id")
-	private int artistId;
+	private Artist artist;
 
 	public Photo() {
 		super();
@@ -41,8 +41,8 @@ public class Photo {
 		this.url = url;
 	}
 
-	public int getArtistId() {
-		return artistId;
+	public Artist getArtist() {
+		return artist;
 	}
 
 }

@@ -24,19 +24,15 @@ public class Booking {
 
 	@Column(name = "artist_id")
 	@ManyToOne
-	private int artistId;
+	private Artist artist;
 
 	private Boolean confirmed;
 
 	@ManyToOne
 	@Column(name = "user_id")
-	private int userId;
+	private User user;
 
-	@Override
-	public String toString() {
-		return "Booking [id=" + id + ", bookingDate=" + bookingDate + ", artistId=" + artistId + ", confirmed="
-				+ confirmed + ", userId=" + userId + "]";
-	}
+	
 
 	public Booking() {
 		super();
@@ -59,12 +55,12 @@ public class Booking {
 		this.bookingDate = bookingDate;
 	}
 
-	public int getArtistId() {
-		return artistId;
+	public Artist getArtist() {
+		return artist;
 	}
 
-	public void setArtistId(int artistId) {
-		this.artistId = artistId;
+	public void setArtist(Artist artist) {
+		this.artist = artist;
 	}
 
 	public Boolean getConfirmed() {
@@ -75,8 +71,8 @@ public class Booking {
 		this.confirmed = confirmed;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
 }

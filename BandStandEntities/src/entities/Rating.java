@@ -18,21 +18,23 @@ class Rating {
 
 	@ManyToOne
 	@Column(name = "artist_id")
-	private int artistId;
+	private Artist artist;
 
 	@ManyToOne
 	@Column(name = "user_id")
-	private int userId;
+	private User user;
 
 	public Rating() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	@Override
 	public String toString() {
-		return "Rating [id=" + id + ", number=" + number + ", artistId=" + artistId + ", userId=" + userId + "]";
+		return "Rating [id=" + id + ", number=" + number + ", artist=" + artist + ", user=" + user + "]";
 	}
+
 
 	public int getId() {
 		return id;
@@ -50,16 +52,16 @@ class Rating {
 		this.number = number;
 	}
 
-	public int getArtistId() {
-		return artistId;
+	public Artist getArtist() {
+		return artist;
 	}
 
-	public void setArtistId(int artistId) {
-		this.artistId = artistId;
+	public void setArtistId(Artist artist) {
+		this.artist = artist;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
 }
