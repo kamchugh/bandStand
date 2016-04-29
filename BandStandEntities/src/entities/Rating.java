@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "rating")
+@Table(name = "RATING")
 class Rating {
 	@Id
 	@GeneratedValue
