@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -12,7 +14,6 @@ import org.junit.Test;
 
 import entities.Artist;
 import entities.Booking;
-import entities.GenreType;
 import entities.User;
 
 public class TestJunit {
