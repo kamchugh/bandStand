@@ -48,4 +48,12 @@ public class BandStandJPADAO implements BandStandDAO {
 		Artist artist = em.find(Artist.class, artistID);
 		return artist;
 	}
+
+	public void addArtist(String name, String email, String password) {
+		Artist newArtist = new Artist();
+		newArtist.setName(name);
+		newArtist.setEmail(email);
+		newArtist.setPassword(password);
+		em.persist(newArtist);
+	}
 }

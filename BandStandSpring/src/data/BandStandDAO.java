@@ -14,4 +14,6 @@ public interface BandStandDAO {
 	public List<Artist> getAllArtists();
 
 	public Artist getArtistById(int artistID);
+	
+	public void addArtist(String name, String email, String password);
 }

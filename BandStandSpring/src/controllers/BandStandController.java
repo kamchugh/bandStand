@@ -62,4 +62,13 @@ public class BandStandController {
 		mv.setViewName("index.jsp");
 		return mv;
 	}
+
+	@RequestMapping("addArtist.do")
+	public String addArtist(@RequestParam("artistName") String name, @RequestParam("artistEmail") String email,
+			@RequestParam("artistPassword") String password) {
+		dao.addArtist(name, email, password);
+
+		return "index.jsp";
+
+	}
 }

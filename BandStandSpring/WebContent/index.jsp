@@ -33,5 +33,12 @@
 			type="submit">
 
 	</form>
+	<form action="addArtist.do" method="GET">
+		<div>Add New Artist</div>
+		<input type="text" name="artistName" value="">Name <input
+			type="text" name="artistEmail" value="">Email <input
+			type="password" name="artistPassword" value="">Password <input
+			type="submit">
+	</form>
 </body>
 </html>
