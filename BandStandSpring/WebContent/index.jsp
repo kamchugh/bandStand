@@ -40,5 +40,24 @@
 			type="password" name="artistPassword" value="">Password <input
 			type="submit">
 	</form>
+
+	<form action="deleteArtistById.do" method="GET">
+		<div>deleteArtistById.do</div>
+		<input type="text" name="artistId" value="">artistId <input
+			type="submit">
+	</form>
+	<form action="addUser.do" method="GET">
+		<div>Add New User</div>
+		<input type="text" name="userFirstName" value="">userFirstName
+		<input type="text" name="userLastName" value="">userLastName <input
+			type="text" name="userEmail" value="">Email <input
+			type="password" name="userPassword" value="">Password <input
+			type="submit">
+	</form>
+	<form action="deleteUserById.do" method="GET">
+		<div>deleteUserById.do</div>
+		<input type="text" name="userId" value="">userId <input
+			type="submit">
+	</form>
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import entities.Artist;
+import entities.Booking;
 import entities.User;
 
 @Component
@@ -56,4 +57,25 @@ public class BandStandJPADAO implements BandStandDAO {
 		newArtist.setPassword(password);
 		em.persist(newArtist);
 	}
+
+	public void deleteArtistById(int artistId) {
+		Artist artistToDelete = em.find(Artist.class, artistId);
+		em.remove(artistToDelete);
+	}
+
+	public void addUser(String firstName, String lastName, String email, String password) {
+		User newUser = new User();
+		newUser.setFirstName(firstName);
+		newUser.setLastName(lastName);
+		newUser.setEmail(email);
+		newUser.setPassword(password);
+		newUser.setAccessLevel(1);
+		em.persist(newUser);
+	}
+
+	public void deleteUserById(int userId) {
+		User userToDelete = em.find(User.class, userId);
+		em.remove(userToDelete);
+	}
+
 }

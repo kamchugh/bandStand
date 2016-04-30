@@ -71,4 +71,28 @@ public class BandStandController {
 		return "index.jsp";
 
 	}
+
+	@RequestMapping("deleteArtistById.do")
+	public String deleteArtistById(@RequestParam("artistId") int artistId) {
+		dao.deleteArtistById(artistId);
+
+		return "index.jsp";
+	}
+
+	@RequestMapping("addUser.do")
+	public String addArtist(@RequestParam("userFirstName") String firstName,
+			@RequestParam("userLastName") String lastName, @RequestParam("userEmail") String email,
+			@RequestParam("userPassword") String password) {
+		dao.addUser(firstName, lastName, email, password);
+
+		return "index.jsp";
+
+	}
+
+	@RequestMapping("deleteUserById.do")
+	public String deleteUserById(@RequestParam("userId") int userId) {
+		dao.deleteUserById(userId);
+
+		return "index.jsp";
+	}
 }
