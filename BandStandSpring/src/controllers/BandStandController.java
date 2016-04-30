@@ -52,4 +52,14 @@ public class BandStandController {
 		mv.setViewName("index.jsp");
 		return mv;
 	}
+
+	@RequestMapping("getArtistById.do")
+	public ModelAndView getArtistById(@RequestParam("artistID") int artistID) {
+		ModelAndView mv = new ModelAndView();
+		Artist artist = dao.getArtistById(artistID);
+		System.out.println(artist.getName());
+		mv.addObject(artist);
+		mv.setViewName("index.jsp");
+		return mv;
+	}
 }

@@ -12,4 +12,6 @@ public interface BandStandDAO {
 	public void setUserAccessLevelToUser(int id);
 
 	public List<Artist> getAllArtists();
+
+	public Artist getArtistById(int artistID);
 }

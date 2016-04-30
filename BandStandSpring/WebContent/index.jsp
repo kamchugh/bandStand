@@ -27,5 +27,11 @@
 
 		<input type="submit">
 	</form>
+	<form action="getArtistById.do" method="GET">
+		<div>getArtistById.do</div>
+		<input type="text" name="artistID" value=""> <input
+			type="submit">
+
+	</form>
 </body>
 </html>
