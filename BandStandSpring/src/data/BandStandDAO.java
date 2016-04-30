@@ -25,4 +25,10 @@ public interface BandStandDAO {
 	public void deleteUserById(int userId);
 	
 	public List<Booking> getAllBookings();
+	
+	public List<Booking> getConfirmedBookings();
+	
+	public List<Booking> getUnConfirmedBookings();
+	
+	
 }

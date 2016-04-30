@@ -63,5 +63,13 @@
 		<div>getAllBookings.do</div>
 		<input type="submit">
 	</form>
+	<form action="getConfirmedBookings.do" method="GET">
+		<div>getConfirmedBookings.do</div>
+		<input type="submit">
+	</form>
+	<form action="getUnConfirmedBookings.do" method="GET">
+		<div>getUnConfirmedBookings.do</div>
+		<input type="submit">
+	</form>
 </body>
 </html>

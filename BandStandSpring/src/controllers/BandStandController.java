@@ -107,4 +107,21 @@ public class BandStandController {
 		}
 		return mv;
 	}
+
+	@RequestMapping("getConfirmedBookings.do")
+	public ModelAndView getConfirmedBookings() {
+		ModelAndView mv = new ModelAndView();
+		List<Booking> confirmedBookings = dao.getConfirmedBookings();
+		mv.addObject("confirmedBookings", confirmedBookings);
+		mv.setViewName("index.jsp");
+		return mv;
+	}
+	@RequestMapping("getUnConfirmedBookings.do")
+	public ModelAndView getUnConfirmedBookings() {
+		ModelAndView mv = new ModelAndView();
+		List<Booking> unConfirmedBookings = dao.getUnConfirmedBookings();
+		mv.addObject("unConfirmedBookings", unConfirmedBookings);
+		mv.setViewName("index.jsp");
+		return mv;
+	}
 }
