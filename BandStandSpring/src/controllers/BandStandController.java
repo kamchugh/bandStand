@@ -3,6 +3,8 @@ package controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import data.BandStandDAO;
 
@@ -13,11 +15,19 @@ public class BandStandController {
 	private BandStandDAO dao;
 	
 	@RequestMapping("getUserAccess.do")
-	public String getUserAccessLevel(){
-		System.out.println("inside controller method");
-		dao.setAdminLevelOn(1);
-		return "index.jsp";
+	public ModelAndView getUserAccessLevel(@RequestParam("userID") int id){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index.jsp");
+		int accessLevel = dao.getAdminLevel(id);
+		mv.addObject(accessLevel);
+		System.out.println(accessLevel);
+		
+		return mv;
 	}
 
-	
+	@RequestMapping("setUserAccessToAdmin.do")
+	public String setUserAccessToAdmin(@RequestParam("userID") int id){
+		dao.setUserAccessLevelToAdmin(id);
+		return "index.jsp";
+	}
 }

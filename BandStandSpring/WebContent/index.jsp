@@ -8,8 +8,12 @@
 </head>
 <body>
 <form action = "getUserAccess.do" method = "GET">
+	<input type = "text" name = "userID" value = "">
 	<input type = "submit">
 </form>
-
+<form action = "setUserAccessToAdmin.do" method = "GET">
+	<input type = "text" name = "userID" value = "">
+	<input type = "submit">
+</form>
 </body>
 </html>

@@ -16,11 +16,18 @@ public class BandStandJPADAO implements BandStandDAO {
 	@PersistenceContext
 	private EntityManager em;
 
+	//Gets the admin level(access level).  1 is a regular user, 2 is an admin.
+	public int getAdminLevel(int id){
+		
+		User user = em.find(User.class,  id);
+		int accessLevel = user.getAccessLevel();
+		return accessLevel;
+	}
 	
-	public void setAdminLevelOn(int id){
-		System.out.println("inside DAO method");
-		User user = em.find(User.class,  1);
-		System.out.println(user.getAccessLevel());
+	//Sets a user's access level to Admin (access level 2).
+	public void setUserAccessLevelToAdmin(int id){
+		User user = em.find(User.class,  id);
+		user.setAccessLevel(2);
 	}
 	
 }
