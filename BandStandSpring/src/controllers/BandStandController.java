@@ -126,11 +126,24 @@ public class BandStandController {
 		return mv;
 	}
 
-	//This is the template for updating fields for both user and artist.  Save the id in a hidden field in the jsp
+	// This is the template for updating fields for both user and artist. Save
+	// the id in a hidden field in the jsp
 	@RequestMapping("updateUserEmail.do")
 	public String updateUserEmail(@RequestParam("email") String email, @RequestParam("userId") int userId) {
 		dao.updateUserEmail(userId, email);
 
+		return "index.jsp";
+	}
+
+	@RequestMapping("setConfirmedBooking.do")
+	public String setConfirmedBooking(@RequestParam("bookingId") int id) {
+		dao.setConfirmedBooking(id);
+		return "index.jsp";
+	}
+
+	@RequestMapping("setUnConfirmedBooking.do")
+	public String setUnConfirmedBooking(@RequestParam("bookingId") int id) {
+		dao.setUnConfirmedBooking(id);
 		return "index.jsp";
 	}
 }

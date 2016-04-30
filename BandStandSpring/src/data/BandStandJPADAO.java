@@ -102,4 +102,14 @@ public class BandStandJPADAO implements BandStandDAO {
 		User user = em.find(User.class,  userId);
 		user.setEmail(email);
 	}
+	
+	public void setConfirmedBooking(int id){
+		Booking booking = em.find(Booking.class,  id);
+		booking.setConfirmed(true);
+	}
+	
+	public void setUnConfirmedBooking(int id){
+		Booking booking = em.find(Booking.class,  id);
+		booking.setConfirmed(false);
+	}
 }

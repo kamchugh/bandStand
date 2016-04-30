@@ -21,15 +21,19 @@ public interface BandStandDAO {
 	public void deleteArtistById(int artistId);
 
 	public void addUser(String firstName, String lastName, String email, String password);
-	
+
 	public void deleteUserById(int userId);
-	
+
 	public List<Booking> getAllBookings();
-	
+
 	public List<Booking> getConfirmedBookings();
-	
+
 	public List<Booking> getUnConfirmedBookings();
-	
+
 	public void updateUserEmail(int userId, String email);
-	
+
+	public void setConfirmedBooking(int id);
+
+	public void setUnConfirmedBooking(int id);
+
 }

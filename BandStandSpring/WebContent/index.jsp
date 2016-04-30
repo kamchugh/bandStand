@@ -76,5 +76,15 @@
 		<input type="hidden" name="userId" value="1"> <input
 			type="text" name="email" value=""> <input type="submit">
 	</form>
+	<form action="setConfirmedBooking.do" method="GET">
+		<div>setConfirmedBooking.do</div>
+		<input type="hidden" name="bookingId" value="1"> <input
+			type="submit">
+	</form>
+	<form action="setUnConfirmedBooking.do" method="GET">
+		<div>setUnConfirmedBooking.do</div>
+		<input type="hidden" name="bookingId" value="1"> <input
+			type="submit">
+	</form>
 </body>
 </html>
