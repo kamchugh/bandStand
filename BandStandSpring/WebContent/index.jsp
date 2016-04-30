@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,13 +7,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action = "getUserAccess.do" method = "GET">
-	<input type = "text" name = "userID" value = "">
-	<input type = "submit">
-</form>
-<form action = "setUserAccessToAdmin.do" method = "GET">
-	<input type = "text" name = "userID" value = "">
-	<input type = "submit">
-</form>
+	<form action="getUserAccess.do" method="GET">
+		<div>getUserAccess.do</div>
+		<input type="text" name="userID" value=""> <input
+			type="submit">
+	</form>
+	<form action="setUserAccessToAdmin.do" method="GET">
+		<div>setUserAccessToAdmin.do</div>
+		<input type="text" name="userID" value=""> <input
+			type="submit">
+	</form>
+	<form action="setUserAccessToUser.do" method="GET">
+		<div>setUserAccessToUser.do</div>
+		<input type="text" name="userID" value=""> <input
+			type="submit">
+	</form>
+	<form action="getAllArtists.do" method="GET">
+		<div>getAllArtists.do</div>
+
+		<input type="submit">
+	</form>
 </body>
 </html>
