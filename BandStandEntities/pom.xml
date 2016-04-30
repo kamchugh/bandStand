@@ -27,31 +27,41 @@
 	</build>
 
 <dependencies>
-
-		<!-- Dependency for mySQL Driver, MySQL Connector/J » 5.1.38 -->
+		<!-- Dependency for Spring MVC -->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.38</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>4.2.5.RELEASE</version>
 		</dependency>
-
-		<!--Dependency for Hibernate Persistence Provider, Hibernate JPA Support 
-			» 5.1.0.Final -->
+		<!-- Dependency for Servlet API -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- Dependency for Hibernate (JPA) -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.1.0.Final</version>
 		</dependency>
-
-		<!-- Dependency for EclipseLink Persistence Provider, EclipseLink JPA » 
-			2.6.2 -->
+		<!-- Dependency for Spring JPA -->
 		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.jpa</artifactId>
-			<version>2.6.2</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>4.2.5.RELEASE</version>
 		</dependency>
-
-
+		<!-- Dependency for MySQL Driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.38</version>
+		</dependency>
 	</dependencies>
 
 </project>
