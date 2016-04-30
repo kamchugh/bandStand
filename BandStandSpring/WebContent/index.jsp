@@ -71,5 +71,10 @@
 		<div>getUnConfirmedBookings.do</div>
 		<input type="submit">
 	</form>
+	<form action="updateUserEmail.do" method="GET">
+		<div>updateUserEmail.do</div>
+		<input type="hidden" name="userId" value="1"> <input
+			type="text" name="email" value=""> <input type="submit">
+	</form>
 </body>
 </html>

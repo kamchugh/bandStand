@@ -30,5 +30,6 @@ public interface BandStandDAO {
 	
 	public List<Booking> getUnConfirmedBookings();
 	
+	public void updateUserEmail(int userId, String email);
 	
 }

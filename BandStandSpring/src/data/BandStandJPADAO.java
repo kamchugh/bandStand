@@ -97,4 +97,9 @@ public class BandStandJPADAO implements BandStandDAO {
 		return bookings;
 				
 	}
+	
+	public void updateUserEmail(int userId, String email){
+		User user = em.find(User.class,  userId);
+		user.setEmail(email);
+	}
 }

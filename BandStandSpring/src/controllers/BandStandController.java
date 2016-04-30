@@ -116,6 +116,7 @@ public class BandStandController {
 		mv.setViewName("index.jsp");
 		return mv;
 	}
+
 	@RequestMapping("getUnConfirmedBookings.do")
 	public ModelAndView getUnConfirmedBookings() {
 		ModelAndView mv = new ModelAndView();
@@ -123,5 +124,13 @@ public class BandStandController {
 		mv.addObject("unConfirmedBookings", unConfirmedBookings);
 		mv.setViewName("index.jsp");
 		return mv;
+	}
+
+	//This is the template for updating fields for both user and artist.  Save the id in a hidden field in the jsp
+	@RequestMapping("updateUserEmail.do")
+	public String updateUserEmail(@RequestParam("email") String email, @RequestParam("userId") int userId) {
+		dao.updateUserEmail(userId, email);
+
+		return "index.jsp";
 	}
 }
