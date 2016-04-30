@@ -27,11 +27,20 @@
 
 		<input type="submit">
 	</form>
+	<form action="getAllUsers.do" method="GET">
+		<div>getAllUsers.do</div>
+
+		<input type="submit">
+	</form>
 	<form action="getArtistById.do" method="GET">
 		<div>getArtistById.do</div>
 		<input type="text" name="artistID" value=""> <input
 			type="submit">
-
+	</form>
+	<form action="getUserById.do" method="GET">
+		<div>getUserById.do</div>
+		<input type="text" name="userID" value=""> <input
+			type="submit">
 	</form>
 	<form action="addArtist.do" method="GET">
 		<div>Add New Artist</div>

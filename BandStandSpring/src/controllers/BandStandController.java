@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import data.BandStandDAO;
 import entities.Artist;
 import entities.Booking;
+import entities.User;
 
 @Controller
 public class BandStandController {
@@ -53,12 +54,34 @@ public class BandStandController {
 		return mv;
 	}
 
+	@RequestMapping("getAllUsers")
+	public ModelAndView getAllUsers() {
+		ModelAndView mv = new ModelAndView();
+		List<User> allUsers = dao.getAllUsers();
+		for (User user : allUsers) {
+			System.out.println(user.getFirstName());
+		}
+		mv.addObject("allUsers", allUsers);
+		mv.setViewName("index.jsp");
+		return mv;
+	}
+
 	@RequestMapping("getArtistById.do")
 	public ModelAndView getArtistById(@RequestParam("artistID") int artistID) {
 		ModelAndView mv = new ModelAndView();
 		Artist artist = dao.getArtistById(artistID);
 		System.out.println(artist.getName());
 		mv.addObject(artist);
+		mv.setViewName("index.jsp");
+		return mv;
+	}
+
+	@RequestMapping("getUserById.do")
+	public ModelAndView getUserById(@RequestParam("userID") int userID) {
+		ModelAndView mv = new ModelAndView();
+		User user = dao.getUserById(userID);
+		System.out.println(user.getFirstName());
+		mv.addObject(user);
 		mv.setViewName("index.jsp");
 		return mv;
 	}
