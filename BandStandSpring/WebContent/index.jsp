@@ -59,5 +59,9 @@
 		<input type="text" name="userId" value="">userId <input
 			type="submit">
 	</form>
+	<form action="getAllBookings.do" method="GET">
+		<div>getAllBookings.do</div>
+		<input type="submit">
+	</form>
 </body>
 </html>

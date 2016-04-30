@@ -77,5 +77,12 @@ public class BandStandJPADAO implements BandStandDAO {
 		User userToDelete = em.find(User.class, userId);
 		em.remove(userToDelete);
 	}
+	
+	public List<Booking> getAllBookings(){
+		String query = "Select b from Booking b";
+		List<Booking> bookings = em.createQuery(query, Booking.class).getResultList();
+		return bookings;
+				
+	}
 
 }

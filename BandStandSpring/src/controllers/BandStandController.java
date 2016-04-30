@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.List;
 
-import org.eclipse.jdt.internal.compiler.ast.Assignment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.BandStandDAO;
 import entities.Artist;
+import entities.Booking;
 
 @Controller
 public class BandStandController {
@@ -94,5 +94,17 @@ public class BandStandController {
 		dao.deleteUserById(userId);
 
 		return "index.jsp";
+	}
+
+	@RequestMapping("getAllBookings.do")
+	public ModelAndView getAllBookings() {
+		ModelAndView mv = new ModelAndView();
+		List<Booking> bookings = dao.getAllBookings();
+		mv.addObject("bookings", bookings);
+		mv.setViewName("index.jsp");
+		for (Booking booking : bookings) {
+			System.out.println(booking.getId());
+		}
+		return mv;
 	}
 }
