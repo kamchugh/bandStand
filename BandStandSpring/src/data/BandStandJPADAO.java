@@ -179,13 +179,13 @@ public class BandStandJPADAO implements BandStandDAO {
 	}
 
 	public List<Booking> getConfirmedBookings(){
-		String query = "Select b from Booking b where confirmed = false";
+		String query = "Select b from Booking b where confirmed = true";
 		List<Booking> bookings = em.createQuery(query, Booking.class).getResultList();
 		return bookings;
 				
 	}
 	public List<Booking> getUnConfirmedBookings(){
-		String query = "Select b from Booking b where confirmed = true";
+		String query = "Select b from Booking b where confirmed = false";
 		List<Booking> bookings = em.createQuery(query, Booking.class).getResultList();
 		return bookings;
 				
