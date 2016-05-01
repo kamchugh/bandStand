@@ -85,11 +85,15 @@ public class BandStandController {
 	}
 
 	@RequestMapping("getArtistById.do")
-	public ModelAndView getArtistById(@RequestParam("artistID") int artistID) {
-		System.out.println("This is the id I have: " + artistID);
+	public ModelAndView getArtistById(@RequestParam("artistID") int artistID,
+			@RequestParam("userID") int userID) {
+		System.out.println("This is the artist id I have: " + artistID);
+		System.out.println("This is the user id I have: " + userID);
 		ModelAndView mv = new ModelAndView();
+		User user = dao.getUserById(userID);
 		Artist artist = dao.getArtistById(artistID);
 		System.out.println(artist.getName());
+		mv.addObject("user", user);
 		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
@@ -189,9 +193,14 @@ public class BandStandController {
 	// Kaylee's methods
 
 	@RequestMapping("addComment.do")
-	public ModelAndView addComment(@RequestParam("artistID") int artistID, @RequestParam("comment") String comment) {
+
+	public ModelAndView addComment(@RequestParam("artistID") int artistID,
+			@RequestParam("comment") String comment,
+			@RequestParam("userID") int userID) {
+
 		System.out.println("I get into the add comment method");
-		dao.addComment(artistID, comment, 1);
+		System.out.println("This is the userID I have: " + userID);
+		dao.addComment(artistID, comment, userID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("comment", comment);
 		mv.setViewName("ArtistPage.jsp");
@@ -199,9 +208,10 @@ public class BandStandController {
 	}
 
 	@RequestMapping("addRating.do")
-	public ModelAndView addRating(@RequestParam("artistID") int artistID, @RequestParam("rating") int rating) {
+	public ModelAndView addRating(@RequestParam("artistID") int artistID, @RequestParam("rating") int rating,
+			@RequestParam("userID") int userID) {
 		System.out.println("I get into the add rating method");
-		dao.addRating(artistID, rating);
+		dao.addRating(artistID, rating, userID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("rating", rating);
 		mv.setViewName("ArtistPage.jsp");
@@ -210,7 +220,8 @@ public class BandStandController {
 
 	@RequestMapping("addBooking.do")
 	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("month") String month,
-			@RequestParam("day") String day, @RequestParam("year") String year) {
+			@RequestParam("day") String day, @RequestParam("year") String year,
+			@RequestParam("userID") int userID) {
 		System.out.println("I'm in the add date method");
 		ModelAndView mv = new ModelAndView();
 		// Date date = new Date();
@@ -219,8 +230,7 @@ public class BandStandController {
 		try {
 			Date newdate = dateFormat.parse(dateString);
 			System.out.println("Im going to try to add the booking now");
-			dao.addBooking(artistID, newdate);
-
+			dao.addBooking(artistID, newdate, userID);
 			System.out.println("I've added the booking");
 			// this is acting funky - showing a "01" for month of "10"
 			mv.addObject("date", newdate);

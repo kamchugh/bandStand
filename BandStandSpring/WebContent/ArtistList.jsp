@@ -28,9 +28,12 @@
 		${individualArtist.firstName}
 		${individualArtist.lastName}
 		<form action="getArtistById.do" method="GET">
-		
+		<input
+			type="text" name="userID" value="${user.id}">
+			<input
+			type="text" name="artistID" value="1">
 		 <input
-			type="submit" name="artistID" value="1">
+			type="submit"  value="submit">
 	</form> 
 		
 		</c:if>

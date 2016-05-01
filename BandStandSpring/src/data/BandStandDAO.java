@@ -52,9 +52,9 @@ public interface BandStandDAO {
 
 	public void addComment(int artistID, String description, int userID);
 
-	public void addRating(int artistID, int rating);
+	public void addRating(int artistID, int rating, int userID);
 
-	public void addBooking(int artistID, Date date);
+	public void addBooking(int artistID, Date date, int userID);
 	
 	public List<Rating> getAllRatings(int artistID);
 	

@@ -65,4 +65,16 @@ public class Rating {
 		return user;
 	}
 
+
+	public void setArtist(Artist artist) {
+		this.artist = artist;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
+
 }
