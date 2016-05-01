@@ -28,7 +28,8 @@
 		${individualArtist.firstName}
 		${individualArtist.lastName}
 		<form action="getArtistById.do" method="GET">
-		
+		<input
+			type="hidden" name="userID" value="${user.id}">
 		 <input
 			type="submit" name="artistID" value="1">
 	</form> 

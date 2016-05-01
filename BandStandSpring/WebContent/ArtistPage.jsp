@@ -12,6 +12,8 @@
 </body>
 ${artist.name} ${artist.description} ${artist.id}
 
+User id: ${user.id}
+
 <br> Give this artist a rating
 <form action="addRating.do" method="GET">
 	<input type="hidden" name="artistID" value="${artist.id}"> <select

@@ -70,11 +70,14 @@ public class BandStandController {
 	}
 
 	@RequestMapping("getArtistById.do")
-	public ModelAndView getArtistById(@RequestParam("artistID") int artistID) {
+	public ModelAndView getArtistById(@RequestParam("artistID") int artistID,
+			@RequestParam("userID") int userID) {
 		System.out.println("This is the id I have: " + artistID);
 		ModelAndView mv = new ModelAndView();
+		User user = dao.getUserById(userID);
 		Artist artist = dao.getArtistById(artistID);
 		System.out.println(artist.getName());
+		mv.addObject("user", user);
 		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
