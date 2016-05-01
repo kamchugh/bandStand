@@ -1,5 +1,6 @@
 package data;
 
+import java.util.Date;
 import java.util.List;
 
 import entities.Artist;
@@ -48,6 +49,12 @@ public interface BandStandDAO {
 
 	public User getUserByEmail(String email);
 
-//	public List<Rating> getRatingByArtist(Artist artist);
+	public void addComment(int artistID, String description, int userID);
+
+	public void addRating(int artistID, int rating);
+
+	public void addBooking(int artistID, Date date);
+
+	// public List<Rating> getRatingByArtist(Artist artist);
 
 }

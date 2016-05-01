@@ -1,5 +1,8 @@
 package controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +53,7 @@ public class BandStandController {
 			System.out.println(artist.getName());
 		}
 		mv.addObject("allArtists", allArtists);
-		mv.setViewName("index.jsp");
+		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
 
@@ -68,11 +71,12 @@ public class BandStandController {
 
 	@RequestMapping("getArtistById.do")
 	public ModelAndView getArtistById(@RequestParam("artistID") int artistID) {
+		System.out.println("This is the id I have: " + artistID);
 		ModelAndView mv = new ModelAndView();
 		Artist artist = dao.getArtistById(artistID);
 		System.out.println(artist.getName());
-		mv.addObject(artist);
-		mv.setViewName("index.jsp");
+		mv.addObject("artist", artist);
+		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
 
@@ -169,8 +173,55 @@ public class BandStandController {
 		dao.setUnConfirmedBooking(id);
 		return "index.jsp";
 	}
-	
-	// Kaylee's methods 
+
+	// Kaylee's methods
+
+	@RequestMapping("addComment.do")
+	public ModelAndView addComment(@RequestParam("artistID") int artistID,
+			@RequestParam("comment") String comment) {
+		System.out.println("I get into the add comment method");
+		dao.addComment(artistID, comment, 1);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("comment", comment);
+		mv.setViewName("ArtistPage.jsp");
+		return mv;
+	}
+
+	@RequestMapping("addRating.do")
+	public ModelAndView addRating(@RequestParam("artistID") int artistID, @RequestParam("rating") int rating) {
+		System.out.println("I get into the add rating method");
+		dao.addRating(artistID, rating);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("rating", rating);
+		mv.setViewName("ArtistPage.jsp");
+		return mv;
+	}
+
+	@RequestMapping("addBooking.do")
+	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("month") String month,
+			@RequestParam("day") String day, @RequestParam("year") String year) {
+		System.out.println("I'm in the add date method");
+		ModelAndView mv = new ModelAndView();
+		// Date date = new Date();
+		String dateString = year + "-" + month + "-" + day;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+		try {
+			Date newdate = dateFormat.parse(dateString);
+			System.out.println("Im going to try to add the booking now");
+			dao.addBooking(artistID, newdate);
+			
+			System.out.println("I've added the booking");
+			
+			mv.addObject("date", newdate);
+			mv.setViewName("ArtistPage.jsp");
+
+		} catch (ParseException e) {
+			System.out.println("I couldn't parse this");
+			e.printStackTrace();
+		}
+		return mv;
+	}
+
 	@RequestMapping("getUserByEmail.do")
 	public ModelAndView ValidatePassword(@RequestParam("email") String email,
 			@RequestParam("password") String password) {
@@ -184,15 +235,14 @@ public class BandStandController {
 			mv.addObject("user", user);
 			mv.setViewName("ArtistList.jsp");
 			return mv;
-		}
-		else {
+		} else {
 			System.out.println("I don't match");
 			ModelAndView mv = new ModelAndView();
 			mv.addObject("user", user);
 			mv.setViewName("index.jsp");
 			return mv;
 		}
-		
+
 	}
-	
+
 }

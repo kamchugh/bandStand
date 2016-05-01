@@ -1,5 +1,6 @@
 package data;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import entities.Artist;
 import entities.Booking;
+import entities.Comment;
 import entities.Rating;
 import entities.User;
 
@@ -92,6 +94,47 @@ public class BandStandJPADAO implements BandStandDAO {
 		newArtist.setEmail(email);
 		newArtist.setPassword(password);
 		em.persist(newArtist);
+	}
+	
+	public void addComment(int artistID, String commentBody, int userID) {
+		System.out.println("I try to add a comment in the DAO");
+		Artist artistComment = getArtistById(artistID);
+		User user = getUserById(userID);
+		Comment comment = new Comment();
+		comment.setArtist(artistComment);
+		System.out.println("I've set the artist to " + artistComment.getName());
+		System.out.println(commentBody);
+		comment.setBody(commentBody);
+		comment.setUser(user);
+		System.out.println("I've set the commentBody to " + commentBody); // this is where the error is
+		//comment.setUser(userComment); - finish this when you get the id to transfer
+		em.persist(comment);
+		System.out.println("I have persisted the comment");
+	}
+	
+	public void addRating(int artistID, int rating) {
+		System.out.println("I get into the addRating DAO");
+		Artist artistRating = getArtistById(artistID);
+		System.out.println("Ive gotten artist " + artistRating.getName());
+		Rating ratingNumber = new Rating();
+		ratingNumber.setNumber(rating);
+		ratingNumber.setArtistId(artistRating);
+		//comment.setUser(userComment); - finish this when you get the id to transfer
+		em.persist(ratingNumber);
+		System.out.println("I've added the rating");
+	}
+	
+	public void addBooking(int artistID, Date date) {
+		System.out.println("In the add booking DAO");
+		Artist artistDate = getArtistById(artistID);
+		
+		Booking booking = new Booking();
+		booking.setArtist(artistDate);
+		booking.setBookingDate(date);
+		em.persist(booking);
+		
+		//comment.setUser(userComment); - finish this when you get the id to transfer
+//		em.persist(ratingNumber);
 	}
 
 	public void deleteArtistById(int artistId) {
