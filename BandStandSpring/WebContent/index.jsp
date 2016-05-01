@@ -139,7 +139,6 @@
 	<br>
 	<br>
 
-
 	<form action="searchByGenre.do" method="GET">
 		<div>Search By Genre</div>
 		<input type="text" name="genre" value="EDM"> <input

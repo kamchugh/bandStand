@@ -129,14 +129,7 @@ public class BandStandJPADAO implements BandStandDAO {
 		System.out.println(commentBody);
 		comment.setBody(commentBody);
 		comment.setUser(user);
-		System.out.println("I've set the commentBody to " + commentBody); // this
-																			// is
-																			// where
-																			// the
-																			// error
-																			// is
-		// comment.setUser(userComment); - finish this when you get the id to
-		// transfer
+		System.out.println("I've set the commentBody to " + commentBody); 											
 		em.persist(comment);
 		System.out.println("I have persisted the comment");
 	}

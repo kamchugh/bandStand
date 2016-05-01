@@ -69,8 +69,5 @@ public interface BandStandDAO {
 
 	// public List<Booking> getAllBookingsByArtist(int artistID);
 
-	// public List<Booking> getAllBookingsByUser(int userID);
-
-	// public List<Rating> getRatingByArtist(Artist artist);
 
 }

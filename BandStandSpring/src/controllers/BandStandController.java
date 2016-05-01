@@ -17,6 +17,7 @@ import entities.Artist;
 import entities.Booking;
 import entities.Comment;
 import entities.Genre;
+import entities.Rating;
 import entities.User;
 
 @Controller
@@ -88,8 +89,7 @@ public class BandStandController {
 	}
 
 	@RequestMapping("getArtistById.do")
-	public ModelAndView getArtistById(@RequestParam("artistID") int artistID,
-			@RequestParam("userID") int userID) {
+	public ModelAndView getArtistById(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
 		System.out.println("This is the artist id I have: " + artistID);
 		System.out.println("This is the user id I have: " + userID);
 		ModelAndView mv = new ModelAndView();
@@ -197,8 +197,7 @@ public class BandStandController {
 
 	@RequestMapping("addComment.do")
 
-	public ModelAndView addComment(@RequestParam("artistID") int artistID,
-			@RequestParam("comment") String comment,
+	public ModelAndView addComment(@RequestParam("artistID") int artistID, @RequestParam("comment") String comment,
 			@RequestParam("userID") int userID) {
 
 		System.out.println("I get into the add comment method");
@@ -223,8 +222,7 @@ public class BandStandController {
 
 	@RequestMapping("addBooking.do")
 	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("month") String month,
-			@RequestParam("day") String day, @RequestParam("year") String year,
-			@RequestParam("userID") int userID) {
+			@RequestParam("day") String day, @RequestParam("year") String year, @RequestParam("userID") int userID) {
 		System.out.println("I'm in the add date method");
 		ModelAndView mv = new ModelAndView();
 		// Date date = new Date();
@@ -245,7 +243,7 @@ public class BandStandController {
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping("getCommentsByBand.do")
 	public ModelAndView getCommentsByBand(@RequestParam("artistID") int artistID) {
 		System.out.println("I enter the get all comments method");
@@ -258,8 +256,25 @@ public class BandStandController {
 			System.out.println(comment);
 		}
 		ModelAndView mv = new ModelAndView();
-		
+
 		mv.addObject("comments", comments);
+		mv.setViewName("ArtistPage.jsp");
+		return mv;
+	}
+
+	@RequestMapping("getRatingsByBand.do")
+	public ModelAndView getRatingsByBand(@RequestParam("artistID") int artistID) {
+		System.out.println("I enter the get all comments method");
+		List<Rating> ratings = new ArrayList();
+		List<Rating> daoRatings = new ArrayList();
+		daoRatings = dao.getAllRatings(artistID);
+		System.out.println("I get below the getAllComments method in the controller");
+		ratings.addAll(daoRatings);
+		for (Rating rating : daoRatings) {
+			System.out.println(rating);
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("ratings", ratings);
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
@@ -286,53 +301,53 @@ public class BandStandController {
 		}
 
 	}
-	
-	// bruno's methods 
-	
-	 @RequestMapping("searchByName.do")
-	    public ModelAndView getArtistById(@RequestParam("name") String name) {
-	        ModelAndView mv = new ModelAndView();
-	        Artist artist = dao.searchByName(name);
-	    
-	        List<Artist> allArtists = dao.getAllArtists();
-	        for (Artist artist2 : allArtists) {
-	            System.out.println(artist2.getName());
-	        }
-	        mv.addObject("all", allArtists);
-	    
-	        mv.addObject("artist", artist);
-	        mv.setViewName("index.jsp");
-	        return mv;
-	    }
-	    
-	    @RequestMapping("searchBookingsByUserId.do")
-	    public ModelAndView getBookings(@RequestParam("userId") int userId) {
-	        ModelAndView mv = new ModelAndView();
-	        List<Booking> bookings = dao.getBookings(userId);
-	        mv.addObject("bookings", bookings);
-	        mv.setViewName("index.jsp");
-	        return mv;
-	    }
-	    
-	    @RequestMapping("searchByGenre.do")
-	    public ModelAndView searchByGenre(@RequestParam("genre") String genreType) {
-	        ModelAndView mv = new ModelAndView();
-	        List<Genre> genres = dao.searchByGenre(genreType);
-	        mv.addObject("allg", genres);
-	        mv.setViewName("index.jsp");
-	        return mv;
-	    }
-	    
-	    @RequestMapping("initialLoad.do")
-	    public ModelAndView initalLoad() {
-	        ModelAndView mv = new ModelAndView();
-	        List<Artist> allArtists = dao.getAllArtists();
-	        for (Artist artist2 : allArtists) {
-	            System.out.println(artist2.getName());
-	        }
-	        mv.addObject("all", allArtists);
-	        mv.setViewName("index.jsp");
-	        return mv;            
-	    } 
+
+	// bruno's methods
+
+	@RequestMapping("searchByName.do")
+	public ModelAndView getArtistById(@RequestParam("name") String name) {
+		ModelAndView mv = new ModelAndView();
+		Artist artist = dao.searchByName(name);
+
+		List<Artist> allArtists = dao.getAllArtists();
+		for (Artist artist2 : allArtists) {
+			System.out.println(artist2.getName());
+		}
+		mv.addObject("all", allArtists);
+
+		mv.addObject("artist", artist);
+		mv.setViewName("index.jsp");
+		return mv;
+	}
+
+	@RequestMapping("searchBookingsByUserId.do")
+	public ModelAndView getBookings(@RequestParam("userId") int userId) {
+		ModelAndView mv = new ModelAndView();
+		List<Booking> bookings = dao.getBookings(userId);
+		mv.addObject("bookings", bookings);
+		mv.setViewName("index.jsp");
+		return mv;
+	}
+
+	@RequestMapping("searchByGenre.do")
+	public ModelAndView searchByGenre(@RequestParam("genre") String genreType) {
+		ModelAndView mv = new ModelAndView();
+		List<Genre> genres = dao.searchByGenre(genreType);
+		mv.addObject("allg", genres);
+		mv.setViewName("index.jsp");
+		return mv;
+	}
+
+	@RequestMapping("initialLoad.do")
+	public ModelAndView initalLoad() {
+		ModelAndView mv = new ModelAndView();
+		List<Artist> allArtists = dao.getAllArtists();
+		for (Artist artist2 : allArtists) {
+			System.out.println(artist2.getName());
+		}
+		mv.addObject("all", allArtists);
+		mv.setViewName("index.jsp");
+		return mv;
+	}
 
 }

@@ -47,9 +47,20 @@ Book this band for a certain date
 		type="submit" name="commentsByBand"
 		value="Get all comments for this artist">
 </form>
+
+<form action="getRatingsByBand.do" method="GET">
+	<input type="text" name="artistID" value="${artist.id}"> <input
+		type="submit" name="RatingsByBand"
+		value="Get all ratings for this artist">
+</form>
 <c:forEach var="comment" items="${comments}">
 	<c:if test="${! empty(comment)}">
 	${comment.body}
+	</c:if>
+</c:forEach>
+<c:forEach var="rating" items="${ratings}">
+	<c:if test="${! empty(rating)}">
+	${rating.number}
 	</c:if>
 </c:forEach>
 </body>
