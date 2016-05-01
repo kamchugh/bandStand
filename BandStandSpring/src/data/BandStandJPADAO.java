@@ -55,6 +55,20 @@ public class BandStandJPADAO implements BandStandDAO {
 //		return ratings;
 //		
 //	}
+	
+	public List<Comment> getAllComments(int artistID) {
+		Artist artist = getArtistById(artistID);
+		String search = "select c from Comment c WHERE u.artistId = '" + artist + "'";
+		List<Comment> allComments = em.createQuery(search, Comment.class).getResultList();
+		return allComments;
+	}
+	
+	public List<Rating> getAllRatings(int artistID) {
+		Artist artist = getArtistById(artistID);
+		String search = "select r from Rating r WHERE r.artistId = '" + artist + "'";
+		List<Rating> allRatings = em.createQuery(search, Rating.class).getResultList();
+		return allRatings;
+	}
 
 	public List<User> getAllUsers() {
 		String search = "select u from User u";

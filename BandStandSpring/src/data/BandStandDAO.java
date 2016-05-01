@@ -5,6 +5,7 @@ import java.util.List;
 
 import entities.Artist;
 import entities.Booking;
+import entities.Comment;
 import entities.Rating;
 import entities.User;
 
@@ -54,6 +55,10 @@ public interface BandStandDAO {
 	public void addRating(int artistID, int rating);
 
 	public void addBooking(int artistID, Date date);
+	
+	public List<Rating> getAllRatings(int artistID);
+	
+	public List<Comment> getAllComments(int artistID);
 
 	// public List<Rating> getRatingByArtist(Artist artist);
 

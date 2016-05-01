@@ -211,7 +211,7 @@ public class BandStandController {
 			dao.addBooking(artistID, newdate);
 			
 			System.out.println("I've added the booking");
-			
+			// this is acting funky - showing a "01" for month of "10"
 			mv.addObject("date", newdate);
 			mv.setViewName("ArtistPage.jsp");
 
