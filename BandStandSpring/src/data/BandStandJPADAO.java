@@ -112,6 +112,7 @@ public class BandStandJPADAO implements BandStandDAO {
 	
 	public void addComment(int artistID, String commentBody, int userID) {
 		System.out.println("I try to add a comment in the DAO");
+		
 		Artist artistComment = getArtistById(artistID);
 		User user = getUserById(userID);
 		Comment comment = new Comment();
@@ -126,25 +127,28 @@ public class BandStandJPADAO implements BandStandDAO {
 		System.out.println("I have persisted the comment");
 	}
 	
-	public void addRating(int artistID, int rating) {
+	public void addRating(int artistID, int rating, int userID) {
 		System.out.println("I get into the addRating DAO");
 		Artist artistRating = getArtistById(artistID);
+		User user = getUserById(userID);
 		System.out.println("Ive gotten artist " + artistRating.getName());
 		Rating ratingNumber = new Rating();
 		ratingNumber.setNumber(rating);
 		ratingNumber.setArtistId(artistRating);
+		ratingNumber.setUser(user);
 		//comment.setUser(userComment); - finish this when you get the id to transfer
 		em.persist(ratingNumber);
 		System.out.println("I've added the rating");
 	}
 	
-	public void addBooking(int artistID, Date date) {
+	public void addBooking(int artistID, Date date, int userID) {
 		System.out.println("In the add booking DAO");
 		Artist artistDate = getArtistById(artistID);
-		
+		User user = getUserById(userID);
 		Booking booking = new Booking();
 		booking.setArtist(artistDate);
 		booking.setBookingDate(date);
+		booking.setUser(user);
 		em.persist(booking);
 		
 		//comment.setUser(userComment); - finish this when you get the id to transfer

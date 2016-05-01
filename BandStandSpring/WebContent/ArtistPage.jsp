@@ -16,8 +16,9 @@ User id: ${user.id}
 
 <br> Give this artist a rating
 <form action="addRating.do" method="GET">
+<input type="hidden" name="userID" value="${user.id}">
 	<input type="hidden" name="artistID" value="${artist.id}"> <select
-		type="textarea" name="rating" value="rating">
+		 name="rating" >
 		<option value="1">1</option>
 		<option value="2">2</option>
 		<option value="3">3</option>
@@ -28,6 +29,7 @@ User id: ${user.id}
 
 Comment on this band
 <form action="addComment.do" method="GET">
+<input type="hidden" name="userID" value="${user.id}">
 	<input type="hidden" name="artistID" value="${artist.id}"> <input
 		type="text" name="comment" value="comment"> <input
 		type="submit">
@@ -35,7 +37,8 @@ Comment on this band
 
 Book this band for a certain date
 <form action="addBooking.do" method="GET">
-	<input type="hidden" name="artistID" value="${artist.id}">
+User ID test <input type="text" name="userID" value="${user.id}">
+	Artist ID test <input type="text" name="artistID" value="${artist.id}">
 	Month <input type="textarea" name="month" value="10"> Day <input
 		type="textarea" name="day" value="23"> Year <input
 		type="textarea" name="year" value="2010"> <input type="submit">
