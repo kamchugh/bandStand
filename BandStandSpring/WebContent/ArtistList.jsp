@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,31 +17,31 @@
 
 	I'd like to...
 
-	<form action="getAllArtists.do" method="GET">
-
+	<form action="getAllArtistsforUser.do" method="GET">
+	User ID test <input type="text" name="userID" value="${user.id}">
 		<input type="submit" value="Get all artists">
 	</form>
-	<c:choose>
-		<c:when test="${! empty(allArtists)}">
-		I'm getting all the artists
-			<c:forEach var="individualArtist" items="${allArtists}">
-				<c:if test="${! empty(individualArtist)}">
-		${individualArtist.firstName}
-		${individualArtist.lastName}
+
+
+<c:forEach var="artist" items="${allArtistsforUser}">
+	<c:if test="${! empty(artist)}">
+	
+	${artist.id}
+	${artist.name}
 		<form action="getArtistById.do" method="GET">
-		<input
-			type="text" name="userID" value="${user.id}">
-			<input
-			type="text" name="artistID" value="1">
-		 <input
-			type="submit"  value="submit">
-	</form> 
-		
-		</c:if>
+		<input type="text" name="userID" value="${user.id}"> <input
+			type="text" name="artistID" value="${artist.id}"> <input type="submit"
+			value="go to band page">
+	</form>
+	
+	
+	</c:if>
+</c:forEach>
 
 
-			</c:forEach>
 
-		</c:when>
-	</c:choose>
+
+
+
+
 </html>

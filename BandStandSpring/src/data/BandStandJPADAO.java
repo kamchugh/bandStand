@@ -69,6 +69,13 @@ public class BandStandJPADAO implements BandStandDAO {
 		}
 		return allComments;
 	}
+	
+	 public List<Booking> getAllBookingsByArtist(int artistID) {
+		 Artist artist = getArtistById(artistID);
+			String search = "select b from Booking b WHERE b.artist.id = '" + artist.getId() + "'";
+			List<Booking> allBookings = em.createQuery(search, Booking.class).getResultList();
+			return allBookings;
+	 }
 
 	public List<Rating> getAllRatings(int artistID) {
 		Artist artist = getArtistById(artistID);

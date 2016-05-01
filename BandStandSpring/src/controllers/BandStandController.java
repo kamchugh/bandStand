@@ -58,6 +58,22 @@ public class BandStandController {
 		return mv;
 	}
 
+	@RequestMapping("getAllArtistsforUser.do")
+	public ModelAndView getAllArtistsforUser(@RequestParam("userID") int userID) {
+		System.out.println("I get into the get all artist for user method");
+		User user = dao.getUserById(userID);
+		List<Artist> allArtistsforUser = new ArrayList();
+		allArtistsforUser.addAll(dao.getAllArtists());
+		for (Artist artist : allArtistsforUser) {
+			System.out.println("Artists I have in the controller" + artist);
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("allArtistsforUser", allArtistsforUser);
+		mv.addObject("user", user);
+		mv.setViewName("ArtistList.jsp");
+		return mv;
+	}
+
 	@RequestMapping("loadArtistEditPage.do")
 	public ModelAndView loadArtistEditPage(@RequestParam("artistId") int id) {
 		ModelAndView mv = new ModelAndView();
@@ -199,12 +215,16 @@ public class BandStandController {
 
 	public ModelAndView addComment(@RequestParam("artistID") int artistID, @RequestParam("comment") String comment,
 			@RequestParam("userID") int userID) {
+		Artist artist = dao.getArtistById(artistID);
+		User user = dao.getUserById(userID);
 
 		System.out.println("I get into the add comment method");
 		System.out.println("This is the userID I have: " + userID);
 		dao.addComment(artistID, comment, userID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("comment", comment);
+		mv.addObject("user", user);
+		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
@@ -212,10 +232,14 @@ public class BandStandController {
 	@RequestMapping("addRating.do")
 	public ModelAndView addRating(@RequestParam("artistID") int artistID, @RequestParam("rating") int rating,
 			@RequestParam("userID") int userID) {
+		Artist artist = dao.getArtistById(artistID);
+		User user = dao.getUserById(userID);
 		System.out.println("I get into the add rating method");
 		dao.addRating(artistID, rating, userID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("rating", rating);
+		mv.addObject("user", user);
+		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
@@ -224,6 +248,8 @@ public class BandStandController {
 	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("month") String month,
 			@RequestParam("day") String day, @RequestParam("year") String year, @RequestParam("userID") int userID) {
 		System.out.println("I'm in the add date method");
+		Artist artist = dao.getArtistById(artistID);
+		User user = dao.getUserById(userID);
 		ModelAndView mv = new ModelAndView();
 		// Date date = new Date();
 		String dateString = year + "-" + month + "-" + day;
@@ -235,6 +261,8 @@ public class BandStandController {
 			System.out.println("I've added the booking");
 			// this is acting funky - showing a "01" for month of "10"
 			mv.addObject("date", newdate);
+			mv.addObject("user", user);
+			mv.addObject("artist", artist);
 			mv.setViewName("ArtistPage.jsp");
 
 		} catch (ParseException e) {
@@ -243,38 +271,68 @@ public class BandStandController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping("getBookingsByBand.do")
+	public ModelAndView getBookingsByBand(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
+		System.out.println("I enter the get all comments method");
+		User user = dao.getUserById(userID);
+		Artist artist = dao.getArtistById(artistID);
+		List<Booking> bookings = new ArrayList();
+		List<Booking> daoBookings = new ArrayList();
+		daoBookings = dao.getAllBookingsByArtist(artistID);
+		System.out.println("I get below the getAllComments method in the controller");
+		bookings.addAll(daoBookings);
+		for (Booking booking : daoBookings) {
+			System.out.println(booking.getId() + " " + booking.getBookingDate());
+		}
+		ModelAndView mv = new ModelAndView();
+
+		mv.addObject("bookings", bookings);
+		mv.addObject("user", user);
+		mv.addObject("artist", artist);
+		mv.setViewName("ArtistPage.jsp");
+		return mv;
+	}
 
 	@RequestMapping("getCommentsByBand.do")
-	public ModelAndView getCommentsByBand(@RequestParam("artistID") int artistID) {
+	public ModelAndView getCommentsByBand(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
 		System.out.println("I enter the get all comments method");
+		User user = dao.getUserById(userID);
+		Artist artist = dao.getArtistById(artistID);
 		List<Comment> comments = new ArrayList();
 		List<Comment> daoComments = new ArrayList();
 		daoComments = dao.getAllComments(artistID);
 		System.out.println("I get below the getAllComments method in the controller");
 		comments.addAll(daoComments);
 		for (Comment comment : comments) {
-			System.out.println(comment);
+			System.out.println(comment.getBody());
 		}
 		ModelAndView mv = new ModelAndView();
 
 		mv.addObject("comments", comments);
+		mv.addObject("user", user);
+		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
 
 	@RequestMapping("getRatingsByBand.do")
-	public ModelAndView getRatingsByBand(@RequestParam("artistID") int artistID) {
+	public ModelAndView getRatingsByBand(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
 		System.out.println("I enter the get all comments method");
+		User user = dao.getUserById(userID);
+		Artist artist = dao.getArtistById(artistID);
 		List<Rating> ratings = new ArrayList();
 		List<Rating> daoRatings = new ArrayList();
 		daoRatings = dao.getAllRatings(artistID);
 		System.out.println("I get below the getAllComments method in the controller");
 		ratings.addAll(daoRatings);
 		for (Rating rating : daoRatings) {
-			System.out.println(rating);
+			System.out.println(rating.getNumber());
 		}
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("ratings", ratings);
+		mv.addObject("user", user);
+		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
