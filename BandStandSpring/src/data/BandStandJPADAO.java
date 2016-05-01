@@ -46,9 +46,13 @@ public class BandStandJPADAO implements BandStandDAO {
 		return allArtists;
 	}
 	
-	public List<Rating> getRatingByArtist() {
-		
-	}
+//	public List<Rating> getRatingByArtist() {
+//		String ratings;
+////		String search = "select r from Rating r WHERE r.artist = " + artist;
+////		List <Rating> ratingByArtist = em.createQuery(search, Rating.class).getResultList();
+//		return ratings;
+//		
+//	}
 
 	public List<User> getAllUsers() {
 		String search = "select u from User u";
@@ -59,7 +63,7 @@ public class BandStandJPADAO implements BandStandDAO {
 	// these methods hopefully give you the correct user when trying to sign in
 	
 	public User getUserByEmail(String email) {
-		String search = "select u from User u WHERE u.email = " + email;
+		String search = "select u from User u WHERE u.email = '" + email + "'";
 		User user = em.createQuery(search, User.class).getSingleResult();
 		return user;
 	}

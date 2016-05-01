@@ -48,6 +48,6 @@ public interface BandStandDAO {
 
 	public User getUserByEmail(String email);
 
-	public List<Rating> getRatingByArtist();
+//	public List<Rating> getRatingByArtist(Artist artist);
 
 }

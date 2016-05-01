@@ -100,9 +100,9 @@
 	<!-- Kaylee's forms  -->
  	<form action="getUserByEmail.do" method="GET">
 		getUserByEmail.do/ input email
-		<input type="hidden" name="email" value="1">
+		<input type="text" name="email" value="">
 		getUserByEmail.do/ input password
-		<input type="hidden" name="password" value="1">
+		<input type="text" name="password" value="">
 		 <input
 			type="submit">
 	</form> 

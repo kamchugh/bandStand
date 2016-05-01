@@ -176,14 +176,17 @@ public class BandStandController {
 			@RequestParam("password") String password) {
 		System.out.println("I come in to the getUserByEmail method with " + email + " and as my password " + password);
 		User user = dao.getUserByEmail(email);
-		System.out.println("The user I have in the getUserByEmail method is: " + user);
-		if (password == dao.matchUserPassword(email)) {
+		System.out.println("The user I have in the getUserByEmail method is: " + user.getId());
+		System.out.println("The password I have stored is: " + password);
+		if (password.equals(dao.matchUserPassword(email))) {
+			System.out.println("I match");
 			ModelAndView mv = new ModelAndView();
 			mv.addObject("user", user);
-			mv.setViewName("artistList.jsp");
+			mv.setViewName("ArtistList.jsp");
 			return mv;
 		}
 		else {
+			System.out.println("I don't match");
 			ModelAndView mv = new ModelAndView();
 			mv.addObject("user", user);
 			mv.setViewName("index.jsp");
