@@ -2,6 +2,7 @@ package controllers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import data.BandStandDAO;
 import entities.Artist;
 import entities.Booking;
+import entities.Comment;
+import entities.Genre;
 import entities.User;
 
 @Controller
@@ -229,6 +232,24 @@ public class BandStandController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping("getCommentsByBand.do")
+	public ModelAndView getCommentsByBand(@RequestParam("artistID") int artistID) {
+		System.out.println("I enter the get all comments method");
+		List<Comment> comments = new ArrayList();
+		List<Comment> daoComments = new ArrayList();
+		daoComments = dao.getAllComments(artistID);
+		System.out.println("I get below the getAllComments method in the controller");
+		comments.addAll(daoComments);
+		for (Comment comment : comments) {
+			System.out.println(comment);
+		}
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("comments", comments);
+		mv.setViewName("ArtistPage.jsp");
+		return mv;
+	}
 
 	@RequestMapping("getUserByEmail.do")
 	public ModelAndView ValidatePassword(@RequestParam("email") String email,
@@ -252,5 +273,53 @@ public class BandStandController {
 		}
 
 	}
+	
+	// bruno's methods 
+	
+	 @RequestMapping("searchByName.do")
+	    public ModelAndView getArtistById(@RequestParam("name") String name) {
+	        ModelAndView mv = new ModelAndView();
+	        Artist artist = dao.searchByName(name);
+	    
+	        List<Artist> allArtists = dao.getAllArtists();
+	        for (Artist artist2 : allArtists) {
+	            System.out.println(artist2.getName());
+	        }
+	        mv.addObject("all", allArtists);
+	    
+	        mv.addObject("artist", artist);
+	        mv.setViewName("index.jsp");
+	        return mv;
+	    }
+	    
+	    @RequestMapping("searchBookingsByUserId.do")
+	    public ModelAndView getBookings(@RequestParam("userId") int userId) {
+	        ModelAndView mv = new ModelAndView();
+	        List<Booking> bookings = dao.getBookings(userId);
+	        mv.addObject("bookings", bookings);
+	        mv.setViewName("index.jsp");
+	        return mv;
+	    }
+	    
+	    @RequestMapping("searchByGenre.do")
+	    public ModelAndView searchByGenre(@RequestParam("genre") String genreType) {
+	        ModelAndView mv = new ModelAndView();
+	        List<Genre> genres = dao.searchByGenre(genreType);
+	        mv.addObject("allg", genres);
+	        mv.setViewName("index.jsp");
+	        return mv;
+	    }
+	    
+	    @RequestMapping("initialLoad.do")
+	    public ModelAndView initalLoad() {
+	        ModelAndView mv = new ModelAndView();
+	        List<Artist> allArtists = dao.getAllArtists();
+	        for (Artist artist2 : allArtists) {
+	            System.out.println(artist2.getName());
+	        }
+	        mv.addObject("all", allArtists);
+	        mv.setViewName("index.jsp");
+	        return mv;            
+	    } 
 
 }

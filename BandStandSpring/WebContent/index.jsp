@@ -95,17 +95,61 @@
 		<input type="hidden" name="bookingId" value="1"> <input
 			type="submit">
 	</form>
-	
-	
+
+
 	<!-- Kaylee's forms  -->
- 	<form action="getUserByEmail.do" method="GET">
-		getUserByEmail.do/ input email
-		<input type="text" name="email" value="">
-		getUserByEmail.do/ input password
-		<input type="text" name="password" value="">
-		 <input
+	<form action="getUserByEmail.do" method="GET">
+		getUserByEmail.do/ input email <input type="text" name="email"
+			value=""> getUserByEmail.do/ input password <input
+			type="text" name="password" value=""> <input type="submit">
+	</form>
+
+	<!--  Bruno's forms -->
+
+	<form action="searchByName.do" method="GET">
+		<div>Search By Name</div>
+		<select name="name">
+			<c:forEach var="name" items="${all}">
+				<option value="${name.name}">${name.name }</option>
+			</c:forEach>
+		</select> <input type="submit">
+	</form>
+
+	<br>
+	<br> ${artist.email }
+
+	<br>
+	<br>
+
+	<form action="searchBookingsByUserId.do" method="GET">
+		<div>List Bookings by userid</div>
+
+		<input type="text" name="userId" value="1"> <input
 			type="submit">
-	</form> 
+	</form>
+	<c:forEach var="booking" items="${bookings}">
+                
+    ${booking.bookingDate }<br />
+    ${booking.id }<br />
+    ${booking.confirmed }<br />
+    ${booking.artist.email }<br />
+	</c:forEach>
+	<br>
+	<br>
+	<br>
+	<br>
+
+
+	<form action="searchByGenre.do" method="GET">
+		<div>Search By Genre</div>
+		<input type="text" name="genre" value="EDM"> <input
+			type="submit">
+
+	</form>
+
+	<c:forEach var="name" items="${allg}">
+        ${name.artist.name}: ${name.artist.email }
+    </c:forEach>
 
 </body>
 </html>
