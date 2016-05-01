@@ -198,15 +198,25 @@ public class BandStandJPADAO implements BandStandDAO {
 
 	}
 
+<<<<<<< HEAD
 	public List<Booking> getConfirmedBookings() {
 		String query = "Select b from Booking b where confirmed = false";
+=======
+	public List<Booking> getConfirmedBookings(){
+		String query = "Select b from Booking b where confirmed = true";
+>>>>>>> 77b34e174aa3e0eaaa7e22a81f7dbecfc90a80d0
 		List<Booking> bookings = em.createQuery(query, Booking.class).getResultList();
 		return bookings;
 
 	}
+<<<<<<< HEAD
 
 	public List<Booking> getUnConfirmedBookings() {
 		String query = "Select b from Booking b where confirmed = true";
+=======
+	public List<Booking> getUnConfirmedBookings(){
+		String query = "Select b from Booking b where confirmed = false";
+>>>>>>> 77b34e174aa3e0eaaa7e22a81f7dbecfc90a80d0
 		List<Booking> bookings = em.createQuery(query, Booking.class).getResultList();
 		return bookings;
 

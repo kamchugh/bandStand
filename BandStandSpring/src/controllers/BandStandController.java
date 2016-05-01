@@ -39,25 +39,40 @@ public class BandStandController {
 	@RequestMapping("setUserAccessToAdmin.do")
 	public String setUserAccessToAdmin(@RequestParam("userID") int id) {
 		dao.setUserAccessLevelToAdmin(id);
-		return "index.jsp";
+		return "Admin.jsp";
 	}
 
 	@RequestMapping("setUserAccessToUser.do")
 	public String setUserAccessToUser(@RequestParam("userID") int id) {
 		dao.setUserAccessLevelToUser(id);
-		return "index.jsp";
+		return "Admin.jsp";
 	}
 
 	@RequestMapping("getAllArtists")
 	public ModelAndView getAllArtist() {
 		ModelAndView mv = new ModelAndView();
 		List<Artist> allArtists = dao.getAllArtists();
-		for (Artist artist : allArtists) {
-			System.out.println(artist.getName());
-		}
 		mv.addObject("allArtists", allArtists);
-		mv.setViewName("ArtistList.jsp");
+		mv.setViewName("Admin.jsp");
 		return mv;
+	}
+
+	@RequestMapping("loadArtistEditPage.do")
+	public ModelAndView loadArtistEditPage(@RequestParam("artistId") int id) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("artistId", id);
+		mv.setViewName("editArtist.jsp");
+		return mv;
+
+	}
+
+	@RequestMapping("loadUserEditPage.do")
+	public ModelAndView loadUserEditPage(@RequestParam("userId") int id) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("userId", id);
+		mv.setViewName("editUser.jsp");
+		return mv;
+
 	}
 
 	@RequestMapping("getAllUsers")
@@ -68,7 +83,7 @@ public class BandStandController {
 			System.out.println(user.getFirstName());
 		}
 		mv.addObject("allUsers", allUsers);
-		mv.setViewName("index.jsp");
+		mv.setViewName("Admin.jsp");
 		return mv;
 	}
 
@@ -102,7 +117,7 @@ public class BandStandController {
 			@RequestParam("artistPassword") String password) {
 		dao.addArtist(name, email, password);
 
-		return "index.jsp";
+		return "Admin.jsp";
 
 	}
 
@@ -119,7 +134,7 @@ public class BandStandController {
 			@RequestParam("userPassword") String password) {
 		dao.addUser(firstName, lastName, email, password);
 
-		return "index.jsp";
+		return "Admin.jsp";
 
 	}
 
@@ -127,7 +142,7 @@ public class BandStandController {
 	public String deleteUserById(@RequestParam("userId") int userId) {
 		dao.deleteUserById(userId);
 
-		return "index.jsp";
+		return "Admin.jsp";
 	}
 
 	@RequestMapping("getAllBookings.do")
@@ -135,10 +150,7 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		List<Booking> bookings = dao.getAllBookings();
 		mv.addObject("bookings", bookings);
-		mv.setViewName("index.jsp");
-		for (Booking booking : bookings) {
-			System.out.println(booking.getId());
-		}
+		mv.setViewName("Admin.jsp");
 		return mv;
 	}
 
@@ -147,7 +159,7 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		List<Booking> confirmedBookings = dao.getConfirmedBookings();
 		mv.addObject("confirmedBookings", confirmedBookings);
-		mv.setViewName("index.jsp");
+		mv.setViewName("Admin.jsp");
 		return mv;
 	}
 
@@ -156,7 +168,7 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		List<Booking> unConfirmedBookings = dao.getUnConfirmedBookings();
 		mv.addObject("unConfirmedBookings", unConfirmedBookings);
-		mv.setViewName("index.jsp");
+		mv.setViewName("Admin.jsp");
 		return mv;
 	}
 
@@ -172,21 +184,23 @@ public class BandStandController {
 	@RequestMapping("setConfirmedBooking.do")
 	public String setConfirmedBooking(@RequestParam("bookingId") int id) {
 		dao.setConfirmedBooking(id);
-		return "index.jsp";
+		return "Admin.jsp";
 	}
 
 	@RequestMapping("setUnConfirmedBooking.do")
 	public String setUnConfirmedBooking(@RequestParam("bookingId") int id) {
 		dao.setUnConfirmedBooking(id);
-		return "index.jsp";
+		return "Admin.jsp";
 	}
 
 	// Kaylee's methods
 
 	@RequestMapping("addComment.do")
+
 	public ModelAndView addComment(@RequestParam("artistID") int artistID,
 			@RequestParam("comment") String comment,
 			@RequestParam("userID") int userID) {
+
 		System.out.println("I get into the add comment method");
 		System.out.println("This is the userID I have: " + userID);
 		dao.addComment(artistID, comment, userID);
@@ -220,7 +234,6 @@ public class BandStandController {
 			Date newdate = dateFormat.parse(dateString);
 			System.out.println("Im going to try to add the booking now");
 			dao.addBooking(artistID, newdate, userID);
-			
 			System.out.println("I've added the booking");
 			// this is acting funky - showing a "01" for month of "10"
 			mv.addObject("date", newdate);
