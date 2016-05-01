@@ -95,5 +95,17 @@
 		<input type="hidden" name="bookingId" value="1"> <input
 			type="submit">
 	</form>
+	
+	
+	<!-- Kaylee's forms  -->
+	<form action="getUserByEmail.do" method="GET">
+		getUserByEmail.do/ input email
+		<input type="hidden" name="email" value="1">
+		getUserByEmail.do/ input password
+		<input type="hidden" name="password" value="1">
+		 <input
+			type="submit">
+	</form>
+
 </body>
 </html>

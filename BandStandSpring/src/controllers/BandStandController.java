@@ -169,4 +169,27 @@ public class BandStandController {
 		dao.setUnConfirmedBooking(id);
 		return "index.jsp";
 	}
+	
+	// Kaylee's methods 
+	@RequestMapping("getUserByEmail.do")
+	public ModelAndView ValidatePassword(@RequestParam("email") String email,
+			@RequestParam("password") String password) {
+		System.out.println("I come in to the getUserByEmail method with " + email + " and as my password " + password);
+		User user = dao.getUserByEmail(email);
+		System.out.println("The user I have in the getUserByEmail method is: " + user);
+		if (password == dao.matchUserPassword(email)) {
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("user", user);
+			mv.setViewName("artistList.jsp");
+			return mv;
+		}
+		else {
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("user", user);
+			mv.setViewName("index.jsp");
+			return mv;
+		}
+		
+	}
+	
 }

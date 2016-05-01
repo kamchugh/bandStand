@@ -4,6 +4,7 @@ import java.util.List;
 
 import entities.Artist;
 import entities.Booking;
+import entities.Rating;
 import entities.User;
 
 public interface BandStandDAO {
@@ -40,5 +41,10 @@ public interface BandStandDAO {
 	public void setConfirmedBooking(int id);
 
 	public void setUnConfirmedBooking(int id);
+	
+	public List<Rating> getAllRatings();
+	
+	public String matchUserPassword(String email);
+	public User getUserByEmail(String email);
 
 }

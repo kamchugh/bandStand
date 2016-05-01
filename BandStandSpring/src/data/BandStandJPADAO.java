@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import entities.Artist;
 import entities.Booking;
+import entities.Rating;
 import entities.User;
 
 @Component
@@ -49,6 +50,23 @@ public class BandStandJPADAO implements BandStandDAO {
 		String search = "select u from User u";
 		List<User> allUsers = em.createQuery(search, User.class).getResultList();
 		return allUsers;
+	}
+	
+	// these methods hopefully give you the correct user when trying to sign in
+	
+	public User getUserByEmail(String email) {
+		String search = "select u from User u WHERE u.email = " + email;
+		User user = em.createQuery(search, User.class).getSingleResult();
+		return user;
+	}
+	
+	public String matchUserPassword(String email) {
+		 String password = "";
+		 getUserByEmail(email).getId();  
+		 User user = em.find(User.class, getUserByEmail(email).getId());
+		 password = user.getPassword();
+		return password;
+		
 	}
 	
 	public Artist getArtistById(int artistID) {
@@ -106,6 +124,12 @@ public class BandStandJPADAO implements BandStandDAO {
 		List<Booking> bookings = em.createQuery(query, Booking.class).getResultList();
 		return bookings;
 				
+	}
+	
+	public List<Rating> getAllRatings() {
+		String query = "Select r from Rating r where confirmed=true";
+				List <Rating> ratings = em.createQuery(query, Rating.class).getResultList();
+				return ratings;
 	}
 	
 	public void updateUserEmail(int userId, String email){
