@@ -15,11 +15,11 @@ public interface BandStandDAO {
 	public void setUserAccessLevelToUser(int id);
 
 	public List<Artist> getAllArtists();
-	
+
 	public List<User> getAllUsers();
 
 	public Artist getArtistById(int artistID);
-	
+
 	public User getUserById(int userID);
 
 	public void addArtist(String name, String email, String password);
@@ -41,10 +41,13 @@ public interface BandStandDAO {
 	public void setConfirmedBooking(int id);
 
 	public void setUnConfirmedBooking(int id);
-	
+
 	public List<Rating> getAllRatings();
-	
+
 	public String matchUserPassword(String email);
+
 	public User getUserByEmail(String email);
+
+	public List<Rating> getRatingByArtist();
 
 }

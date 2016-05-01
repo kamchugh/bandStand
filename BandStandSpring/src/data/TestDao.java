@@ -11,7 +11,7 @@ public class TestDao {
 			//User user = em.find(User.class,  1);
 			//System.out.println(user.getAccessLevel());
 //			System.out.println(user.getAccessLevel());
-			dao.setAdminLevelOn(1);
+//			dao.setAdminLevelOn(1);
 //	        em.close();
 //	        emf.close();
 //		

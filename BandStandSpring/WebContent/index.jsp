@@ -98,14 +98,14 @@
 	
 	
 	<!-- Kaylee's forms  -->
-	<form action="getUserByEmail.do" method="GET">
+ 	<form action="getUserByEmail.do" method="GET">
 		getUserByEmail.do/ input email
 		<input type="hidden" name="email" value="1">
 		getUserByEmail.do/ input password
 		<input type="hidden" name="password" value="1">
 		 <input
 			type="submit">
-	</form>
+	</form> 
 
 </body>
 </html>
