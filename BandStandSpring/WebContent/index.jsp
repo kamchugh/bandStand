@@ -153,6 +153,8 @@
 	<c:forEach var="name" items="${allg}">
         ${name.artist.name}: ${name.artist.email }
     </c:forEach>
+    
+    <a href="ArtistList.jsp">User Homepage</a>
 
 </body>
 </html>

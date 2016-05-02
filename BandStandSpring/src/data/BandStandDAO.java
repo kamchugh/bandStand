@@ -39,8 +39,6 @@ public interface BandStandDAO {
 
 	public List<Booking> getUnConfirmedBookings();
 
-	public void updateUserEmail(int userId, String email);
-
 	public void setConfirmedBooking(int id);
 
 	public void setUnConfirmedBooking(int id);
@@ -49,7 +47,8 @@ public interface BandStandDAO {
 
 	public String matchUserPassword(String email);
 
-	public User getUserByEmail(String email);
+	public void updateUser(int userId, String firstName, String lastName, String email, String password,
+			String photoUrl);
 
 	public void addComment(int artistID, String description, int userID);
 
@@ -68,6 +67,8 @@ public interface BandStandDAO {
 	public List<Booking> getBookings(int userId);
 
 	public List<Booking> getAllBookingsByArtist(int artistID);
+	
+	public User getUserByEmail(String email);
 
 	public void updateArtist(Artist artist);
 	
