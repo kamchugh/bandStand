@@ -346,9 +346,17 @@ body {
 	${booking.id}
 	${booking.bookingDate}
 	</c:if>
+
 	</c:forEach> --%>
 	<footer class="panel-footer">
 		<div class="container">I'm the footer</div>
 	</footer>
+
+
+<form action = "getAllPhotosForArtist.do" method = "GET">
+	<input type = "hidden" name = "artistId" value = "${artist.id}">
+	<input type = "submit" value = "Get Photos">
+</form>
+
 </body>
 </html>

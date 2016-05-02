@@ -7,6 +7,7 @@ import entities.Artist;
 import entities.Booking;
 import entities.Comment;
 import entities.Genre;
+import entities.Photo;
 import entities.Rating;
 import entities.User;
 
@@ -74,6 +75,8 @@ public interface BandStandDAO {
 	public int updateArtist(Artist artist);
 
 	public int getRatingsForArtist(Artist artist);
+	
+	public List<Photo> getArtistPhotos(int id);
 
 
 }

@@ -1,6 +1,5 @@
 package data;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +13,7 @@ import entities.Artist;
 import entities.Booking;
 import entities.Comment;
 import entities.Genre;
+import entities.Photo;
 import entities.Rating;
 import entities.User;
 
@@ -250,6 +250,19 @@ public class BandStandJPADAO implements BandStandDAO {
 		return ratings;
 	}
 
+	
+	public List<Photo> getArtistPhotos(int id){
+		System.out.println("in DAO");
+		Artist artist = em.find(Artist.class,  id);
+		List<Photo> photos = artist.getPhotos();
+		for(Photo photo: photos){ 
+			System.out.println("inside for each");
+			System.out.println(photo.getUrl());
+		}
+		return photos;
+	}
+	
+	
 	public int updateUser(int userId, String firstName, String lastName, String email, String password, String photoUrl) {
 		List<User> users = getAllUsers();
 		for(User user: users){
