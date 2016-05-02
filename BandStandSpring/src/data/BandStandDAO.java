@@ -70,4 +70,6 @@ public interface BandStandDAO {
 	
 	public User getUserByEmail(String email);
 
+	public void updateArtist(Artist artist);
+
 }

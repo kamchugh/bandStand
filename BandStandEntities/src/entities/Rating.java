@@ -30,7 +30,9 @@ public class Rating {
 		// TODO Auto-generated constructor stub
 	}
 
-	
+	public void removeArtist(Artist artist){
+		
+	}
 	@Override
 	public String toString() {
 		return "Rating [id=" + id + ", number=" + number + ", artist=" + artist + ", user=" + user + "]";

@@ -75,9 +75,10 @@ public class BandStandController {
 	}
 
 	@RequestMapping("loadArtistEditPage.do")
-	public ModelAndView loadArtistEditPage(@RequestParam("artistId") int id) {
+	public ModelAndView loadArtistEditPage(@RequestParam("artistId") int artistID) {
+		Artist artist = dao.getArtistById(artistID);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("artistId", id);
+		mv.addObject("artist", artist);
 		mv.setViewName("editArtist.jsp");
 		return mv;
 
@@ -85,9 +86,11 @@ public class BandStandController {
 
 	@RequestMapping("loadUserEditPage.do")
 	public ModelAndView loadUserEditPage(@RequestParam("userId") int id) {
+		User user = dao.getUserById(id);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("userId", id);
+		mv.addObject("user", user);
 		mv.setViewName("editUser.jsp");
+//		mv.setViewName("ArtistList.jsp");
 		return mv;
 
 	}
@@ -141,7 +144,7 @@ public class BandStandController {
 	public String deleteArtistById(@RequestParam("artistId") int artistId) {
 		dao.deleteArtistById(artistId);
 
-		return "index.jsp";
+		return "Admin.jsp";
 	}
 
 	@RequestMapping("addUser.do")
@@ -191,15 +194,15 @@ public class BandStandController {
 	// This is the template for updating fields for both user and artist. Save
 	// the id in a hidden field in the jsp
 	@RequestMapping("updateUser.do")
-	public ModelAndView updateUser(@RequestParam("email") String email, @RequestParam("userId") int userId, @RequestParam("firstName") String firstName,
+	public ModelAndView updateUser(User user, @RequestParam("email") String email, @RequestParam("userId") int userId, @RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName, @RequestParam("password") String password, @RequestParam("photoUrl") String photoUrl) {
 		
-		User user = dao.getUserById(userId);
+//		User user = dao.getUserById(userId);
 		ModelAndView mv = new ModelAndView();
 		dao.updateUser(userId, firstName, lastName, email, password, photoUrl);
 		
-		mv.addObject("user",user);
-		mv.setViewName("ArtistList.jsp");;
+//		mv.addObject("user",user);
+		mv.setViewName("Admin.jsp");;
 
 		return mv;
 	}
@@ -366,6 +369,19 @@ public class BandStandController {
 		}
 
 	}
+	
+	// this method updates an artist
+	
+	@RequestMapping("updateArtist.do")
+	public ModelAndView updateArtist(Artist artist, @RequestParam("name") String name) {
+	System.out.println("I make it into the updateArtist.do method");
+	System.out.println(artist);
+		dao.updateArtist(artist);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("Admin.jsp");
+		mv.addObject("nameUpdated", name);
+		return mv;
+	}
 
 	// bruno's methods
 
@@ -418,7 +434,7 @@ public class BandStandController {
 			System.out.println(artist2.getName());
 		}
 		mv.addObject("all", allArtists);
-		mv.setViewName("ArtistList.jsp");
+		mv.setViewName("index.jsp");
 		return mv;
 	}
 

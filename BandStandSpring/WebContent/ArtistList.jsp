@@ -24,22 +24,22 @@
 	</form>
 
 
-	<form action="getArtistById.do" method="GET">
-		<c:forEach var="artist" items="${allArtistsforUser}">
-			<c:if test="${! empty(artist)}">
+
+	<c:forEach var="artist" items="${allArtistsforUser}">
+		<c:if test="${! empty(artist)}">
 	
 	${artist.id}
 	${artist.name}
+<form action="getArtistById.do" method="GET">
+				<input type="text" name="userID" value="${user.id}"> <input
+					type="text" name="artistID" value="${artist.id}"> <input
+					type="submit" value="go to band page">
+			</form>
 
-				<input type="text" name="userID" value="${user.id}">
-				<input type="text" name="artistID" value="${artist.id}">
-				<input type="submit" value="go to band page">
+		</c:if>
+	</c:forEach>
 
 
-			</c:if>
-		</c:forEach>
-
-	</form>
 
 
 
@@ -135,15 +135,18 @@
 	<c:forEach var="name" items="${allg}">
         ${name.artist.name}: ${name.artist.email }
     </c:forEach>
-    
-    <br><br><br><br>
-    
-    <div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<%--   <div>
     <form action="updateUser.do" method="GET">
 			<h3>Update User</h3>
 			<input type="hidden" name="" value="${user.id } "> 
 			First Name
-			<input type="text" name="firstName" value="${user.firstName }" "/>
+			<input type="text" name="firstName" value="${user.firstName }"/>
 			Last Name
 			<input type="text" name="lastName" value="${user.lastName }">
 			Email
@@ -154,10 +157,12 @@
 			<input type="text" name="photoUrl" value="${user.photoUrl }">
 			<input type="submit" value="Update">
 		</form>
-    </div>
-    
-    
-    
-    
-    
+    </div> --%>
+
+
+	<%-- <c:if test="${user.accessLevel = 2}">
+		<form action="Admin.jsp">
+			<input type="submit" value="Admin Mode">
+		</form>
+	</c:if> --%>
 </html>

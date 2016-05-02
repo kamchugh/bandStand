@@ -173,6 +173,12 @@ public class BandStandJPADAO implements BandStandDAO {
 
 	public void deleteArtistById(int artistId) {
 		Artist artistToDelete = em.find(Artist.class, artistId);
+		artistToDelete.removeRatings(artistToDelete.getRatings());
+		artistToDelete.removeBookings(artistToDelete.getBookings());
+		artistToDelete.removePhotos(artistToDelete.getPhotos());
+		artistToDelete.removeRecordings(artistToDelete.getRecordings());
+		artistToDelete.removeComments(artistToDelete.getComments());
+		artistToDelete.removeGenres(artistToDelete.getGenres());
 		em.remove(artistToDelete);
 	}
 
@@ -266,6 +272,18 @@ public class BandStandJPADAO implements BandStandDAO {
 			System.out.println(booking.getBookingDate());
 		}
 		return user.getBookings();
+	}
+	
+	public void updateArtist(Artist artist) {
+		Artist artistinMethod = em.find(Artist.class, artist.getId());
+		System.out.println("I make it into the controller for update artist");
+//		User user = em.find(User.class, userId);
+//		user.setEmail(email);
+		artistinMethod.setName(artist.getName());
+		artistinMethod.setEmail(artist.getEmail());
+		artistinMethod.setPassword(artist.getPassword());
+		artistinMethod.setDescription(artist.getDescription());
+		
 	}
 	
 }
