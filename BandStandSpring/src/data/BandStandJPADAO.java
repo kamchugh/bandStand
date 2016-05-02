@@ -122,12 +122,20 @@ public class BandStandJPADAO implements BandStandDAO {
 		return user;
 	}
 
-	public void addArtist(String name, String email, String password) {
+	public int addArtist(String name, String email, String password) {
+
+		List<Artist> artists = getAllArtists();
+		for(Artist artist: artists){
+			if (artist.getEmail().equals(email)){
+				return 1;
+			}
+		}
 		Artist newArtist = new Artist();
 		newArtist.setName(name);
 		newArtist.setEmail(email);
 		newArtist.setPassword(password);
 		em.persist(newArtist);
+		return 0;
 	}
 
 	public void addComment(int artistID, String commentBody, int userID) {
@@ -288,15 +296,26 @@ public class BandStandJPADAO implements BandStandDAO {
 		return user.getBookings();
 	}
 	
-	public void updateArtist(Artist artist) {
-		Artist artistinMethod = em.find(Artist.class, artist.getId());
-		System.out.println("I make it into the controller for update artist");
-//		User user = em.find(User.class, userId);
-//		user.setEmail(email);
-		artistinMethod.setName(artist.getName());
-		artistinMethod.setEmail(artist.getEmail());
-		artistinMethod.setPassword(artist.getPassword());
-		artistinMethod.setDescription(artist.getDescription());
+	public int updateArtist(Artist artist) {
+		
+		List<Artist> artists = getAllArtists();
+		for(Artist artistHolder: artists){
+			if (artistHolder.getEmail().equals(artist.getEmail())){
+				return 1;
+			}
+		}
+		try{
+			Artist artistinMethod = em.find(Artist.class, artist.getId());
+			artistinMethod.setName(artist.getName());
+			artistinMethod.setEmail(artist.getEmail());
+			artistinMethod.setPassword(artist.getPassword());
+			artistinMethod.setDescription(artist.getDescription());
+			return 0;
+		}catch(Exception e){
+			return 1;
+		}
+
+
 		
 	}
 	

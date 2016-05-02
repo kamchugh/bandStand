@@ -130,12 +130,26 @@ public class BandStandController {
 	}
 
 	@RequestMapping("addArtist.do")
-	public String addArtist(@RequestParam("artistName") String name, @RequestParam("artistEmail") String email,
+	public ModelAndView addArtist(@RequestParam("artistName") String name, @RequestParam("artistEmail") String email,
 			@RequestParam("artistPassword") String password) {
-		dao.addArtist(name, email, password);
+		ModelAndView mv = new ModelAndView();
+		if (name == "" || email == "" || password == "") {
+			String error = "Value required.";
+			mv.addObject(error);
+			System.out.println(error);
+			mv.setViewName("Admin.jsp");
+		} else {
+			int addArtistReturn = dao.addArtist(name, email, password);
+			if (addArtistReturn != 0) {
+				String duplicateError = "This email already exists for anothe user.";
+				mv.addObject(duplicateError);
+				System.out.println(duplicateError);
 
-		return "Admin.jsp";
+			}
+			mv.setViewName("Admin.jsp");
 
+		}
+		return mv;
 	}
 
 	@RequestMapping("deleteArtistById.do")
@@ -146,35 +160,54 @@ public class BandStandController {
 	}
 
 	@RequestMapping("addUserRegistration.do")
-	public String addUserRegistration(@RequestParam("userFirstName") String firstName,
+	public ModelAndView addUserRegistration(@RequestParam("userFirstName") String firstName,
 			@RequestParam("userLastName") String lastName, @RequestParam("userEmail") String email,
 			@RequestParam("userPassword") String password) {
-		
-		int addUserReturn = dao.addUser(firstName, lastName, email, password);
-		if(addUserReturn != 0){
-			return "index.jsp";
+		ModelAndView mv = new ModelAndView();
+		if (firstName == "" || lastName == "" || email == "" || password == "") {
+			String error = "Value required.";
+			mv.addObject(error);
+			System.out.println(error);
+			mv.setViewName("index.jsp");
+		} else {
+			int addUserReturn = dao.addUser(firstName, lastName, email, password);
+			if (addUserReturn != 0) {
+				String duplicateError = "This email already exists for anothe user.";
+				mv.addObject(duplicateError);
+				System.out.println(duplicateError);
+
+			}
+			mv.setViewName("index.jsp");
+
 		}
-
-		return "Admin.jsp";
-
+		return mv;
 	}
+
 	@RequestMapping("addUser.do")
 	public ModelAndView addUser(@RequestParam("userFirstName") String firstName,
 			@RequestParam("userLastName") String lastName, @RequestParam("userEmail") String email,
 			@RequestParam("userPassword") String password) {
 		ModelAndView mv = new ModelAndView();
-		int addUserReturn = dao.addUser(firstName, lastName, email, password);
-		if(addUserReturn != 0){
-			String duplicateError = "This email already exists for anothe user.";
-			mv.addObject(duplicateError);
-			System.out.println(duplicateError);
-			
-		}
-		mv.setViewName("Admin.jsp");
-		return mv;
 
+		if (firstName == "" || lastName == "" || email == "" || password == "") {
+			String error = "Value required.";
+			mv.addObject(error);
+			System.out.println(error);
+			mv.setViewName("Admin.jsp");
+		} else {
+			int addUserReturn = dao.addUser(firstName, lastName, email, password);
+			if (addUserReturn != 0) {
+				String duplicateError = "This email already exists for anothe user.";
+				mv.addObject(duplicateError);
+				System.out.println(duplicateError);
+
+			}
+			mv.setViewName("Admin.jsp");
+
+		}
+		return mv;
 	}
-	
+
 	@RequestMapping("deleteUserById.do")
 	public String deleteUserById(@RequestParam("userId") int userId) {
 		dao.deleteUserById(userId);
@@ -265,44 +298,44 @@ public class BandStandController {
 		return mv;
 	}
 
-//	@RequestMapping("addBooking.do")
-//	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("month") String month,
-//			@RequestParam("day") String day, @RequestParam("year") String year, @RequestParam("userID") int userID) {
-//		System.out.println("I'm in the add date method");
-//		Artist artist = dao.getArtistById(artistID);
-//		User user = dao.getUserById(userID);
-//		ModelAndView mv = new ModelAndView();
-//		// Date date = new Date();
-//		String dateString = year + "-" + month + "-" + day;
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-//		try {
-//			Date newdate = dateFormat.parse(dateString);
-//			System.out.println("Im going to try to add the booking now");
-//			dao.addBooking(artistID, newdate, userID);
-//			System.out.println("I've added the booking");
-//			// this is acting funky - showing a "01" for month of "10"
-//			mv.addObject("date", newdate);
-//			mv.addObject("user", user);
-//			mv.addObject("artist", artist);
-//			mv.setViewName("ArtistPage.jsp");
-//
-//		} catch (ParseException e) {
-//			System.out.println("I couldn't parse this");
-//			e.printStackTrace();
-//		}
-//		return mv;
-//	}
-	
-	
+	// @RequestMapping("addBooking.do")
+	// public ModelAndView addDate(@RequestParam("artistID") int artistID,
+	// @RequestParam("month") String month,
+	// @RequestParam("day") String day, @RequestParam("year") String year,
+	// @RequestParam("userID") int userID) {
+	// System.out.println("I'm in the add date method");
+	// Artist artist = dao.getArtistById(artistID);
+	// User user = dao.getUserById(userID);
+	// ModelAndView mv = new ModelAndView();
+	// // Date date = new Date();
+	// String dateString = year + "-" + month + "-" + day;
+	// SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+	// try {
+	// Date newdate = dateFormat.parse(dateString);
+	// System.out.println("Im going to try to add the booking now");
+	// dao.addBooking(artistID, newdate, userID);
+	// System.out.println("I've added the booking");
+	// // this is acting funky - showing a "01" for month of "10"
+	// mv.addObject("date", newdate);
+	// mv.addObject("user", user);
+	// mv.addObject("artist", artist);
+	// mv.setViewName("ArtistPage.jsp");
+	//
+	// } catch (ParseException e) {
+	// System.out.println("I couldn't parse this");
+	// e.printStackTrace();
+	// }
+	// return mv;
+	// }
+
 	@RequestMapping("addBooking.do")
-	public ModelAndView addDate(@RequestParam("artistID") int artistID, 
-			@RequestParam("date") String date, @RequestParam("userID") int userID) {
-		
+	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("date") String date,
+			@RequestParam("userID") int userID) {
+
 		Artist artist = dao.getArtistById(artistID);
 		User user = dao.getUserById(userID);
 		ModelAndView mv = new ModelAndView();
-		
-		
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 		try {
 			Date newdate = dateFormat.parse(date);
@@ -321,6 +354,7 @@ public class BandStandController {
 		}
 		return mv;
 	}
+
 	@RequestMapping("getBookingsByBand.do")
 	public ModelAndView getBookingsByBand(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
 		System.out.println("I enter the get all comments method");
@@ -391,7 +425,7 @@ public class BandStandController {
 			@RequestParam("password") String password) {
 		ModelAndView mv = new ModelAndView();
 		User user = dao.getUserByEmail(email);
-		if (user == null){
+		if (user == null) {
 			mv.setViewName("index.jsp");
 			return mv;
 		}
@@ -408,17 +442,35 @@ public class BandStandController {
 		}
 
 	}
-	
+
 	// this method updates an artist
-	
+
 	@RequestMapping("updateArtist.do")
-	public ModelAndView updateArtist(Artist artist, @RequestParam("name") String name) {
-	System.out.println("I make it into the updateArtist.do method");
-	System.out.println(artist);
-		dao.updateArtist(artist);
+	public ModelAndView updateArtist(Artist artist) {
+
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("Admin.jsp");
-		mv.addObject("nameUpdated", name);
+		// mv.setViewName("Admin.jsp");
+		// mv.addObject("nameUpdated", name);
+		// return mv;
+
+		if (artist.getName() == "" || artist.getEmail() == "" || artist.getPassword() == ""
+				|| artist.getDescription() == "") {
+			String error = "Value required.";
+			mv.addObject(error);
+			System.out.println(error);
+			mv.setViewName("editArtist.jsp");
+		} else {
+			int updateArtistReturn = dao.updateArtist(artist);
+			if (updateArtistReturn != 0) {
+				String duplicateError = "This email already exists for another user.";
+				mv.addObject("error", duplicateError);
+				System.out.println(duplicateError);
+				mv.setViewName("editArtist.jsp");
+			} else {
+				mv.setViewName("Admin.jsp");
+			}
+
+		}
 		return mv;
 	}
 
@@ -447,7 +499,7 @@ public class BandStandController {
 		mv.addObject("bookings", bookings);
 		System.out.println("before");
 		for (Booking booking : bookings) {
-			
+
 			System.out.println(booking.getId());
 			System.out.println(booking.getBookingDate());
 		}
