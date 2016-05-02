@@ -268,5 +268,8 @@
 	${nameUpdated }  has been updated
 	</c:if>
 
+    <a href="ArtistList.jsp">User Homepage</a>
+
+
 </body>
 </html>

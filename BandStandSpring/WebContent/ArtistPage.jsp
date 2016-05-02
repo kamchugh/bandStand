@@ -69,11 +69,14 @@ User ID test <input type="text" name="userID" value="${user.id}">
 	${comment.body}
 	</c:if>
 </c:forEach>
-<c:forEach var="rating" items="${ratings}">
+<%-- <c:forEach var="rating" items="${ratings}">
 	<c:if test="${! empty(rating)}">
 	${rating.number}
 	</c:if>
-</c:forEach>
+</c:forEach> --%>
+<c:if test="${! empty(ratings)}">
+	${ratings}
+	</c:if>
  <c:forEach var="booking" items="${bookings}">
  This artist is already booked on...
 	<c:if test="${! empty(booking)}">

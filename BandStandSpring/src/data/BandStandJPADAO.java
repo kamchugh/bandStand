@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -249,9 +250,13 @@ public class BandStandJPADAO implements BandStandDAO {
 		return ratings;
 	}
 
-	public void updateUserEmail(int userId, String email) {
+	public void updateUser(int userId, String firstName, String lastName, String email, String password, String photoUrl) {
 		User user = em.find(User.class, userId);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
 		user.setEmail(email);
+		user.setPassword(password);
+		user.setPhotoUrl(photoUrl);
 	}
 
 	public void setConfirmedBooking(int id) {
@@ -317,6 +322,28 @@ public class BandStandJPADAO implements BandStandDAO {
 
 
 		
+	}
+	
+	public int getRatingsForArtist(Artist artist) {
+	getArtistById(artist.getId());
+	//List <Rating> ratings = new ArrayList<>();
+	//ratings = getAllRatings(artist.getId());
+	List <Rating> ratings = getAllRatings(artist.getId());
+	System.out.println("Array size: " + ratings.size());
+	int addedRatings = 0;
+	for (Rating rating : ratings) {
+		System.out.println("I'm in ratings with: " + rating);
+		addedRatings = addedRatings + rating.getNumber();
+		System.out.println(addedRatings);
+	}
+	if (ratings.size()!=0){
+	int ratingAverage = (addedRatings / ratings.size());
+	System.out.println("Average rating: " + ratingAverage);
+	return ratingAverage;
+	}
+	else{
+		return 0;
+	}
 	}
 	
 }

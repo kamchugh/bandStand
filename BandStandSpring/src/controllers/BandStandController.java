@@ -86,9 +86,11 @@ public class BandStandController {
 
 	@RequestMapping("loadUserEditPage.do")
 	public ModelAndView loadUserEditPage(@RequestParam("userId") int id) {
+		User user = dao.getUserById(id);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("userId", id);
+		mv.addObject("user", user);
 		mv.setViewName("editUser.jsp");
+//		mv.setViewName("ArtistList.jsp");
 		return mv;
 
 	}
@@ -244,11 +246,18 @@ public class BandStandController {
 
 	// This is the template for updating fields for both user and artist. Save
 	// the id in a hidden field in the jsp
-	@RequestMapping("updateUserEmail.do")
-	public String updateUserEmail(@RequestParam("email") String email, @RequestParam("userId") int userId) {
-		dao.updateUserEmail(userId, email);
+	@RequestMapping("updateUser.do")
+	public ModelAndView updateUser(User user, @RequestParam("email") String email, @RequestParam("userId") int userId, @RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName, @RequestParam("password") String password, @RequestParam("photoUrl") String photoUrl) {
+		
+//		User user = dao.getUserById(userId);
+		ModelAndView mv = new ModelAndView();
+		dao.updateUser(userId, firstName, lastName, email, password, photoUrl);
+		
+//		mv.addObject("user",user);
+		mv.setViewName("Admin.jsp");;
 
-		return "index.jsp";
+		return mv;
 	}
 
 	@RequestMapping("setConfirmedBooking.do")
@@ -409,11 +418,17 @@ public class BandStandController {
 		daoRatings = dao.getAllRatings(artistID);
 		System.out.println("I get below the getAllComments method in the controller");
 		ratings.addAll(daoRatings);
+		int addedRatings = 0;
 		for (Rating rating : daoRatings) {
-			System.out.println(rating.getNumber());
+			addedRatings = addedRatings + rating.getNumber();
+			System.out.println(addedRatings);
 		}
+		double ratingAverage = ((double)addedRatings / daoRatings.size());
+		System.out.println("I am the added ratings" + addedRatings);
+		System.out.println("I am the size of the list" + daoRatings.size());
+		System.out.println("I am the rating average" + ratingAverage);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("ratings", ratings);
+		mv.addObject("ratings", ratingAverage);
 		mv.addObject("user", user);
 		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
@@ -516,6 +531,28 @@ public class BandStandController {
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
+	
+	@RequestMapping("searchByRating.do")
+	public ModelAndView searchByRating(@RequestParam("rating") int passedRating, @RequestParam("userId") int userID) {
+		ModelAndView mv = new ModelAndView();
+		User user = dao.getUserById(userID);
+		List<Artist> artists = new ArrayList();
+		List<Artist> matchedArtists = new ArrayList();
+		artists = dao.getAllArtists();
+		for (Artist artist : artists) {
+		int averageRating = dao.getRatingsForArtist(artist);
+		if (averageRating == passedRating) {
+			matchedArtists.add(artist);
+		}
+		}
+		//List<Artist> artistRatingMatch = new ArrayList();
+
+		mv.addObject("ratingMatch", matchedArtists);
+		mv.addObject("user", user);
+		mv.setViewName("ArtistList.jsp");
+		return mv; 
+		
+	}
 
 	@RequestMapping("initialLoad.do")
 	public ModelAndView initalLoad() {
@@ -525,7 +562,7 @@ public class BandStandController {
 			System.out.println(artist2.getName());
 		}
 		mv.addObject("all", allArtists);
-		mv.setViewName("ArtistList.jsp");
+		mv.setViewName("index.jsp");
 		return mv;
 	}
 
