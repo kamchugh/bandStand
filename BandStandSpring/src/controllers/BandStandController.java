@@ -141,7 +141,7 @@ public class BandStandController {
 	public String deleteArtistById(@RequestParam("artistId") int artistId) {
 		dao.deleteArtistById(artistId);
 
-		return "index.jsp";
+		return "Admin.jsp";
 	}
 
 	@RequestMapping("addUser.do")
