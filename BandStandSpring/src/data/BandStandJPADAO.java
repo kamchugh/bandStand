@@ -264,4 +264,16 @@ public class BandStandJPADAO implements BandStandDAO {
 		return user.getBookings();
 	}
 	
+	public void updateArtist(Artist artist) {
+		Artist artistinMethod = em.find(Artist.class, artist.getId());
+		System.out.println("I make it into the controller for update artist");
+//		User user = em.find(User.class, userId);
+//		user.setEmail(email);
+		artistinMethod.setName(artist.getName());
+		artistinMethod.setEmail(artist.getEmail());
+		artistinMethod.setPassword(artist.getPassword());
+		artistinMethod.setDescription(artist.getDescription());
+		
+	}
+	
 }

@@ -9,7 +9,7 @@
 <title>Administration Portal</title>
 </head>
 <body>
-	<h1>Administartion Portal</h1>
+	<h1>Administration Portal</h1>
 	<div>
 		<form action="addArtist.do" method="GET">
 			<h3>Add New Artist</h3>
@@ -264,6 +264,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<c:if test="${not empty nameUpdated }">
+	${nameUpdated }  has been updated
+	</c:if>
 
 </body>
 </html>

@@ -75,9 +75,10 @@ public class BandStandController {
 	}
 
 	@RequestMapping("loadArtistEditPage.do")
-	public ModelAndView loadArtistEditPage(@RequestParam("artistId") int id) {
+	public ModelAndView loadArtistEditPage(@RequestParam("artistId") int artistID) {
+		Artist artist = dao.getArtistById(artistID);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("artistId", id);
+		mv.addObject("artist", artist);
 		mv.setViewName("editArtist.jsp");
 		return mv;
 
@@ -358,6 +359,19 @@ public class BandStandController {
 			return mv;
 		}
 
+	}
+	
+	// this method updates an artist
+	
+	@RequestMapping("updateArtist.do")
+	public ModelAndView updateArtist(Artist artist, @RequestParam("name") String name) {
+	System.out.println("I make it into the updateArtist.do method");
+	System.out.println(artist);
+		dao.updateArtist(artist);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("Admin.jsp");
+		mv.addObject("nameUpdated", name);
+		return mv;
 	}
 
 	// bruno's methods
