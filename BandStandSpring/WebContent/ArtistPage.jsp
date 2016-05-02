@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,9 +37,11 @@ Book this band for a certain date
 <form action="addBooking.do" method="GET">
 	User ID test <input type="text" name="userID" value="${user.id}">
 	Artist ID test <input type="text" name="artistID" value="${artist.id}">
-	Month <input type="textarea" name="month" value="10"> Day <input
+	<!-- Month <input type="textarea" name="month" value="10"> Day <input
 		type="textarea" name="day" value="23"> Year <input
-		type="textarea" name="year" value="2010"> <input type="submit">
+		type="textarea" name="year" value="2010"> <input type="submit"> -->
+		<input type = "date" name = "date">
+		<input type = "submit">
 </form>
 
 <form action="getCommentsByBand.do" method="GET">

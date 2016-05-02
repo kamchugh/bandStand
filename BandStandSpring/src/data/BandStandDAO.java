@@ -29,7 +29,7 @@ public interface BandStandDAO {
 
 	public void deleteArtistById(int artistId);
 
-	public void addUser(String firstName, String lastName, String email, String password);
+	public int addUser(String firstName, String lastName, String email, String password);
 
 	public void deleteUserById(int userId);
 

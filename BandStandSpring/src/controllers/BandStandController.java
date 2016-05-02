@@ -145,16 +145,36 @@ public class BandStandController {
 		return "Admin.jsp";
 	}
 
-	@RequestMapping("addUser.do")
-	public String addArtist(@RequestParam("userFirstName") String firstName,
+	@RequestMapping("addUserRegistration.do")
+	public String addUserRegistration(@RequestParam("userFirstName") String firstName,
 			@RequestParam("userLastName") String lastName, @RequestParam("userEmail") String email,
 			@RequestParam("userPassword") String password) {
-		dao.addUser(firstName, lastName, email, password);
+		
+		int addUserReturn = dao.addUser(firstName, lastName, email, password);
+		if(addUserReturn != 0){
+			return "index.jsp";
+		}
 
 		return "Admin.jsp";
 
 	}
+	@RequestMapping("addUser.do")
+	public ModelAndView addUser(@RequestParam("userFirstName") String firstName,
+			@RequestParam("userLastName") String lastName, @RequestParam("userEmail") String email,
+			@RequestParam("userPassword") String password) {
+		ModelAndView mv = new ModelAndView();
+		int addUserReturn = dao.addUser(firstName, lastName, email, password);
+		if(addUserReturn != 0){
+			String duplicateError = "This email already exists for anothe user.";
+			mv.addObject(duplicateError);
+			System.out.println(duplicateError);
+			
+		}
+		mv.setViewName("Admin.jsp");
+		return mv;
 
+	}
+	
 	@RequestMapping("deleteUserById.do")
 	public String deleteUserById(@RequestParam("userId") int userId) {
 		dao.deleteUserById(userId);
@@ -245,18 +265,47 @@ public class BandStandController {
 		return mv;
 	}
 
+//	@RequestMapping("addBooking.do")
+//	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("month") String month,
+//			@RequestParam("day") String day, @RequestParam("year") String year, @RequestParam("userID") int userID) {
+//		System.out.println("I'm in the add date method");
+//		Artist artist = dao.getArtistById(artistID);
+//		User user = dao.getUserById(userID);
+//		ModelAndView mv = new ModelAndView();
+//		// Date date = new Date();
+//		String dateString = year + "-" + month + "-" + day;
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+//		try {
+//			Date newdate = dateFormat.parse(dateString);
+//			System.out.println("Im going to try to add the booking now");
+//			dao.addBooking(artistID, newdate, userID);
+//			System.out.println("I've added the booking");
+//			// this is acting funky - showing a "01" for month of "10"
+//			mv.addObject("date", newdate);
+//			mv.addObject("user", user);
+//			mv.addObject("artist", artist);
+//			mv.setViewName("ArtistPage.jsp");
+//
+//		} catch (ParseException e) {
+//			System.out.println("I couldn't parse this");
+//			e.printStackTrace();
+//		}
+//		return mv;
+//	}
+	
+	
 	@RequestMapping("addBooking.do")
-	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("month") String month,
-			@RequestParam("day") String day, @RequestParam("year") String year, @RequestParam("userID") int userID) {
-		System.out.println("I'm in the add date method");
+	public ModelAndView addDate(@RequestParam("artistID") int artistID, 
+			@RequestParam("date") String date, @RequestParam("userID") int userID) {
+		
 		Artist artist = dao.getArtistById(artistID);
 		User user = dao.getUserById(userID);
 		ModelAndView mv = new ModelAndView();
-		// Date date = new Date();
-		String dateString = year + "-" + month + "-" + day;
+		
+		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 		try {
-			Date newdate = dateFormat.parse(dateString);
+			Date newdate = dateFormat.parse(date);
 			System.out.println("Im going to try to add the booking now");
 			dao.addBooking(artistID, newdate, userID);
 			System.out.println("I've added the booking");
@@ -272,7 +321,6 @@ public class BandStandController {
 		}
 		return mv;
 	}
-	
 	@RequestMapping("getBookingsByBand.do")
 	public ModelAndView getBookingsByBand(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
 		System.out.println("I enter the get all comments method");
@@ -341,19 +389,19 @@ public class BandStandController {
 	@RequestMapping("getUserByEmail.do")
 	public ModelAndView ValidatePassword(@RequestParam("email") String email,
 			@RequestParam("password") String password) {
-		System.out.println("I come in to the getUserByEmail method with " + email + " and as my password " + password);
+		ModelAndView mv = new ModelAndView();
 		User user = dao.getUserByEmail(email);
+		if (user == null){
+			mv.setViewName("index.jsp");
+			return mv;
+		}
 		System.out.println("The user I have in the getUserByEmail method is: " + user.getId());
 		System.out.println("The password I have stored is: " + password);
 		if (password.equals(dao.matchUserPassword(email))) {
-			System.out.println("I match");
-			ModelAndView mv = new ModelAndView();
 			mv.addObject("user", user);
 			mv.setViewName("ArtistList.jsp");
 			return mv;
 		} else {
-			System.out.println("I don't match");
-			ModelAndView mv = new ModelAndView();
 			mv.addObject("user", user);
 			mv.setViewName("index.jsp");
 			return mv;
