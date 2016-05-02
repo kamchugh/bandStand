@@ -39,8 +39,27 @@ public class User {
 	
 	
 	
+	public void removeBookings(List<Booking> bookingsList){
+		for(Booking booking: bookingsList)
+			if (bookings.contains(booking)){
+				bookings.remove(booking);
+		}
+	}
 	
 	
+	public void removeRatings(List<Rating> ratingsList){
+		for(Rating rating: ratingsList)
+			if (ratings.contains(rating)){
+				ratings.remove(rating);
+		}
+	}
+	
+	public void removeComments(List<Comment> commentList){
+		for(Comment comment: commentList)
+			if (comments.contains(comment)){
+				comments.remove(comment);
+		}
+	}
 	public User() {
 		super();
 	}

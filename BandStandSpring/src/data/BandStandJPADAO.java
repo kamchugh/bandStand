@@ -95,7 +95,12 @@ public class BandStandJPADAO implements BandStandDAO {
 
 	public User getUserByEmail(String email) {
 		String search = "select u from User u WHERE u.email = '" + email + "'";
-		User user = em.createQuery(search, User.class).getSingleResult();
+		User user;
+		try{
+			user = em.createQuery(search, User.class).getSingleResult();
+		}catch(Exception e){
+			user = null;
+		}
 		return user;
 	}
 
@@ -165,6 +170,7 @@ public class BandStandJPADAO implements BandStandDAO {
 		booking.setArtist(artistDate);
 		booking.setBookingDate(date);
 		booking.setUser(user);
+		booking.setConfirmed(false);
 		em.persist(booking);
 
 		// comment.setUser(userComment); - finish this when you get the id to
@@ -182,8 +188,22 @@ public class BandStandJPADAO implements BandStandDAO {
 		artistToDelete.removeGenres(artistToDelete.getGenres());
 		em.remove(artistToDelete);
 	}
+	
+	public void deleteUserById(int userId) {
+		User userToDelete = em.find(User.class, userId);
+		userToDelete.removeRatings(userToDelete.getRatings());
+		userToDelete.removeBookings(userToDelete.getBookings());
+		userToDelete.removeComments(userToDelete.getComments());
+		em.remove(userToDelete);
+	}
 
-	public void addUser(String firstName, String lastName, String email, String password) {
+	public int addUser(String firstName, String lastName, String email, String password) {
+		List<User> users = getAllUsers();
+		for(User user: users){
+			if (user.getEmail().equals(email)){
+				return 1;
+			}
+		}
 		User newUser = new User();
 		newUser.setFirstName(firstName);
 		newUser.setLastName(lastName);
@@ -191,12 +211,10 @@ public class BandStandJPADAO implements BandStandDAO {
 		newUser.setPassword(password);
 		newUser.setAccessLevel(1);
 		em.persist(newUser);
+		return 0;
 	}
 
-	public void deleteUserById(int userId) {
-		User userToDelete = em.find(User.class, userId);
-		em.remove(userToDelete);
-	}
+
 
 	public List<Booking> getAllBookings() {
 		String query = "Select b from Booking b";
