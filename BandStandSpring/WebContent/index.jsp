@@ -145,6 +145,10 @@
 			type="submit">
 
 	</form>
+	
+		<c:forEach var="artist" items="${ratingMatch}">
+        ${artist.name}: ${artist.email }
+    </c:forEach>
 
 	<c:forEach var="name" items="${allg}">
         ${name.artist.name}: ${name.artist.email }

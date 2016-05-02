@@ -113,6 +113,21 @@
 
 		</select> <input type="submit">
 	</form>
+	
+		<form action="searchByRating.do" method="GET">
+		<div>Search By Rating</div>
+
+		<select name="rating">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+		</select> <input type="submit">
+	</form>
+	<c:forEach var="artist" items="${ratingMatch}">
+        ${artist.name}: ${artist.email}
+    </c:forEach>
 
 	<table>
 		<thead>
