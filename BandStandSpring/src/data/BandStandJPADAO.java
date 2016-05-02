@@ -173,6 +173,12 @@ public class BandStandJPADAO implements BandStandDAO {
 
 	public void deleteArtistById(int artistId) {
 		Artist artistToDelete = em.find(Artist.class, artistId);
+		artistToDelete.removeRatings(artistToDelete.getRatings());
+		artistToDelete.removeBookings(artistToDelete.getBookings());
+		artistToDelete.removePhotos(artistToDelete.getPhotos());
+		artistToDelete.removeRecordings(artistToDelete.getRecordings());
+		artistToDelete.removeComments(artistToDelete.getComments());
+		artistToDelete.removeGenres(artistToDelete.getGenres());
 		em.remove(artistToDelete);
 	}
 

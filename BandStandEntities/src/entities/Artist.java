@@ -46,6 +46,47 @@ public class Artist {
 		
 	}
 	
+	public void removeRatings(List<Rating> ratingsList){
+		for(Rating rating: ratingsList)
+			if (ratings.contains(rating)){
+				ratings.remove(rating);
+		}
+	}
+	
+	public void removeBookings(List<Booking> bookingsList){
+		for(Booking booking: bookingsList)
+			if (bookings.contains(booking)){
+				bookings.remove(booking);
+		}
+	}
+	
+	public void removePhotos(List<Photo> photosList){
+		for(Photo photo: photosList)
+			if (photos.contains(photo)){
+				photos.remove(photo);
+		}
+	}
+	
+	public void removeRecordings(List<Recording> recordingsList){
+		for(Recording recording: recordingsList)
+			if (recordings.contains(recording)){
+				recordings.remove(recording);
+		}
+	}
+	
+	public void removeComments(List<Comment> commentList){
+		for(Comment comment: commentList)
+			if (comments.contains(comment)){
+				comments.remove(comment);
+		}
+	}
+	
+	public void removeGenres(List<Genre> genresList){
+		for(Genre genre: genresList)
+			if (genres.contains(genre)){
+				genres.remove(genre);
+		}
+	}
 	public Artist(int id, String name, String description, String email, String password) {
 		super();
 		this.id = id;
