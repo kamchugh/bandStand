@@ -135,4 +135,29 @@
 	<c:forEach var="name" items="${allg}">
         ${name.artist.name}: ${name.artist.email }
     </c:forEach>
+    
+    <br><br><br><br>
+    
+    <div>
+    <form action="updateUser.do" method="GET">
+			<h3>Update User</h3>
+			<input type="hidden" name="" value="${user.id } "> 
+			First Name
+			<input type="text" name="firstName" value="${user.firstName }" "/>
+			Last Name
+			<input type="text" name="lastName" value="${user.lastName }">
+			Email
+			<input type="text" name="email" value="${user.email }">
+			Password
+			<input type="password" name="password" value="${user.password }">
+			Photo URL
+			<input type="text" name="photoUrl" value="${user.photoUrl }">
+			<input type="submit" value="Update">
+		</form>
+    </div>
+    
+    
+    
+    
+    
 </html>
