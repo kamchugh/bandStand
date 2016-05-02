@@ -18,30 +18,32 @@
 
 	I'd like to...
 
-	<form action="getAllArtists.do" method="GET">
-
+	<form action="getAllArtistsforUser.do" method="GET">
+		User ID test <input type="text" name="userID" value="${user.id}">
 		<input type="submit" value="Get all artists">
 	</form>
-	<c:choose>
-		<c:when test="${! empty(allArtists)}">
-		I'm getting all the artists
-			<c:forEach var="individualArtist" items="${allArtists}">
-				<c:if test="${! empty(individualArtist)}">
-		${individualArtist.firstName}
-		${individualArtist.lastName}
-		<form action="getArtistById.do" method="GET">
-						<input type="text" name="userID" value="${user.id}"> <input
-							type="text" name="artistID" value="1"> <input
-							type="submit" value="submit">
-					</form>
-
-				</c:if>
 
 
-			</c:forEach>
+	<form action="getArtistById.do" method="GET">
+		<c:forEach var="artist" items="${allArtistsforUser}">
+			<c:if test="${! empty(artist)}">
+	
+	${artist.id}
+	${artist.name}
 
-		</c:when>
-	</c:choose>
+				<input type="text" name="userID" value="${user.id}">
+				<input type="text" name="artistID" value="${artist.id}">
+				<input type="submit" value="go to band page">
+
+
+			</c:if>
+		</c:forEach>
+
+	</form>
+
+
+
+
 
 	<br>
 	<br>
@@ -68,25 +70,25 @@
 			type="submit">
 	</form>
 	<c:forEach var="booking" items="${bookings}">
-                
-        <table>
-        <thead>
-        <tr>
-        	<td>Booking ID</td>
-        	<td>Booking Date</td>
-        	<td>Confirmed Status</td>
-        </tr>
-        </thead>
-        	<tr>
-        	<td>${booking.id }</td>
-        	<td>${booking.bookingDate }</td>
-        	<td>${booking.confirmed }</td>
-        	</tr>
-        <tbody>
-        </tbody>
-        
-        </table>        
-   
+
+		<table>
+			<thead>
+				<tr>
+					<td>Booking ID</td>
+					<td>Booking Date</td>
+					<td>Confirmed Status</td>
+				</tr>
+			</thead>
+			<tr>
+				<td>${booking.id }</td>
+				<td>${booking.bookingDate }</td>
+				<td>${booking.confirmed }</td>
+			</tr>
+			<tbody>
+			</tbody>
+
+		</table>
+
 	</c:forEach>
 	<br>
 	<br>
@@ -111,24 +113,24 @@
 
 		</select> <input type="submit">
 	</form>
-	
+
 	<table>
-        <thead>
-        <tr>
-        	<td>Booking ID</td>
-        	<td>Booking Date</td>
-        	<td>Confirmed Status</td>
-        </tr>
-        </thead>
-        	<tr>
-        	<td>${booking.id }</td>
-        	<td>${booking.bookingDate }</td>
-        	<td>${booking.confirmed }</td>
-        	</tr>
-        <tbody>
-        </tbody>
-        
-        </table>    
+		<thead>
+			<tr>
+				<td>Booking ID</td>
+				<td>Booking Date</td>
+				<td>Confirmed Status</td>
+			</tr>
+		</thead>
+		<tr>
+			<td>${booking.id }</td>
+			<td>${booking.bookingDate }</td>
+			<td>${booking.confirmed }</td>
+		</tr>
+		<tbody>
+		</tbody>
+
+	</table>
 
 	<c:forEach var="name" items="${allg}">
         ${name.artist.name}: ${name.artist.email }

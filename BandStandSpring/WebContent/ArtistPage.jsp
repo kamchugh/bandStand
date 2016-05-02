@@ -43,12 +43,21 @@ Book this band for a certain date
 </form>
 
 <form action="getCommentsByBand.do" method="GET">
+User ID test <input type="text" name="userID" value="${user.id}">
 	<input type="text" name="artistID" value="${artist.id}"> <input
 		type="submit" name="commentsByBand"
 		value="Get all comments for this artist">
 </form>
 
+ <form action="getBookingsByBand.do" method="GET">
+User ID test <input type="text" name="userID" value="${user.id}">
+	<input type="text" name="artistID" value="${artist.id}"> <input
+		type="submit" name="bookingsByBand"
+		value="Get all bookings for this artist">
+</form>
+
 <form action="getRatingsByBand.do" method="GET">
+User ID test <input type="text" name="userID" value="${user.id}">
 	<input type="text" name="artistID" value="${artist.id}"> <input
 		type="submit" name="RatingsByBand"
 		value="Get all ratings for this artist">
@@ -63,5 +72,13 @@ Book this band for a certain date
 	${rating.number}
 	</c:if>
 </c:forEach>
+ <c:forEach var="booking" items="${bookings}">
+ This artist is already booked on...
+	<c:if test="${! empty(booking)}">
+	
+	${booking.id}
+	${booking.bookingDate}
+	</c:if>
+</c:forEach> 
 </body>
 </html>
