@@ -116,7 +116,7 @@
 	
 		<form action="searchByRating.do" method="GET">
 		<div>Search By Rating</div>
-
+<input type="text" name="userId" value="${user.id}">
 		<select name="rating">
 			<option value="1">1</option>
 			<option value="2">2</option>

@@ -472,8 +472,9 @@ public class BandStandController {
 	}
 	
 	@RequestMapping("searchByRating.do")
-	public ModelAndView searchByRating(@RequestParam("rating") int passedRating) {
+	public ModelAndView searchByRating(@RequestParam("rating") int passedRating, @RequestParam("userId") int userID) {
 		ModelAndView mv = new ModelAndView();
+		User user = dao.getUserById(userID);
 		List<Artist> artists = new ArrayList();
 		List<Artist> matchedArtists = new ArrayList();
 		artists = dao.getAllArtists();
@@ -486,6 +487,7 @@ public class BandStandController {
 		//List<Artist> artistRatingMatch = new ArrayList();
 
 		mv.addObject("ratingMatch", matchedArtists);
+		mv.addObject("user", user);
 		mv.setViewName("ArtistList.jsp");
 		return mv; 
 		
