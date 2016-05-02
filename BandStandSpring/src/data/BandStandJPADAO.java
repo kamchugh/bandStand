@@ -181,6 +181,14 @@ public class BandStandJPADAO implements BandStandDAO {
 		artistToDelete.removeGenres(artistToDelete.getGenres());
 		em.remove(artistToDelete);
 	}
+	
+	public void deleteUserById(int userId) {
+		User userToDelete = em.find(User.class, userId);
+		userToDelete.removeRatings(userToDelete.getRatings());
+		userToDelete.removeBookings(userToDelete.getBookings());
+		userToDelete.removeComments(userToDelete.getComments());
+		em.remove(userToDelete);
+	}
 
 	public void addUser(String firstName, String lastName, String email, String password) {
 		User newUser = new User();
@@ -192,10 +200,7 @@ public class BandStandJPADAO implements BandStandDAO {
 		em.persist(newUser);
 	}
 
-	public void deleteUserById(int userId) {
-		User userToDelete = em.find(User.class, userId);
-		em.remove(userToDelete);
-	}
+
 
 	public List<Booking> getAllBookings() {
 		String query = "Select b from Booking b";
