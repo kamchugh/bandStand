@@ -85,5 +85,9 @@ User ID test <input type="text" name="userID" value="${user.id}">
 	${booking.bookingDate}
 	</c:if>
 </c:forEach> 
+<form action = "getAllPhotosForArtist.do" method = "GET">
+	<input type = "hidden" name = "artistId" value = "${artist.id}">
+	<input type = "submit" value = "Get Photos">
+</form>
 </body>
 </html>

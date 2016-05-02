@@ -17,6 +17,7 @@ import entities.Artist;
 import entities.Booking;
 import entities.Comment;
 import entities.Genre;
+import entities.Photo;
 import entities.Rating;
 import entities.User;
 
@@ -450,6 +451,21 @@ public class BandStandController {
 		return mv;
 	}
 
+	@RequestMapping("getAllPhotosForArtist.do")
+	public ModelAndView getAllPhotosForArtist(@RequestParam("artistId") int id){
+		System.out.println("in controller");
+		ModelAndView mv = new ModelAndView();
+		List<Photo> photoList = dao.getArtistPhotos(id);
+		System.out.println("back in controller");
+		for(Photo photo: photoList){ 
+			System.out.println("inside for each");
+			System.out.println(photo.getUrl());
+		}
+		mv.addObject("photos", photoList);
+		mv.setViewName("ArtistPage.jsp");
+		return mv;
+		
+	}
 	@RequestMapping("getUserByEmail.do")
 	public ModelAndView ValidatePassword(@RequestParam("email") String email,
 			@RequestParam("password") String password) {
