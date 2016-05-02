@@ -249,6 +249,12 @@ public class BandStandJPADAO implements BandStandDAO {
 	public List<Booking> getBookings(int userId) {
 		String search = "select u from User u where u.id='" + userId + "'";
 		User user = em.createQuery(search, User.class).getSingleResult();
+		
+		for (Booking booking : user.getBookings()) {
+			System.out.println(booking.getId());
+			System.out.println(booking.getBookingDate());
+		}
 		return user.getBookings();
 	}
+	
 }

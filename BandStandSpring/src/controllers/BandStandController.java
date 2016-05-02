@@ -325,7 +325,14 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		List<Booking> bookings = dao.getBookings(userId);
 		mv.addObject("bookings", bookings);
-		mv.setViewName("index.jsp");
+		System.out.println("before");
+		for (Booking booking : bookings) {
+			
+			System.out.println(booking.getId());
+			System.out.println(booking.getBookingDate());
+		}
+		System.out.println("after");
+		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
 
@@ -334,7 +341,7 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		List<Genre> genres = dao.searchByGenre(genreType);
 		mv.addObject("allg", genres);
-		mv.setViewName("index.jsp");
+		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
 
@@ -346,7 +353,7 @@ public class BandStandController {
 			System.out.println(artist2.getName());
 		}
 		mv.addObject("all", allArtists);
-		mv.setViewName("index.jsp");
+		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
 
