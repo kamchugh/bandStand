@@ -24,22 +24,22 @@
 	</form>
 
 
-	<form action="getArtistById.do" method="GET">
-		<c:forEach var="artist" items="${allArtistsforUser}">
-			<c:if test="${! empty(artist)}">
+
+	<c:forEach var="artist" items="${allArtistsforUser}">
+		<c:if test="${! empty(artist)}">
 	
 	${artist.id}
 	${artist.name}
+<form action="getArtistById.do" method="GET">
+				<input type="text" name="userID" value="${user.id}"> <input
+					type="text" name="artistID" value="${artist.id}"> <input
+					type="submit" value="go to band page">
+			</form>
 
-				<input type="text" name="userID" value="${user.id}">
-				<input type="text" name="artistID" value="${artist.id}">
-				<input type="submit" value="go to band page">
+		</c:if>
+	</c:forEach>
 
 
-			</c:if>
-		</c:forEach>
-
-	</form>
 
 
 
