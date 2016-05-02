@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -280,6 +281,28 @@ public class BandStandJPADAO implements BandStandDAO {
 		artistinMethod.setPassword(artist.getPassword());
 		artistinMethod.setDescription(artist.getDescription());
 		
+	}
+	
+	public int getRatingsForArtist(Artist artist) {
+	getArtistById(artist.getId());
+	//List <Rating> ratings = new ArrayList<>();
+	//ratings = getAllRatings(artist.getId());
+	List <Rating> ratings = getAllRatings(artist.getId());
+	System.out.println("Array size: " + ratings.size());
+	int addedRatings = 0;
+	for (Rating rating : ratings) {
+		System.out.println("I'm in ratings with: " + rating);
+		addedRatings = addedRatings + rating.getNumber();
+		System.out.println(addedRatings);
+	}
+	if (ratings.size()!=0){
+	int ratingAverage = (addedRatings / ratings.size());
+	System.out.println("Average rating: " + ratingAverage);
+	return ratingAverage;
+	}
+	else{
+		return 0;
+	}
 	}
 	
 }

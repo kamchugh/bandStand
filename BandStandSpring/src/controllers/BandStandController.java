@@ -327,11 +327,17 @@ public class BandStandController {
 		daoRatings = dao.getAllRatings(artistID);
 		System.out.println("I get below the getAllComments method in the controller");
 		ratings.addAll(daoRatings);
+		int addedRatings = 0;
 		for (Rating rating : daoRatings) {
-			System.out.println(rating.getNumber());
+			addedRatings = addedRatings + rating.getNumber();
+			System.out.println(addedRatings);
 		}
+		double ratingAverage = ((double)addedRatings / daoRatings.size());
+		System.out.println("I am the added ratings" + addedRatings);
+		System.out.println("I am the size of the list" + daoRatings.size());
+		System.out.println("I am the rating average" + ratingAverage);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("ratings", ratings);
+		mv.addObject("ratings", ratingAverage);
 		mv.addObject("user", user);
 		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
@@ -415,6 +421,26 @@ public class BandStandController {
 		mv.addObject("allg", genres);
 		mv.setViewName("ArtistList.jsp");
 		return mv;
+	}
+	
+	@RequestMapping("searchByRating.do")
+	public ModelAndView searchByRating(@RequestParam("rating") int passedRating) {
+		ModelAndView mv = new ModelAndView();
+		List<Artist> artists = new ArrayList();
+		List<Artist> matchedArtists = new ArrayList();
+		artists = dao.getAllArtists();
+		for (Artist artist : artists) {
+		int averageRating = dao.getRatingsForArtist(artist);
+		if (averageRating == passedRating) {
+			matchedArtists.add(artist);
+		}
+		}
+		//List<Artist> artistRatingMatch = new ArrayList();
+
+		mv.addObject("ratingMatch", matchedArtists);
+		mv.setViewName("ArtistList.jsp");
+		return mv; 
+		
 	}
 
 	@RequestMapping("initialLoad.do")
