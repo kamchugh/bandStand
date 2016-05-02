@@ -90,7 +90,7 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user", user);
 		mv.setViewName("editUser.jsp");
-//		mv.setViewName("ArtistList.jsp");
+		// mv.setViewName("ArtistList.jsp");
 		return mv;
 
 	}
@@ -247,18 +247,33 @@ public class BandStandController {
 	// This is the template for updating fields for both user and artist. Save
 	// the id in a hidden field in the jsp
 	@RequestMapping("updateUser.do")
-	public ModelAndView updateUser(User user, @RequestParam("email") String email, @RequestParam("userId") int userId, @RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName, @RequestParam("password") String password, @RequestParam("photoUrl") String photoUrl) {
-		
-//		User user = dao.getUserById(userId);
-		ModelAndView mv = new ModelAndView();
-		dao.updateUser(userId, firstName, lastName, email, password, photoUrl);
-		
-//		mv.addObject("user",user);
-		mv.setViewName("Admin.jsp");;
+	public ModelAndView updateUser(User user, @RequestParam("email") String email, @RequestParam("userId") int userId,
+			@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
+			@RequestParam("password") String password, @RequestParam("photoUrl") String photoUrl) {
 
+		ModelAndView mv = new ModelAndView();
+
+		if (firstName == "" || lastName == "" || email == "" || password == "") {
+			String error = "Value required.";
+			mv.addObject(error);
+			System.out.println(error);
+			mv.setViewName("editUser.jsp");
+		} else {
+			int addUserReturn = dao.updateUser(userId, firstName, lastName, email, password, photoUrl);
+			if (addUserReturn != 0) {
+				String duplicateError = "This email already exists for another user.";
+				mv.addObject(duplicateError);
+				System.out.println(duplicateError);
+				mv.setViewName("editUser.jsp");
+			} else {
+				mv.setViewName("Admin.jsp");
+			}
+
+		}
 		return mv;
 	}
+
+	
 
 	@RequestMapping("setConfirmedBooking.do")
 	public String setConfirmedBooking(@RequestParam("bookingId") int id) {
@@ -423,7 +438,7 @@ public class BandStandController {
 			addedRatings = addedRatings + rating.getNumber();
 			System.out.println(addedRatings);
 		}
-		double ratingAverage = ((double)addedRatings / daoRatings.size());
+		double ratingAverage = ((double) addedRatings / daoRatings.size());
 		System.out.println("I am the added ratings" + addedRatings);
 		System.out.println("I am the size of the list" + daoRatings.size());
 		System.out.println("I am the rating average" + ratingAverage);
@@ -531,7 +546,7 @@ public class BandStandController {
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
-	
+
 	@RequestMapping("searchByRating.do")
 	public ModelAndView searchByRating(@RequestParam("rating") int passedRating, @RequestParam("userId") int userID) {
 		ModelAndView mv = new ModelAndView();
@@ -540,18 +555,18 @@ public class BandStandController {
 		List<Artist> matchedArtists = new ArrayList();
 		artists = dao.getAllArtists();
 		for (Artist artist : artists) {
-		int averageRating = dao.getRatingsForArtist(artist);
-		if (averageRating == passedRating) {
-			matchedArtists.add(artist);
+			int averageRating = dao.getRatingsForArtist(artist);
+			if (averageRating == passedRating) {
+				matchedArtists.add(artist);
+			}
 		}
-		}
-		//List<Artist> artistRatingMatch = new ArrayList();
+		// List<Artist> artistRatingMatch = new ArrayList();
 
 		mv.addObject("ratingMatch", matchedArtists);
 		mv.addObject("user", user);
 		mv.setViewName("ArtistList.jsp");
-		return mv; 
-		
+		return mv;
+
 	}
 
 	@RequestMapping("initialLoad.do")

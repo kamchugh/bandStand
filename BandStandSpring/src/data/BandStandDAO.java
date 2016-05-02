@@ -47,7 +47,7 @@ public interface BandStandDAO {
 
 	public String matchUserPassword(String email);
 
-	public void updateUser(int userId, String firstName, String lastName, String email, String password,
+	public int updateUser(int userId, String firstName, String lastName, String email, String password,
 			String photoUrl);
 
 	public void addComment(int artistID, String description, int userID);

@@ -250,13 +250,20 @@ public class BandStandJPADAO implements BandStandDAO {
 		return ratings;
 	}
 
-	public void updateUser(int userId, String firstName, String lastName, String email, String password, String photoUrl) {
+	public int updateUser(int userId, String firstName, String lastName, String email, String password, String photoUrl) {
+		List<User> users = getAllUsers();
+		for(User user: users){
+			if (user.getEmail().equals(email)){
+				return 1;
+			}
+		}
 		User user = em.find(User.class, userId);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
 		user.setPassword(password);
 		user.setPhotoUrl(photoUrl);
+		return 0;
 	}
 
 	public void setConfirmedBooking(int id) {
