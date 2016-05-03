@@ -86,7 +86,7 @@
 						<c:forEach var="name" items="${all}">
 							<option value="${name.name}">${name.name }</option>
 						</c:forEach>
-					</select> <input class="btn btn-default" type="submit" value="Go">
+					</select> <input style="margin-top: 10px;" class="btn btn-default" type="submit" value="Go">
 				</form>
 
 
@@ -113,7 +113,7 @@
 						<option value="Alternative">Alternative</option>
 
 
-					</select> <input class="btn btn-default" type="submit" value="Go">
+					</select> <input style="margin-top: 10px;" class="btn btn-default" type="submit" value="Go">
 				</form>
 
 			</div>
@@ -128,12 +128,12 @@
 						<option value="3">3</option>
 						<option value="4">4</option>
 						<option value="5">5</option>
-					</select> <input class="btn btn-default" type="submit" value="Go">
+					</select> <input style="margin-top: 10px;" class="btn btn-default" type="submit" value="Go">
 				</form>
 			</div>
 			<div class="col-xs-2">
 				<form action="searchBookingsByUserId.do" method="GET">
-					<input type="text" name="userId" value="${user.id }"> <input
+					<input type="text" name="userId" value="${user.id }"> <input style="margin-top: 10px;"
 						class="btn btn-default" type="submit" value="See My Bookings">
 				</form>
 			</div>
