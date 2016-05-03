@@ -46,7 +46,9 @@ public class BandStandJPADAO implements BandStandDAO {
 
 	public List<Artist> getAllArtists() {
 		String search = "select a from Artist a";
+		System.out.println("before");
 		List<Artist> allArtists = em.createQuery(search, Artist.class).getResultList();
+		System.out.println("after");
 		return allArtists;
 	}
 

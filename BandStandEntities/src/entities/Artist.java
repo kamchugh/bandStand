@@ -3,6 +3,7 @@ package entities;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +38,7 @@ public class Artist {
 	@OneToMany(mappedBy = "artist")  // one artist, many comments
 	private List<Comment> comments;
 	
-	@OneToMany(mappedBy = "artist")  // one artist, many photos
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "artist")  // one artist, many photos
 	private List<Photo> photos;
 	
 	

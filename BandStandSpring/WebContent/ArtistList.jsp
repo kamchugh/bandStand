@@ -5,179 +5,221 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Bare - Start Bootstrap Template</title>
+
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="stylesheet.css">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="container">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+			data-target="#bs-example-navbar-collapse-1">
+			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
+			<span class="icon-bar"></span> <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="ArtistList.jsp">Home</a>
+	</div>
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li><a href="#">Hello, ${user.firstName }</a></li>
+			<li>
+				<!--                         <a href="#">Services</a>
+ -->
+			</li>
+			<li>
+				<!--                         <a href="#">Contact</a>
+ -->
+			</li>
+		</ul>
+	</div>
+	<!-- /.navbar-collapse -->
+</div>
+<!-- /.container --> </nav>
 
 <body>
+	<div class="container">
+		<br> <br> <br> <br>
 
-	<h1>I'm printing things</h1>
+		<%-- 	<h1>User id: ${user.id}</h1>
+		<h1>Hi there, ${user.firstName}</h1> --%>
 
-	<h1>User id: ${user.id}</h1>
-	<h1>Hi there, ${user.firstName}</h1>
+		I'd like to... <br> <br>
 
-	I'd like to...
+<!-- <form class="form-inline">
+ -->
+		<div class="row">
+			<div class="col-xs-2">
 
-	<form action="getAllArtistsforUser.do" method="GET">
-		User ID test <input type="text" name="userID" value="${user.id}">
-		<input type="submit" value="Get all artists">
-	</form>
+				<form action="getAllArtists.do" method="GET">
 
+					<input class="btn btn-default" type="submit"
+						value="See All Artists">
+				</form>
+		
 
+			</div>
+			<div class="col-xs-2">
 
-	<c:forEach var="artist" items="${allArtistsforUser}">
-		<c:if test="${! empty(artist)}">
-	
-	${artist.id}
-	${artist.name}
-<form action="getArtistById.do" method="GET">
-				<input type="text" name="userID" value="${user.id}"> <input
-					type="text" name="artistID" value="${artist.id}"> <input
-					type="submit" value="go to band page">
-			</form>
+				<form action="searchByName.do" method="GET">
+					<!-- 					<div>Search By Name</div>
+ -->
+					<select class="form-control" name="name">
+						<option selected="selected">Select Artist</option>
 
-		</c:if>
-	</c:forEach>
-
-
-
-
-
+						<c:forEach var="name" items="${all}">
+							<option value="${name.name}">${name.name }</option>
+						</c:forEach>
+					</select> <input class="btn btn-default" type="submit" value="Go">
+				</form>
 
 
-	<br>
-	<br>
 
-	<form action="searchByName.do" method="GET">
-		<div>Search By Name</div>
-		<select name="name">
-			<c:forEach var="name" items="${all}">
-				<option value="${name.name}">${name.name }</option>
-			</c:forEach>
-		</select> <input type="submit">
-	</form>
+				<!-- 				<button class="btn btn-default" type="submit">Search Name</button>-->
+			</div>
+			<div class="col-xs-2">
 
-	<br>
-	<br> ${artist.email }
 
-	<br>
-	<br>
+				<form action="searchByGenre.do" method="GET">
+					<!-- 				<div>Search By Genre</div>
+ -->
+					<select class="form-control" name="genre">
+						<option selected="selected">Select Genre</option>
 
-	<form action="searchBookingsByUserId.do" method="GET">
-		<div>List Bookings by userid</div>
+						<option value="Jazz">Jazz</option>
+						<option value="Brass">Brass</option>
+						<option value="EDM">EDM</option>
+						<option value="Jazz">Jazz</option>
+						<option value="Reggae">Reggae</option>
+						<option value="Brass">Brass</option>
+						<option value="Piano">Piano</option>
+						<option value="Country">Country</option>
+						<option value="Alternative">Alternative</option>
 
-		<input type="text" name="userId" value="1"> <input
-			type="submit">
-	</form>
-	<c:forEach var="booking" items="${bookings}">
 
-		<table>
-			<thead>
+					</select> <input class="btn btn-default" type="submit" value="Go">
+				</form>
+
+			</div>
+			<div class="col-xs-2">
+				<form action="searchByRating.do" method="GET">
+					<input type="hidden" name="userId" value="1"> <select
+						class="form-control" name="rating">
+						<option selected="selected">Select Rating</option>
+
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select> <input class="btn btn-default" type="submit" value="Go">
+				</form>
+			</div>
+			<div class="col-xs-2">
+				<form action="searchBookingsByUserId.do" method="GET">
+
+					<input type="text" name="userId" value="${user.id }"> <input
+						class="btn btn-default" type="submit" value="See My Bookings">
+				</form>
+
+			</div>
+			<div class="col-xs-2">
+				<button class="btn btn-default" type="submit">Update My
+					Info</button>
+			</div>
+		</div>
+
+
+
+
+<!-- </form>
+ -->
+
+		<br> <br> <br> <br>
+
+
+
+		<c:forEach var="artist2" items="${artist}">
+<%-- 			<c:forEach var="photos" items="${ artist2}">
+ --%>				<table class="table">
+					<thead>
+						<tr>
+							<td>Pic</td>
+							<td>Name</td>
+							<td>Description</td>
+							<td>Email</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+							<img src="${artist2.photos[0].url}" height=200 width=200/>
+							</td>
+							<td>${artist2.name}</td>
+							<td>${artist2.description}</td>
+							<td>${artist2.email}</td>
+						</tr>
+					</tbody>
+				</table>
+<%--         ${artist2.photos}
+ --%><%-- 			</c:forEach>
+ --%>		</c:forEach>
+
+
+		<br> <br> <br> <br>
+
+
+
+		<c:forEach var="booking" items="${bookings}">
+
+			<table class="table">
+				<thead>
+					<tr>
+						<td>Booking ID</td>
+						<td>Booking Date</td>
+						<td>Confirmed Status</td>
+						<td>Artist Booked</td>
+					</tr>
+				</thead>
 				<tr>
-					<td>Booking ID</td>
-					<td>Booking Date</td>
-					<td>Confirmed Status</td>
+					<td>${booking.id }</td>
+					<td>${booking.bookingDate }</td>
+					<td>${booking.confirmed }</td>
+					<td>${booking.artist.name }</td>
 				</tr>
-			</thead>
-			<tr>
-				<td>${booking.id }</td>
-				<td>${booking.bookingDate }</td>
-				<td>${booking.confirmed }</td>
-			</tr>
-			<tbody>
-			</tbody>
+				<tbody>
+				</tbody>
 
-		</table>
+			</table>
 
-	</c:forEach>
-	<br>
-	<br>
-	<br>
-	<br>
+		</c:forEach>
+		<br> <br> <br> <br>
 
 
-	<form action="searchByGenre.do" method="GET">
-		<div>Search By Genre</div>
 
-		<select name="genre">
-			<option value="Jazz">Jazz</option>
-			<option value="Brass">Brass</option>
-			<option value="EDM">EDM</option>
-			<option value="Jazz">Jazz</option>
-			<option value="Reggae">Reggae</option>
-			<option value="Brass">Brass</option>
-			<option value="Piano">Piano</option>
-			<option value="Country">Country</option>
-			<option value="Alternative">Alternative</option>
-
-
-		</select> <input type="submit">
-	</form>
-	
-		<form action="searchByRating.do" method="GET">
-		<div>Search By Rating</div>
-<input type="text" name="userId" value="${user.id}">
-		<select name="rating">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-		</select> <input type="submit">
-	</form>
-	<c:forEach var="artist" items="${ratingMatch}">
+		<c:forEach var="artist" items="${ratingMatch}">
         ${artist.name}: ${artist.email}
     </c:forEach>
 
-	<table>
-		<thead>
-			<tr>
-				<td>Booking ID</td>
-				<td>Booking Date</td>
-				<td>Confirmed Status</td>
-			</tr>
-		</thead>
-		<tr>
-			<td>${booking.id }</td>
-			<td>${booking.bookingDate }</td>
-			<td>${booking.confirmed }</td>
-		</tr>
-		<tbody>
-		</tbody>
-
-	</table>
-
-	<c:forEach var="name" items="${allg}">
-        ${name.artist.name}: ${name.artist.email }
-    </c:forEach>
-
-	<br>
-	<br>
-	<br>
-	<br>
-
-	<%--   <div>
-    <form action="updateUser.do" method="GET">
-			<h3>Update User</h3>
-			<input type="hidden" name="" value="${user.id } "> 
-			First Name
-			<input type="text" name="firstName" value="${user.firstName }"/>
-			Last Name
-			<input type="text" name="lastName" value="${user.lastName }">
-			Email
-			<input type="text" name="email" value="${user.email }">
-			Password
-			<input type="password" name="password" value="${user.password }">
-			Photo URL
-			<input type="text" name="photoUrl" value="${user.photoUrl }">
-			<input type="submit" value="Update">
-		</form>
-    </div> --%>
 
 
-	<%-- <c:if test="${user.accessLevel = 2}">
-		<form action="Admin.jsp">
-			<input type="submit" value="Admin Mode">
-		</form>
-	</c:if> --%>
+
+		<br> <br> <br> <br>
+
+	</div>
 </html>

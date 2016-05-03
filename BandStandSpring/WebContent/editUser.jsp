@@ -9,6 +9,28 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <form action="updateUser.do" method="GET">
 			<h3>Update User</h3>
 			<input type="hidden" name="userId" value="${user.id } "> 

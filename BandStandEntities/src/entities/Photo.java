@@ -34,6 +34,10 @@ public class Photo {
 		this.id = id;
 	}
 
+	public void setArtist(Artist artist) {
+		this.artist = artist;
+	}
+
 	public String getUrl() {
 		return url;
 	}

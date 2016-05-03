@@ -17,6 +17,7 @@ import entities.Artist;
 import entities.Booking;
 import entities.Comment;
 import entities.Genre;
+import entities.Photo;
 import entities.Rating;
 import entities.User;
 
@@ -49,12 +50,17 @@ public class BandStandController {
 		return "Admin.jsp";
 	}
 
-	@RequestMapping("getAllArtists")
+	@RequestMapping("getAllArtists.do")
 	public ModelAndView getAllArtist() {
 		ModelAndView mv = new ModelAndView();
 		List<Artist> allArtists = dao.getAllArtists();
-		mv.addObject("allArtists", allArtists);
-		mv.setViewName("Admin.jsp");
+//		for (Artist artist : allArtists) {
+//			for (Photo photos : artist.getPhotos()) {
+//				System.out.println(photos.getUrl());
+//			}
+//		}
+		mv.addObject("artist", allArtists);
+		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
 
@@ -460,13 +466,11 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		List<Booking> bookings = dao.getBookings(userId);
 		mv.addObject("bookings", bookings);
-		System.out.println("before");
 		for (Booking booking : bookings) {
 			
 			System.out.println(booking.getId());
 			System.out.println(booking.getBookingDate());
 		}
-		System.out.println("after");
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
@@ -475,7 +479,13 @@ public class BandStandController {
 	public ModelAndView searchByGenre(@RequestParam("genre") String genreType) {
 		ModelAndView mv = new ModelAndView();
 		List<Genre> genres = dao.searchByGenre(genreType);
-		mv.addObject("allg", genres);
+		
+		List<Artist> matchedArtists = new ArrayList();
+		for (Genre g : genres) {
+			matchedArtists.add(g.getArtist());
+		}
+		
+		mv.addObject("artist", matchedArtists);
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
@@ -489,13 +499,14 @@ public class BandStandController {
 		artists = dao.getAllArtists();
 		for (Artist artist : artists) {
 		int averageRating = dao.getRatingsForArtist(artist);
+		System.out.println("controller average rating; " + averageRating);
 		if (averageRating == passedRating) {
 			matchedArtists.add(artist);
 		}
 		}
 		//List<Artist> artistRatingMatch = new ArrayList();
 
-		mv.addObject("ratingMatch", matchedArtists);
+		mv.addObject("artist", matchedArtists);
 		mv.addObject("user", user);
 		mv.setViewName("ArtistList.jsp");
 		return mv; 
@@ -510,7 +521,7 @@ public class BandStandController {
 			System.out.println(artist2.getName());
 		}
 		mv.addObject("all", allArtists);
-		mv.setViewName("index.jsp");
+		mv.setViewName("index1.jsp");
 		return mv;
 	}
 
