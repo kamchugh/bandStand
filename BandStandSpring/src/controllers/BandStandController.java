@@ -620,5 +620,22 @@ public class BandStandController {
 		mv.setViewName("index1.jsp");
 		return mv;
 	}
+	
+	@RequestMapping("getAllArtistsUser.do")
+	public ModelAndView getAllArtists() {
+		ModelAndView mv = new ModelAndView();
+		List<Artist> allArtists = dao.getAllArtists();
+		mv.addObject("artist", allArtists);
+		
+		// for (Artist artist : allArtists) {
+		// for (Photo photos : artist.getPhotos()) {
+		// System.out.println(photos.getUrl());
+		// }
+		// }
+	
+		mv.setViewName("ArtistList.jsp");
+		return mv;
+	}
+	
 
 }

@@ -65,7 +65,7 @@
 		<div class="row">
 			<div class="col-xs-2">
 
-				<form action="getAllArtists.do" method="GET">
+				<form action="getAllArtistsUser.do" method="GET">
 
 					<input class="btn btn-default" type="submit"
 						value="See All Artists">
