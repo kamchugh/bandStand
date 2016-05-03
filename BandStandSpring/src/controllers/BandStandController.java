@@ -519,7 +519,7 @@ public class BandStandController {
 	@RequestMapping("userLogOut.do")
 	public ModelAndView userLogOut(HttpSession session){
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index.jsp");
+		mv.setViewName("index1.jsp");
 		session.invalidate();
 		return mv;
 	}
@@ -537,7 +537,7 @@ public class BandStandController {
 		mv.addObject("all", allArtists);
 		
 		if (user == null) {
-			mv.setViewName("index.jsp");
+			mv.setViewName("index1.jsp");
 			return mv;
 		}
 
