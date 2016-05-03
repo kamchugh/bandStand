@@ -324,9 +324,6 @@ body {
 
 </div>
 </body>
-    <!-- jQuery Version 1.11.1 -->
-    <script src="startbootstrap-bare-1.0.4 2/js/bootstrap.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="startbootstrap-bare-1.0.4 2/js/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 </html>
