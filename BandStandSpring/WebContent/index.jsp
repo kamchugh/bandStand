@@ -58,10 +58,10 @@
 	<form action="addUser.do" method="GET">
 		<div>Add New User</div>
 		<input type="text" name="userFirstName" value="">userFirstName
-		<input type="text" name="userLastName" value="">userLastName <input
-			type="text" name="userEmail" value="">Email <input
-			type="password" name="userPassword" value="">Password <input
-			type="submit">
+		<input type="text" name="userLastName" value="">userLastName 
+		<input type="text" name="userEmail" value="">Email 
+		<input type="password" name="userPassword" value="">Password 
+		<input type="submit">
 	</form>
 	<form action="deleteUserById.do" method="GET">
 		<div>deleteUserById.do</div>
@@ -99,9 +99,10 @@
 
 	<!-- Kaylee's forms  -->
 	<form action="getUserByEmail.do" method="GET">
-		getUserByEmail.do/ input email <input type="text" name="email"
-			value=""> getUserByEmail.do/ input password <input
-			type="text" name="password" value=""> <input type="submit">
+		getUserByEmail.do/ input email 
+		<input type="text" name="email" value=""> 
+		getUserByEmail.do/ input password 
+		<input type="text" name="password" value=""> <input type="submit">
 	</form>
 
 	<!--  Bruno's forms -->

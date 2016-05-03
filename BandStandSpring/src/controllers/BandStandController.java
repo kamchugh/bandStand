@@ -168,22 +168,31 @@ public class BandStandController {
 	@RequestMapping("addUserRegistration.do")
 	public ModelAndView addUserRegistration(@RequestParam("userFirstName") String firstName,
 			@RequestParam("userLastName") String lastName, @RequestParam("userEmail") String email,
-			@RequestParam("userPassword") String password) {
+			@RequestParam("userPassword") String password, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		
+		List<Artist> allArtists = dao.getAllArtists();
+		for (Artist artist2 : allArtists) {
+			System.out.println(artist2.getName());
+		}
+		mv.addObject("all", allArtists);
 		if (firstName == "" || lastName == "" || email == "" || password == "") {
 			String error = "Value required.";
 			mv.addObject(error);
 			System.out.println(error);
-			mv.setViewName("index.jsp");
+			mv.setViewName("index1.jsp");
 		} else {
 			int addUserReturn = dao.addUser(firstName, lastName, email, password);
+			
 			if (addUserReturn != 0) {
 				String duplicateError = "This email already exists for anothe user.";
 				mv.addObject(duplicateError);
 				System.out.println(duplicateError);
 
 			}
-			mv.setViewName("index.jsp");
+			User user = dao.getUserByEmail(email);
+			session.setAttribute("user",  user);
+			mv.setViewName("ArtistList.jsp");
 
 		}
 		return mv;
@@ -508,6 +517,13 @@ public class BandStandController {
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = dao.getUserByEmail(email);
+		
+		List<Artist> allArtists = dao.getAllArtists();
+		for (Artist artist2 : allArtists) {
+			System.out.println(artist2.getName());
+		}
+		mv.addObject("all", allArtists);
+		
 		if (user == null) {
 			mv.setViewName("index.jsp");
 			return mv;
@@ -523,6 +539,8 @@ public class BandStandController {
 			mv.setViewName("index.jsp");
 			return mv;
 		}
+		
+		
 
 	}
 
