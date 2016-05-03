@@ -62,13 +62,10 @@ body {
 					<li><a href="userLogOut.do">Log out</a></li>
 					<li><a href="updateMyInfoClick.do">Edit my account</a></li>
 					<li><a href="searchBookingsByUserId.do">View my bookings</a></li>
-					<li>
-					<c:if test="${user.accessLevel == 2}">
-						<form action="Admin.jsp">
-							<button type="submit" value="Admin Mode" class = "btn btn-link">Admin Portal</button>
-						</form>
-					</c:if>
-					</li>
+					<li><c:if test="${user.accessLevel == 2}">
+					<a href="Admin.jsp">Admin Portal</a>
+					</c:if></li>
+					
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -104,7 +101,7 @@ body {
 				</c:if>
 
 				<h1>${artist.name}</h1>
-				<div class="orangeGenre">
+				<div>
 					<p class="lead">
 						<c:forEach var="g" items="${artist.genres}">
 							<c:if test="${! empty(g)}">
@@ -112,7 +109,8 @@ body {
 				</c:if>
 						</c:forEach>
 					</p>
-				</div>
+					</div>
+				
 				<div id="carousel-example-generic" class="carousel slide"
 					data-ride="carousel" data-interval="8000">
 
@@ -358,7 +356,7 @@ body {
 
 
 	<footer class="panel-footer">
-		<div class="container">I'm the footer</div>
+		<div class="container footerText">Copyright BandStand 2016</div>
 	</footer>
 
 

@@ -1,6 +1,5 @@
-
-.carousel-inner > .item > img {
-    margin: 0 auto;
+.carousel-inner>.item>img {
+	margin: 0 auto;
 }
 
 .orangeText {
@@ -8,22 +7,21 @@
 }
 
 .orangeBorder {
-	padding-top: 15px; 
-	border-style: solid; 
-	border-color: #FF9900; 
-	border-radius: 20px; 
-	margin-top: 20px; 
+	padding-top: 15px;
+	border-style: solid;
+	border-color: #FF9900;
+	border-radius: 20px;
+	margin-top: 20px;
 	margin-bottom: 20px;
-					
 }
 
 .blackBorder {
 	padding-top: 15px;
-	padding-bottom: 15px;  
-	border-style: solid; 
-	border-color: black; 
-	border-radius: 20px; 
-	margin-top: 20px; 
+	padding-bottom: 15px;
+	border-style: solid;
+	border-color: black;
+	border-radius: 20px;
+	margin-top: 20px;
 	margin-bottom: 20px;
 }
 
@@ -32,14 +30,36 @@
 	padding-right: 15px;
 }
 
-
 .scroll {
-    width: 150px;
-    height: 150px;
-    overflow: scroll;
+	width: 150px;
+	height: 150px;
+	overflow: scroll;
 }
 
 .orangeGenre {
-	background-color: rgba (255,153,0, .5);
+	background-color: rgba(255, 153, 0, .5);
 	border-radius: 40px;
+	display: inline;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 15px;
+}
+
+link {
+	background-color: transparent;
+	text-decoration: none;
+	margin-top: 5px;
+	padding-top: 10px;
+	background-color: black;
+	color: white;
+}
+
+link:active, link:hover {
+	outline: 0;
+}
+
+.footerText {
+	font-size: 12px;
+	text-align: center;
+	color: grey;
 }
