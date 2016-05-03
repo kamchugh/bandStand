@@ -124,9 +124,9 @@ body {
 					</a>
 				</div>
 				<!-- Carousel -->
-				<div class="container"
+				<div class="blackBorder"
 					style="padding-top: 15px; border-style: solid; border-color: black; border-radius: 20px; margin-top: 20px; margin-bottom: 20px;">
-					<p class="lead" style="padding-top: 10px;">${artist.description}</p>
+					<p class="lead sidePadding" style="padding-top: 10px;">${artist.description}</p>
 
 <%-- 					<p class="lead">
 					<form action="getRatingsByBand.do" method="GET">
