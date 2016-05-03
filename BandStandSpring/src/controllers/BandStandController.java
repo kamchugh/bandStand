@@ -116,6 +116,14 @@ public class BandStandController {
 		mv.setViewName("Admin.jsp");
 		return mv;
 	}
+	
+	@RequestMapping("updateMyInfoClick.do")
+	public ModelAndView updateMyInforClick() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("showForm", "true");
+		mv.setViewName("ArtistList.jsp");
+		return mv;
+	}
 
 	@RequestMapping("getUserById.do")
 	public ModelAndView getUserById(@RequestParam("userID") int userID) {
