@@ -121,6 +121,7 @@ public class BandStandJPADAO implements BandStandDAO {
 		for (Genre g : artist.getGenres()) {
 			System.out.println(g.getGenretype());
 		}
+
 		return artist;
 	}
 

@@ -1,0 +1,23 @@
+
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+.orangeText {
+	color: #FF9900;
+}
+
+.blackBorder {
+	padding-top: 15px; 
+	border-style: solid; 
+	border-color: black; 
+	border-radius: 20px; 
+	margin-top: 20px; 
+	margin-bottom: 20px;
+					
+}
+
+.sidePadding {
+	padding-left: 15px;
+	padding-right: 15px;
+}

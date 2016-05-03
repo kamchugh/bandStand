@@ -57,13 +57,13 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		List<Artist> allArtists = dao.getAllArtists();
 		mv.addObject("allArtists", allArtists);
-		
+
 		// for (Artist artist : allArtists) {
 		// for (Photo photos : artist.getPhotos()) {
 		// System.out.println(photos.getUrl());
 		// }
 		// }
-	
+
 		mv.setViewName("Admin.jsp");
 		return mv;
 	}
@@ -122,20 +122,6 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("showForm", "true");
 		mv.setViewName("ArtistList.jsp");
-		return mv;
-	}
-
-	@RequestMapping("getArtistById.do")
-	public ModelAndView getArtistById(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
-		ModelAndView mv = new ModelAndView();
-		User user = dao.getUserById(userID);
-		Artist artist = dao.getArtistById(artistID);
-
-		mv.addObject("user", user);
-		mv.addObject("artist", artist);
-		
-
-		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
 
@@ -371,28 +357,34 @@ public class BandStandController {
 	@RequestMapping("addBooking.do")
 	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("date") String date,
 			@RequestParam("userID") int userID) {
-
-		Artist artist = dao.getArtistById(artistID);
-		User user = dao.getUserById(userID);
 		ModelAndView mv = new ModelAndView();
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-		try {
-			Date newdate = dateFormat.parse(date);
-			System.out.println("Im going to try to add the booking now");
-			dao.addBooking(artistID, newdate, userID);
-			System.out.println("I've added the booking");
-			// this is acting funky - showing a "01" for month of "10"
-			mv.addObject("date", newdate);
-			mv.addObject("user", user);
-			mv.addObject("artist", artist);
+		if (date == null) {
+			String dateError = "Please enter a date.";
+			mv.addObject("dateError", dateError);
 			mv.setViewName("ArtistPage.jsp");
+			return mv;
 
-		} catch (ParseException e) {
-			System.out.println("I couldn't parse this");
-			e.printStackTrace();
+		} else {
+			Artist artist = dao.getArtistById(artistID);
+			User user = dao.getUserById(userID);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+			try {
+				Date newdate = dateFormat.parse(date);
+				System.out.println("Im going to try to add the booking now");
+				dao.addBooking(artistID, newdate, userID);
+				System.out.println("I've added the booking");
+				// this is acting funky - showing a "01" for month of "10"
+				mv.addObject("date", newdate);
+				mv.addObject("user", user);
+				mv.addObject("artist", artist);
+				mv.setViewName("ArtistPage.jsp");
+
+			} catch (ParseException e) {
+				System.out.println("I couldn't parse this");
+				e.printStackTrace();
+			}
+			return mv;
 		}
-		return mv;
 	}
 
 	@RequestMapping("getBookingsByBand.do")
@@ -466,6 +458,34 @@ public class BandStandController {
 		return mv;
 	}
 
+	@RequestMapping("getArtistById.do")
+	public ModelAndView getArtistById(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
+		ModelAndView mv = new ModelAndView();
+		User user = dao.getUserById(userID);
+		Artist artist = dao.getArtistById(artistID);
+		List<Rating> ratings = new ArrayList<>();
+		List<Rating> daoRatings = new ArrayList<>();
+		daoRatings = dao.getAllRatings(artistID);
+		System.out.println("I get below the getAllComments method in the controller");
+		ratings.addAll(daoRatings);
+		int addedRatings = 0;
+		for (Rating rating : daoRatings) {
+			addedRatings = addedRatings + rating.getNumber();
+			System.out.println(addedRatings);
+		}
+		double ratingAverage = ((double) addedRatings / daoRatings.size());
+		System.out.println("I am the added ratings" + addedRatings);
+		System.out.println("I am the size of the list" + daoRatings.size());
+		System.out.println("I am the rating average" + ratingAverage);
+		mv.addObject("ratings", ratingAverage);
+
+		mv.addObject("user", user);
+		mv.addObject("artist", artist);
+
+		mv.setViewName("ArtistPage.jsp");
+		return mv;
+	}
+
 	@RequestMapping("getAllPhotosForArtist.do")
 	public ModelAndView getAllPhotosForArtist(@RequestParam("artistId") int id) {
 		System.out.println("in controller");
@@ -482,10 +502,10 @@ public class BandStandController {
 
 	}
 
-	//User log in.  Store user in session.
+	// User log in. Store user in session.
 	@RequestMapping("getUserByEmail.do")
-	public ModelAndView ValidatePassword(@RequestParam("email") String email,
-			@RequestParam("password") String password, HttpSession session) {
+	public ModelAndView ValidatePassword(@RequestParam("email") String email, @RequestParam("password") String password,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = dao.getUserByEmail(email);
 		if (user == null) {
@@ -494,12 +514,12 @@ public class BandStandController {
 		}
 
 		if (password.equals(dao.matchUserPassword(email))) {
-			//mv.addObject("user", user);
+			// mv.addObject("user", user);
 			session.setAttribute("user", user);
 			mv.setViewName("ArtistList.jsp");
 			return mv;
 		} else {
-			//mv.addObject("user", user);
+			// mv.addObject("user", user);
 			mv.setViewName("index.jsp");
 			return mv;
 		}
@@ -622,22 +642,21 @@ public class BandStandController {
 		mv.setViewName("index1.jsp");
 		return mv;
 	}
-	
+
 	@RequestMapping("getAllArtistsUser.do")
 	public ModelAndView getAllArtists() {
 		ModelAndView mv = new ModelAndView();
 		List<Artist> allArtists = dao.getAllArtists();
 		mv.addObject("artist", allArtists);
-		
+
 		// for (Artist artist : allArtists) {
 		// for (Photo photos : artist.getPhotos()) {
 		// System.out.println(photos.getUrl());
 		// }
 		// }
-	
+
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
-	
 
 }
