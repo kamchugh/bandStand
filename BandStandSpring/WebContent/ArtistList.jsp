@@ -170,7 +170,7 @@
 							<td>
 							<img src="${artist2.photos[0].url}" height=200 width=200/>
 							</td>
-							<td>${artist2.name}</td>
+							<td><a href="getArtistById.do?artistID=${artist2.id}&userID=${user.id}">${artist2.name}</a></td>
 							<td>${artist2.description}</td>
 							<td>${artist2.email}</td>
 						</tr>

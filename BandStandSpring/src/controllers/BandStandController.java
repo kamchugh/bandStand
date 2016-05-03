@@ -125,10 +125,12 @@ public class BandStandController {
 		User user = dao.getUserById(userID);
 		Artist artist = dao.getArtistById(artistID);
 		System.out.println(artist.getName());
-		for (Genre genre : artist.getGenres()) {
-			System.out.println(genre.getGenretype());
-		}
-		mv.addObject("genres", artist.getGenres());
+//		for (Genre genre : artist.getGenres()) {
+//			System.out.println(genre.getGenretype());
+//		}
+//		mv.addObject("genres", artist.getGenres());
+		mv.addObject("photos", artist.getPhotos());
+		mv.addObject("recordings", artist.getRecordings());
 		mv.addObject("user", user);
 		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
