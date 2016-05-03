@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-
+<link type="text/css" rel="stylesheet" href="custom.css" />
 <title>Artist's Page</title>
 
 <!-- Bootstrap Core CSS -->
@@ -69,44 +69,49 @@ body {
 
 		<div class="row">
 			<div class="col-lg-12 text-center">
-
+			 <c:if test="${! empty(date)}">
+						<%-- ${booking.id} --%>
+						<h3 class="orangeText">
+							You booking for <b>${date} </b> is being processed. ${artist.name} will respond to you soon!
+						</h3>
+					</c:if>
 
 				<h1>${artist.name}</h1>
-				<p class="lead">	
-				<c:forEach var="g" items="${artist.genres}">
-				<c:if test="${! empty(g)}">
+				<p class="lead">
+					<c:forEach var="g" items="${artist.genres}">
+						<c:if test="${! empty(g)}">
 				${g.genretype}
 				</c:if>
-				</c:forEach>
+					</c:forEach>
 				</p>
 				<div id="carousel-example-generic" class="carousel slide"
-					data-ride="carousel" data-interval="3000">
+					data-ride="carousel" data-interval="8000">
 
 					<!-- Indicators -->
-					<ol class="carousel-indicators">
+			<!-- 		<ol class="carousel-indicators">
 						<li data-target="#carousel-example-generic" data-slide-to="0"
 							class="active"></li>
 						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
 						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-					</ol>
+					</ol> -->
 
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner">
 
- 						<div class="item active">
+						<div class="item active">
 							<img
 								src="http://www.artlimited.net/user/0/0/2/5/4/4/9/artlimited_img476686.jpg"
-								style="width: 100%; height: 300px;">
-						</div> 
+								style="width: 80%; height: 300px;">
+						</div>
 
 						<c:forEach items="${artist.photos}" var="photo">
 							<div class="item">
-								<img src="${photo.url}" style="width: 100%; height: 300px;">
+								<img src="${photo.url}" style="width:; height: 300px;">
 
 							</div>
 
 						</c:forEach>
-				
+
 					</div>
 
 					<!-- Controls -->
@@ -119,58 +124,103 @@ body {
 					</a>
 				</div>
 				<!-- Carousel -->
-				<p class="lead" style="padding-top: 10px;">${artist.description}</p>
-				<p class="lead">
-				<form action="getRatingsByBand.do" method="GET">
-					<!-- User ID test -->
-					<input type="hidden" name="userID" value="${user.id}"> <input
-						type="hidden" name="artistID" value="${artist.id}"> <input
-						class="btn btn-default" type="submit" name="RatingsByBand"
-						value="Get rating for this artist">
-				</form>
-				</p>
-				<p>
-					<c:if test="${! empty(ratings)}">
-						<c:if test="${ratings <= 1}">
-							<img
-								src="http://fadmagazine.com/wp-content/uploads/one-star-rating.jpg"
-								alt="Smiley face" height="42" width="140">
-							<%-- ${ratings} --%>
-						</c:if>
+				<div class="container"
+					style="padding-top: 15px; border-style: solid; border-color: black; border-radius: 20px; margin-top: 20px; margin-bottom: 20px;">
+					<p class="lead" style="padding-top: 10px;">${artist.description}</p>
 
-						<c:if test="${(ratings <= 2) && (ratings > 1)}">
-							<img
-								src="http://vignette3.wikia.nocookie.net/dickfiguresfanon/images/3/3a/Two-star-rating.png/revision/latest?cb=20140418000000"
-								alt="Smiley face" height="42" width="140">
+<%-- 					<p class="lead">
+					<form action="getRatingsByBand.do" method="GET">
+						<!-- User ID test -->
+						<input type="hidden" name="userID" value="${user.id}"> <input
+							type="hidden" name="artistID" value="${artist.id}"> <input
+							class="btn btn-default" type="submit" name="RatingsByBand"
+							value="Get rating for this artist">
+					</form> 
+					</p> --%>
+					<ul class="list-inline" style="padding-top: 10px;">
+					<li> 
+					
+						<c:if test="${! empty(ratings)}">
+							<c:if test="${ratings <= 1}">
+								<img
+									src="http://fadmagazine.com/wp-content/uploads/one-star-rating.jpg"
+									alt="Smiley face" height="42" width="140">
+								<%-- ${ratings} --%>
+							</c:if>
 
-							<%-- ${ratings} --%>
-						</c:if>
-						<c:if test="${(ratings <= 3) && (ratings > 2)}">
-							<img
-								src="http://www.gobblertown.com/wp-content/uploads/2015/08/Three-Stars.jpg"
-								alt="Smiley face" height="42" width="140">
-							<%-- ${ratings} --%>
-						</c:if>
-						<c:if test="${(ratings <= 5) && (ratings > 4)}">
-							<img
-								src="http://www.ecofleetuk.com/wp-content/uploads/4-star-rating.png"
-								alt="Smiley face" height="42" width="140">
-							<%-- ${ratings} --%>
-						</c:if>
+							<c:if test="${(ratings <= 2) && (ratings > 1)}">
+								<img
+									src="http://vignette3.wikia.nocookie.net/dickfiguresfanon/images/3/3a/Two-star-rating.png/revision/latest?cb=20140418000000"
+									alt="Smiley face" height="42" width="140">
 
-					</c:if>
-				</p>
+								<%-- ${ratings} --%>
+							</c:if>
+							<c:if test="${(ratings <= 3) && (ratings > 2)}">
+								<img
+									src="http://www.gobblertown.com/wp-content/uploads/2015/08/Three-Stars.jpg"
+									alt="Smiley face" height="42" width="140">
+								<%-- ${ratings} --%>
+							</c:if>
+							<c:if test="${(ratings <= 5) && (ratings > 4)}">
+								<img
+									src="http://www.ecofleetuk.com/wp-content/uploads/4-star-rating.png"
+									alt="Smiley face" height="42" width="140">
+								<%-- ${ratings} --%>
+							</c:if>
+						<%-- 		<c:if test="${(ratings = NaN)}">
+								<p>Not yet rated</p>
+							</c:if> --%>
+							
+
+						</c:if>
+						</li>
+						<li>
+						<h4 style="padding-bottom: -20px;">${ratings}</h4></li>
+					
+
+					<ul class="list-inline" style="padding-top: 10px;">
+						<li>See what others had to say!</li>
+						<li>
+							<form action="getCommentsByBand.do" method="GET">
+								<!-- User ID test -->
+								<input type="hidden" name="userID" value="${user.id}"> <input
+									type="hidden" name="artistID" value="${artist.id}"> <input
+									class="btn btn-default" type="submit" name="commentsByBand"
+									value="Get all comments for this artist">
+							</form>
+						<li>
+					</ul>
+
+
+					<c:forEach var="comment" items="${comments}">
+						<c:if test="${! empty(comment)}">
+							<div class="overflow">
+								<dl class="dl-horizontal">
+									<dt>${comment.user.firstName}</dt>
+									<dd>${comment.body}</dd>
+								</dl>
+
+							</div>
+							<%-- 	${comment.body}
+	${comment.user.firstName} --%>
+						</c:if>
+					</c:forEach>
+				</div>
+				<h3 style="padding-top: 10px; padding-bottom: 20px;">Listen to
+					${artist.name}'s tunes</h3>
 				<div>
-				<c:forEach var="a" items="${artist.recordings}">
-				<c:if test="${! empty(a)}">
+					<c:forEach var="a" items="${artist.recordings}">
+						<c:if test="${! empty(a)}">
 				${a.url}
 				</c:if>
-			
-				</c:forEach>
-				
-				
+
+					</c:forEach>
+
+
 				</div>
-				
+				<h3 style="padding-top: 10px; padding-bottom: 20px;">Request
+					${artist.name}</h3>
+
 				<ul class="list-inline" style="padding-top: 10px;">
 					<li>Request this band for a certain date</li>
 					<li>
@@ -184,19 +234,22 @@ body {
 		type="textarea" name="year" value="2010"> <input type="submit"> -->
 							<input class="form-control" type="date" name="date">
 					</li>
-					<li><input class="btn btn-default" type="submit"></li>
+					<li><input class="btn btn-warning" type="submit"
+						name="Book this band"></li>
 					</form>
-					<li>
+					
+					
+
 				</ul>
 				<ul class="list-inline" style="padding-top: 10px;">
-					<li>Check their confirmed bookings</li>
+
 					<li>
 						<form action="getBookingsByBand.do" method="GET">
 							<!-- User ID test -->
 							<input type="hidden" name="userID" value="${user.id}"> <input
 								type="hidden" name="artistID" value="${artist.id}"> <input
 								class="btn btn-default" type="submit" name="bookingsByBand"
-								value="Get all bookings for this artist">
+								value="Check their bookings first">
 						</form>
 					<li>
 				</ul>
@@ -210,66 +263,44 @@ body {
 					</c:if>
 
 				</c:forEach>
-				<ul class="list-inline" style="padding-top: 10px;">
-					<li>See what others had to say!</li>
-					<li>
-						<form action="getCommentsByBand.do" method="GET">
-							<!-- User ID test -->
-							<input type="hidden" name="userID" value="${user.id}"> <input
-								type="hidden" name="artistID" value="${artist.id}"> <input
-								class="btn btn-default" type="submit" name="commentsByBand"
-								value="Get all comments for this artist">
+
+				<div class="jumbotron">
+					<h3 style="padding-top: 10px; padding-bottom: 20px;">Did
+						${artist.name} perform at your event? Let us know what you
+						thought!</h3>
+					<ul class="list-inline">
+						<li>Give ${artist.name} a rating</li>
+						<li>
+							<form action="addRating.do" method="GET">
+								<input type="hidden" name="userID" value="${user.id}"> <input
+									type="hidden" name="artistID" value="${artist.id}"> <select
+									class="form-control" name="rating">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+						</li>
+						<li><input class="btn btn-default" type="submit"></li>
 						</form>
-					<li>
-				</ul>
+						<li>
+					</ul>
 
-				<c:forEach var="comment" items="${comments}">
-					<c:if test="${! empty(comment)}">
-						<div class="overflow">
-							<dl class="dl-horizontal">
-								<dt>${comment.user.firstName}</dt>
-								<dd>${comment.body}</dd>
-							</dl>
-						</div>
-						<%-- 	${comment.body}
-	${comment.user.firstName} --%>
-					</c:if>
-				</c:forEach>
-
-				<h3 style="padding-top: 10px; padding-bottom: 20px;">Did
-					${artist.name} perform at your event? Let us know what you thought!</h3>
-				<ul class="list-inline">
-					<li>Give ${artist.name} a rating</li>
-					<li>
-						<form action="addRating.do" method="GET">
-							<input type="hidden" name="userID" value="${user.id}"> <input
-								type="hidden" name="artistID" value="${artist.id}"> <select
-								class="form-control" name="rating">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-							</select>
-					</li>
-					<li><input class="btn btn-default" type="submit"></li>
+					<p>Comment on ${artist.name}</p>
+					<p>
+					<form action="addComment.do" method="GET">
+						<input type="hidden" name="userID" value="${user.id}"> <input
+							type="hidden" name="artistID" value="${artist.id}">
+						<textarea class="form-control" type="text" name="comment"
+							value="comment"></textarea>
+						<p style="padding-top: 10px;">
+							<input class="btn btn-default" type="submit">
+						</p>
 					</form>
-					<li>
-				</ul>
-
-				<p>Comment on ${artist.name}</p>
-				<p>
-				<form action="addComment.do" method="GET">
-					<input type="hidden" name="userID" value="${user.id}"> <input
-						type="hidden" name="artistID" value="${artist.id}">
-					<textarea class="form-control" type="text" name="comment"
-						value="comment"></textarea>
-					<p style="padding-top: 10px;">
-						<input class="btn btn-default" type="submit">
-					</p>
-				</form>
-				<p>
-				</ul>
+					<p>
+					</ul>
+				</div>
 
 			</div>
 		</div>
@@ -293,92 +324,15 @@ body {
 	<!-- Bootstrap Core JavaScript -->
 
 
-	<%-- ${artist.name} ${artist.description} ${artist.id} User id: ${user.id} --%>
 
-	<%-- 	<br> Give this artist a rating
-	<form action="addRating.do" method="GET">
-		<input type="hidden" name="userID" value="${user.id}"> <input
-			type="hidden" name="artistID" value="${artist.id}"> <select
-			name="rating">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-		</select> <input type="submit">
-	</form>
 
-	Comment on this band
-	<form action="addComment.do" method="GET">
-		<input type="hidden" name="userID" value="${user.id}"> <input
-			type="hidden" name="artistID" value="${artist.id}"> <input
-			type="text" name="comment" value="comment"> <input
-			type="submit">
-	</form> --%>
 
-	<%-- 	Book this band for a certain date
-	<form action="addBooking.do" method="GET">
-		<!-- User ID test -->
-		<input type="hidden" name="userID" value="${user.id}">
-		<!-- Artist ID test -->
-		<input type="hidden" name="artistID" value="${artist.id}">
-		<!-- Month <input type="textarea" name="month" value="10"> Day <input
-		type="textarea" name="day" value="23"> Year <input
-		type="textarea" name="year" value="2010"> <input type="submit"> -->
-		<input type="date" name="date"> <input type="submit">
-	</form> --%>
-
-	<%-- 	<form action="getCommentsByBand.do" method="GET">
-		<!-- User ID test -->
-		<input type="hidden" name="userID" value="${user.id}"> <input
-			type="hidden" name="artistID" value="${artist.id}"> <input
-			type="submit" name="commentsByBand"
-			value="Get all comments for this artist">
-	</form> --%>
-
-	<%-- 	<form action="getBookingsByBand.do" method="GET">
-		<!-- User ID test -->
-		<input type="hidden" name="userID" value="${user.id}"> <input
-			type="hidden" name="artistID" value="${artist.id}"> <input
-			type="submit" name="bookingsByBand"
-			value="Get all bookings for this artist">
-	</form> --%>
-
-	<%-- 	<form action="getRatingsByBand.do" method="GET">
-		<!-- User ID test -->
-		<input type="hidden" name="userID" value="${user.id}"> <input
-			type="hidden" name="artistID" value="${artist.id}"> <input
-			type="submit" name="RatingsByBand"
-			value="Get all ratings for this artist">
-	</form> --%>
-	<%-- 	<c:forEach var="comment" items="${comments}">
-		<c:if test="${! empty(comment)}">
-	${comment.body}
-	</c:if>
-	</c:forEach> --%>
-	<%-- <c:forEach var="rating" items="${ratings}">
-	<c:if test="${! empty(rating)}">
-	${rating.number}
-	</c:if>
-</c:forEach> --%>
-	<%-- 	<c:if test="${! empty(ratings)}">
-	${ratings}
-	</c:if> --%>
-	<%-- <c:forEach var="booking" items="${bookings}">
- This artist is already booked on...
-	<c:if test="${! empty(booking)}">
-	
-	${booking.id}
-	${booking.bookingDate}
-	</c:if>
-
-	</c:forEach> --%>
 	<footer class="panel-footer">
 		<div class="container">I'm the footer</div>
 	</footer>
 
 
-<%-- 	<form action="getAllPhotosForArtist.do" method="GET">
+	<%-- 	<form action="getAllPhotosForArtist.do" method="GET">
 		<input type="hidden" name="artistId" value="${artist.id}"> <input
 			type="submit" value="Get Photos">
 	</form> --%>

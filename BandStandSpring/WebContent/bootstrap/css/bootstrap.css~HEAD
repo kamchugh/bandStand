@@ -9,6 +9,14 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
+.simpleBlackBorder {
+border-style: solid;
+border-color: black;
+border-radius: 10px;
+background-color: black;
+}
+
 body {
   margin: 0;
 }

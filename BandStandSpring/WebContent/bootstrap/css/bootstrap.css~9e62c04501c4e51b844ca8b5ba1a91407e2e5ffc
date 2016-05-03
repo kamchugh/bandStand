@@ -5,6 +5,14 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
+#simpleBlackBorder {
+border-style: solid;
+border-color: black;
+border-radius: 10px;
+background-color: black;
+
+}
+
 
 div .overflow {
     width: 150px;
