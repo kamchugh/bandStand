@@ -59,8 +59,10 @@ body {
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="ArtistList.jsp">Search</a></li>
-					<li><a href="userLogout.do">Log out</a></li>
-					<li><a href="editUser.jsp">Edit my account</a></li>
+					<li><a href="userLogOut.do">Log out</a></li>
+					<li><a href="updateMyInfoClick.do">Edit my account</a></li>
+					<li><a href="searchBookingsByUserId.do">View my bookings</a></li>
+					
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -122,7 +124,7 @@ body {
 						<div class="item active">
 							<img
 								src="http://www.artlimited.net/user/0/0/2/5/4/4/9/artlimited_img476686.jpg"
-								style="width: 80%; height: 300px;">
+								style="height: 300px;">
 						</div>
 
 						<c:forEach items="${artist.photos}" var="photo">
@@ -197,7 +199,7 @@ body {
 
 
 						<ul class="list-inline" style="padding-top: 10px;">
-							<li>See what others had to say!</li>
+							<li><p class="lead sidePadding" style="padding-top: 10px;"> See what others had to say! </p></li>
 							<li>
 								<form action="getCommentsByBand.do" method="GET">
 									<!-- User ID test -->

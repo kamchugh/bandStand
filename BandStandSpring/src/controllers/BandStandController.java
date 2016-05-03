@@ -304,7 +304,7 @@ public class BandStandController {
 		dao.addComment(artistID, comment, userID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("comment", comment);
-		mv.addObject("user", user);
+		//mv.addObject("user", user);
 		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
@@ -511,7 +511,7 @@ public class BandStandController {
 	public ModelAndView userLogOut(HttpSession session){
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index.jsp");
-		session.removeAttribute("user");
+		session.invalidate();
 		return mv;
 	}
 	// User log in. Store user in session.
@@ -590,10 +590,26 @@ public class BandStandController {
 		return mv;
 	}
 
+//	@RequestMapping("searchBookingsByUserId.do")
+//	public ModelAndView getBookings(@RequestParam("userId") int userId) {
+//		ModelAndView mv = new ModelAndView();
+//		List<Booking> bookings = dao.getBookings(userId);
+//		mv.addObject("bookings", bookings);
+//		for (Booking booking : bookings) {
+//
+//			System.out.println(booking.getId());
+//			System.out.println(booking.getBookingDate());
+//		}
+//		mv.setViewName("ArtistList.jsp");
+//		return mv;
+//	}
+	
 	@RequestMapping("searchBookingsByUserId.do")
-	public ModelAndView getBookings(@RequestParam("userId") int userId) {
+	public ModelAndView getBookings(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		List<Booking> bookings = dao.getBookings(userId);
+		//System.out.println("user id " + user.getId());
+		User user = (User)(session.getAttribute("user"));
+		List<Booking> bookings = dao.getBookings(user.getId());
 		mv.addObject("bookings", bookings);
 		for (Booking booking : bookings) {
 
