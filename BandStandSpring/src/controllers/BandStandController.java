@@ -24,6 +24,7 @@ import entities.Rating;
 import entities.User;
 
 @Controller
+
 public class BandStandController {
 
 	@Autowired
@@ -40,7 +41,6 @@ public class BandStandController {
 		return mv;
 	}
 
-	
 	@RequestMapping("setUserAccessToAdmin.do")
 	public String setUserAccessToAdmin(@RequestParam("userID") int id) {
 		dao.setUserAccessLevelToAdmin(id);
@@ -117,7 +117,7 @@ public class BandStandController {
 		mv.setViewName("Admin.jsp");
 		return mv;
 	}
-	
+
 	@RequestMapping("updateMyInfoClick.do")
 	public ModelAndView updateMyInforClick() {
 		ModelAndView mv = new ModelAndView();
@@ -171,7 +171,7 @@ public class BandStandController {
 			@RequestParam("userLastName") String lastName, @RequestParam("userEmail") String email,
 			@RequestParam("userPassword") String password, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		List<Artist> allArtists = dao.getAllArtists();
 		for (Artist artist2 : allArtists) {
 			System.out.println(artist2.getName());
@@ -184,7 +184,7 @@ public class BandStandController {
 			mv.setViewName("index1.jsp");
 		} else {
 			int addUserReturn = dao.addUser(firstName, lastName, email, password);
-			
+
 			if (addUserReturn != 0) {
 				String duplicateError = "This email already exists for anothe user.";
 				mv.addObject(duplicateError);
@@ -192,7 +192,7 @@ public class BandStandController {
 
 			}
 			User user = dao.getUserByEmail(email);
-			session.setAttribute("user",  user);
+			session.setAttribute("user", user);
 			mv.setViewName("ArtistList.jsp");
 
 		}
@@ -313,7 +313,7 @@ public class BandStandController {
 		dao.addComment(artistID, comment, userID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("comment", comment);
-		//mv.addObject("user", user);
+		// mv.addObject("user", user);
 		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
@@ -379,7 +379,7 @@ public class BandStandController {
 			return mv;
 
 		} else {
-			
+
 			User user = dao.getUserById(userID);
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 			try {
@@ -517,25 +517,24 @@ public class BandStandController {
 	}
 
 	@RequestMapping("userLogOut.do")
-	public ModelAndView userLogOut(HttpSession session){
+	public ModelAndView userLogOut(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index.jsp");
 		session.invalidate();
 		return mv;
 	}
+
 	// User log in. Store user in session.
 	@RequestMapping("getUserByEmail.do")
 	public ModelAndView ValidatePassword(@RequestParam("email") String email, @RequestParam("password") String password,
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = dao.getUserByEmail(email);
-		
+
 		List<Artist> allArtists = dao.getAllArtists();
-		for (Artist artist2 : allArtists) {
-			System.out.println(artist2.getName());
-		}
+
 		mv.addObject("all", allArtists);
-		
+
 		if (user == null) {
 			mv.setViewName("index.jsp");
 			return mv;
@@ -551,8 +550,6 @@ public class BandStandController {
 			mv.setViewName("index.jsp");
 			return mv;
 		}
-		
-		
 
 	}
 
@@ -595,6 +592,12 @@ public class BandStandController {
 		Artist artist = dao.searchByName(name);
 
 		List<Artist> allArtists = dao.getAllArtists();
+		
+		List<Artist> singleArtist = new ArrayList<>();
+		
+		singleArtist.add(artist);
+		
+		
 		for (Artist artist2 : allArtists) {
 			System.out.println(artist2.getName());
 		}
@@ -602,31 +605,34 @@ public class BandStandController {
 		for (Genre genre : artist.getGenres()) {
 			System.out.println(genre.getGenretype());
 		}
+		
+		
 		mv.addObject("genres", artist.getGenres());
-		mv.addObject("artist", artist);
-		mv.setViewName("index.jsp");
+		mv.addObject("artist", singleArtist);
+//		mv.addObject("artist", artist);
+		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
 
-//	@RequestMapping("searchBookingsByUserId.do")
-//	public ModelAndView getBookings(@RequestParam("userId") int userId) {
-//		ModelAndView mv = new ModelAndView();
-//		List<Booking> bookings = dao.getBookings(userId);
-//		mv.addObject("bookings", bookings);
-//		for (Booking booking : bookings) {
-//
-//			System.out.println(booking.getId());
-//			System.out.println(booking.getBookingDate());
-//		}
-//		mv.setViewName("ArtistList.jsp");
-//		return mv;
-//	}
-	
+	// @RequestMapping("searchBookingsByUserId.do")
+	// public ModelAndView getBookings(@RequestParam("userId") int userId) {
+	// ModelAndView mv = new ModelAndView();
+	// List<Booking> bookings = dao.getBookings(userId);
+	// mv.addObject("bookings", bookings);
+	// for (Booking booking : bookings) {
+	//
+	// System.out.println(booking.getId());
+	// System.out.println(booking.getBookingDate());
+	// }
+	// mv.setViewName("ArtistList.jsp");
+	// return mv;
+	// }
+
 	@RequestMapping("searchBookingsByUserId.do")
 	public ModelAndView getBookings(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		//System.out.println("user id " + user.getId());
-		User user = (User)(session.getAttribute("user"));
+		// System.out.println("user id " + user.getId());
+		User user = (User) (session.getAttribute("user"));
 		List<Booking> bookings = dao.getBookings(user.getId());
 		mv.addObject("bookings", bookings);
 		for (Booking booking : bookings) {
@@ -678,13 +684,11 @@ public class BandStandController {
 	}
 
 	@RequestMapping("initialLoad.do")
-	public ModelAndView initalLoad() {
+	public ModelAndView initalLoad(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		List<Artist> allArtists = dao.getAllArtists();
-		for (Artist artist2 : allArtists) {
-			System.out.println(artist2.getName());
-		}
-		mv.addObject("all", allArtists);
+		session.setAttribute("all",  allArtists);
+		//mv.addObject("all", allArtists);
 		mv.setViewName("index1.jsp");
 		return mv;
 	}

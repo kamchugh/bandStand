@@ -154,8 +154,7 @@
 
 
 		<c:forEach var="artist2" items="${artist}">
-			<%-- 			<c:forEach var="photos" items="${ artist2}">
- --%>
+
 			<table class="table">
 				<thead>
 					<tr>
@@ -182,10 +181,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<%--         ${artist2.photos}
- --%>
-			<%-- 			</c:forEach>
- --%>
+
 		</c:forEach>
 
 
@@ -229,6 +225,10 @@
 				</div>
 				<br>
 				<br>
+				
+				<div>				
+				<input type="hidden" name="userId" value="${user.id } ">
+				</div>
 
 				<form class="text-center form-horizontal " action="updateUser.do"
 					method="GET">
