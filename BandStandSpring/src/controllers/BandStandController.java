@@ -349,28 +349,34 @@ public class BandStandController {
 	@RequestMapping("addBooking.do")
 	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("date") String date,
 			@RequestParam("userID") int userID) {
-
-		Artist artist = dao.getArtistById(artistID);
-		User user = dao.getUserById(userID);
 		ModelAndView mv = new ModelAndView();
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-		try {
-			Date newdate = dateFormat.parse(date);
-			System.out.println("Im going to try to add the booking now");
-			dao.addBooking(artistID, newdate, userID);
-			System.out.println("I've added the booking");
-			// this is acting funky - showing a "01" for month of "10"
-			mv.addObject("date", newdate);
-			mv.addObject("user", user);
-			mv.addObject("artist", artist);
+		if (date == null) {
+			String dateError = "Please enter a date.";
+			mv.addObject("dateError", dateError);
 			mv.setViewName("ArtistPage.jsp");
+			return mv;
 
-		} catch (ParseException e) {
-			System.out.println("I couldn't parse this");
-			e.printStackTrace();
+		} else {
+			Artist artist = dao.getArtistById(artistID);
+			User user = dao.getUserById(userID);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+			try {
+				Date newdate = dateFormat.parse(date);
+				System.out.println("Im going to try to add the booking now");
+				dao.addBooking(artistID, newdate, userID);
+				System.out.println("I've added the booking");
+				// this is acting funky - showing a "01" for month of "10"
+				mv.addObject("date", newdate);
+				mv.addObject("user", user);
+				mv.addObject("artist", artist);
+				mv.setViewName("ArtistPage.jsp");
+
+			} catch (ParseException e) {
+				System.out.println("I couldn't parse this");
+				e.printStackTrace();
+			}
+			return mv;
 		}
-		return mv;
 	}
 
 	@RequestMapping("getBookingsByBand.do")

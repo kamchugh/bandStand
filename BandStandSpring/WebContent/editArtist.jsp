@@ -46,7 +46,7 @@ body {
 				<div>Artist Description</div>
 				<input type="text" name="description" value="${artist.description}">
 				<br>
-				<input type="submit" value="Update Artist">
+				<button type="btn btn-default">Update Artist</button>
 			</form>
 		</div>
 	</div>
