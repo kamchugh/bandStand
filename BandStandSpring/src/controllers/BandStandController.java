@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -470,23 +472,24 @@ public class BandStandController {
 
 	}
 
+	//User log in.  Store user in session.
 	@RequestMapping("getUserByEmail.do")
 	public ModelAndView ValidatePassword(@RequestParam("email") String email,
-			@RequestParam("password") String password) {
+			@RequestParam("password") String password, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = dao.getUserByEmail(email);
 		if (user == null) {
 			mv.setViewName("index.jsp");
 			return mv;
 		}
-		System.out.println("The user I have in the getUserByEmail method is: " + user.getId());
-		System.out.println("The password I have stored is: " + password);
+
 		if (password.equals(dao.matchUserPassword(email))) {
-			mv.addObject("user", user);
+			//mv.addObject("user", user);
+			session.setAttribute("user", user);
 			mv.setViewName("ArtistList.jsp");
 			return mv;
 		} else {
-			mv.addObject("user", user);
+			//mv.addObject("user", user);
 			mv.setViewName("index.jsp");
 			return mv;
 		}
