@@ -72,7 +72,13 @@ body {
 
 
 				<h1>${artist.name}</h1>
-				<p class="lead">display all genres here</p>
+				<p class="lead">	
+				<c:forEach var="g" items="${artist.genres}">
+				<c:if test="${! empty(g)}">
+				${g.genretype}
+				</c:if>
+				</c:forEach>
+				</p>
 				<div id="carousel-example-generic" class="carousel slide"
 					data-ride="carousel" data-interval="3000">
 
@@ -89,13 +95,13 @@ body {
 
  						<div class="item active">
 							<img
-								src="http://static1.squarespace.com/static/51b5d84ce4b0830c27f5f7ec/t/51b64047e4b02b24a3e40ecb/1370898508799/The+A+Band+of+New+York+4.jpg"
+								src="http://www.artlimited.net/user/0/0/2/5/4/4/9/artlimited_img476686.jpg"
 								style="width: 100%; height: 300px;">
 						</div> 
 
 						<c:forEach items="${photos}" var="photo">
 							<div class="item">
-								<img src="${photo.url}" style="width: 700px; height: 300px;">
+								<img src="${photo.url}" style="width: 100%; height: 300px;">
 
 							</div>
 
@@ -154,6 +160,17 @@ body {
 
 					</c:if>
 				</p>
+				<div>
+				<c:forEach var="a" items="${artist.recordings}">
+				<c:if test="${! empty(a)}">
+				${a.url}
+				</c:if>
+			
+				</c:forEach>
+				
+				
+				</div>
+				
 				<ul class="list-inline" style="padding-top: 10px;">
 					<li>Request this band for a certain date</li>
 					<li>
@@ -361,10 +378,10 @@ body {
 	</footer>
 
 
-	<form action="getAllPhotosForArtist.do" method="GET">
+<%-- 	<form action="getAllPhotosForArtist.do" method="GET">
 		<input type="hidden" name="artistId" value="${artist.id}"> <input
 			type="submit" value="Get Photos">
-	</form>
+	</form> --%>
 
 </body>
 
