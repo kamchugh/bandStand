@@ -69,10 +69,10 @@ body {
 
 		<div class="row">
 			<div class="col-lg-12 text-center">
-			<c:forEach items ="${genres}" var ="genre">
+		<%-- 	<c:forEach items ="${genres}" var ="genre">
 			${genre.genretype} 
 			
-			</c:forEach>
+			</c:forEach> --%>
 
 				<h1>${artist.name}</h1>
 				<p class="lead">display all genres here</p>
