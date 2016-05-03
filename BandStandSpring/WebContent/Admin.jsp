@@ -5,45 +5,119 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+body {
+	padding-top: 70px;
+	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="startbootstrap-bare-1.0.4 2/css/bootstrap.css">
+<link rel="stylesheet" type="text/css"
+	href="startbootstrap-bare-1.0.4 2/css/bootstrap.css">
 <title>Administration Portal</title>
 </head>
 <body>
-	<h1>Administration Portal</h1>
-	<div>
-		<form action="addArtist.do" method="GET">
-			<h3>Add New Artist</h3>
-			<div>Artist Name</div>
-			<input type="text" name="artistName" value="">
-			<div>Artist Email</div>
-			<input type="text" name="artistEmail" value="">
-			<div>Artist Password</div>
-			<input type="password" name="artistPassword" value=""><input
-				type="submit" value="Add New Artist">
-		</form>
-		<form action="addUser.do" method="GET">
-			<h3>Add New user</h3>
-			<div>User First Name</div>
-			<input type="text" name="userFirstName" value="">
-			<div>User Last Name</div>
-			<input type="text" name="userLastName" value="">
-			<div>email</div>
-			<input type="text" name="userEmail" value="">
-			<div>Password</div>
-			<input type="password" name="userPassword" value="">Password
-			<input type="submit" value="Add New User">
-		</form>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="ArtistList.jsp">Home</a>
+
+
+
+			</div>
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<form class="navbar-brand" action="getAllUsers.do" method="GET">
+
+							<button type="submit" name="getAllUsers" value="getAllUsers"
+								class="btn-link">Users</button>
+								
+						</form>
+					</li>
+					<li>
+						<form class="navbar-brand" action="getAllArtists.do" method="GET">
+							<button type="submit" name="getAllArtists" value="getAllArtists"
+								class="btn-link">Artists</button>
+						</form>
+					</li>
+					<li>
+						<form class="navbar-brand" action="getAllBookings.do" method="GET">
+
+							<button type="submit" name="getAllBookings" value="getAllBookings"
+								class="btn-link">Bookings</button>
+						</form>
+					</li>
+					<li>
+						<form class="navbar-brand"action="getConfirmedBookings.do" method="GET">
+							<button type="submit" name="getConfirmedBookings" value="getConfirmedBookings"
+								class="btn-link">Confirmed Bookings</button>
+						</form>
+					</li>
+					<li>
+						<form class="navbar-brand"action="getUnConfirmedBookings.do" method="GET">
+							<button type="submit" name="getUnConfirmedBookings" value="getUnConfirmedBookings"
+								class="btn-link">Unconfirmed Bookings</button>
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</nav>
+
+	<div class="continer-fluid">
+		<div class="row text-center">
+			<div class="col-md-12">
+				<h1>Administration Portal</h1>
+			</div>
+
+		</div>
+
+		<div class="row text-center">
+			<div class="col-sm-6">
+				<form action="addArtist.do" method="GET">
+					<h3>Add New Artist</h3>
+					<div>Artist Name</div>
+					<input type="text" name="artistName" value="">
+					<div>Artist Email</div>
+					<input type="text" name="artistEmail" value="">
+					<div>Artist Password</div>
+					<input type="password" name="artistPassword" value=""><br>
+					<input type="submit" value="Add New Artist">
+				</form>
+			</div>
+			<div class="col-sm-6">
+				<form action="addUser.do" method="GET">
+					<h3>Add New user</h3>
+					<div>User First Name</div>
+					<input type="text" name="userFirstName" value="">
+					<div>User Last Name</div>
+					<input type="text" name="userLastName" value="">
+					<div>email</div>
+					<input type="text" name="userEmail" value="">
+					<div>Password</div>
+					<input type="password" name="userPassword" value=""> <br>
+					<input type="submit" value="Add New User">
+				</form>
+			</div>
+		</div>
+		<hr>
 	</div>
-	<hr>
-
 	<div>
-		<h3>Display All Users</h3>
-		<form action="getAllUsers.do" method="GET">
 
-			<input type="submit">
-		</form>
-
-		<table class="table table-hover">
+<div class = "container-fluid">
+		<table class="table table-hover ">
 			<thead class="text-center">
 				<tr>
 					<c:if test="${not empty allUsers }">
@@ -96,20 +170,10 @@
 						</td>
 					</tr>
 				</c:forEach>
-
-				<%-- <c:forEach items ="${employeeList}" var = "item">
-					<tr>
-					
-					</tr>
-				</c:forEach> --%>
-
 			</tbody>
 		</table>
-		<h3>Display All Artists</h3>
-		<form action="getAllArtists.do" method="GET">
-			<input type="submit">
-		</form>
-	</div>
+
+
 	<table class="table table-hover">
 		<thead class="text-center">
 			<tr>
@@ -147,20 +211,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<h2>Bookings</h2>
 	<div>
-		<form action="getAllBookings.do" method="GET">
-
-			<input type="submit" value="Get All Bookings">
-		</form>
-		<form action="getConfirmedBookings.do" method="GET">
-			<input type="submit" value="Get Confirmed Bookings">
-		</form>
-		<form action="getUnConfirmedBookings.do" method="GET">
-			<input type="submit" value="Get UNconfirmed Bookings">
-		</form>
 	</div>
-	<table>
+	<table class="table table-hover">
 		<thead class="text-center">
 			<tr>
 				<c:if test="${not empty bookings }">
@@ -200,7 +253,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<table>
+	<table class="table table-hover">
 		<thead class="text-center">
 			<tr>
 				<c:if test="${not empty confirmedBookings }">
@@ -232,7 +285,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<table>
+	<table class="table table-hover">
 		<thead class="text-center">
 			<tr>
 				<c:if test="${not empty unConfirmedBookings }">
@@ -264,12 +317,17 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<c:if test="${not empty nameUpdated }">
+<%-- 	<c:if test="${not empty nameUpdated }">
 	${nameUpdated }  has been updated
-	</c:if>
+	</c:if> --%>
 
-    <a href="ArtistList.jsp">User Homepage</a>
+	<!-- <a href="ArtistList.jsp">User Homepage</a> -->
 
-
+</div>
 </body>
+    <!-- jQuery Version 1.11.1 -->
+    <script src="startbootstrap-bare-1.0.4 2/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="startbootstrap-bare-1.0.4 2/js/jquery.js"></script>
 </html>

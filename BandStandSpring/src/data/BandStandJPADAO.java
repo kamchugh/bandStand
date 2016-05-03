@@ -1,6 +1,5 @@
 package data;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +13,7 @@ import entities.Artist;
 import entities.Booking;
 import entities.Comment;
 import entities.Genre;
+import entities.Photo;
 import entities.Rating;
 import entities.User;
 
@@ -125,12 +125,20 @@ public class BandStandJPADAO implements BandStandDAO {
 		return user;
 	}
 
-	public void addArtist(String name, String email, String password) {
+	public int addArtist(String name, String email, String password) {
+
+		List<Artist> artists = getAllArtists();
+		for(Artist artist: artists){
+			if (artist.getEmail().equals(email)){
+				return 1;
+			}
+		}
 		Artist newArtist = new Artist();
 		newArtist.setName(name);
 		newArtist.setEmail(email);
 		newArtist.setPassword(password);
 		em.persist(newArtist);
+		return 0;
 	}
 
 	public void addComment(int artistID, String commentBody, int userID) {
@@ -244,13 +252,33 @@ public class BandStandJPADAO implements BandStandDAO {
 		return ratings;
 	}
 
-	public void updateUser(int userId, String firstName, String lastName, String email, String password, String photoUrl) {
+	
+	public List<Photo> getArtistPhotos(int id){
+		System.out.println("in DAO");
+		Artist artist = em.find(Artist.class,  id);
+		List<Photo> photos = artist.getPhotos();
+		for(Photo photo: photos){ 
+			System.out.println("inside for each");
+			System.out.println(photo.getUrl());
+		}
+		return photos;
+	}
+	
+	
+	public int updateUser(int userId, String firstName, String lastName, String email, String password, String photoUrl) {
+		List<User> users = getAllUsers();
+		for(User user: users){
+			if (user.getEmail().equals(email)){
+				return 1;
+			}
+		}
 		User user = em.find(User.class, userId);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
 		user.setPassword(password);
 		user.setPhotoUrl(photoUrl);
+		return 0;
 	}
 
 	public void setConfirmedBooking(int id) {
@@ -295,15 +323,26 @@ public class BandStandJPADAO implements BandStandDAO {
 		return user.getBookings();
 	}
 	
-	public void updateArtist(Artist artist) {
-		Artist artistinMethod = em.find(Artist.class, artist.getId());
-		System.out.println("I make it into the controller for update artist");
-//		User user = em.find(User.class, userId);
-//		user.setEmail(email);
-		artistinMethod.setName(artist.getName());
-		artistinMethod.setEmail(artist.getEmail());
-		artistinMethod.setPassword(artist.getPassword());
-		artistinMethod.setDescription(artist.getDescription());
+	public int updateArtist(Artist artist) {
+		
+		List<Artist> artists = getAllArtists();
+		for(Artist artistHolder: artists){
+			if (artistHolder.getEmail().equals(artist.getEmail())){
+				return 1;
+			}
+		}
+		try{
+			Artist artistinMethod = em.find(Artist.class, artist.getId());
+			artistinMethod.setName(artist.getName());
+			artistinMethod.setEmail(artist.getEmail());
+			artistinMethod.setPassword(artist.getPassword());
+			artistinMethod.setDescription(artist.getDescription());
+			return 0;
+		}catch(Exception e){
+			return 1;
+		}
+
+
 		
 	}
 	

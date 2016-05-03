@@ -54,11 +54,11 @@ public class BandStandController {
 	public ModelAndView getAllArtist() {
 		ModelAndView mv = new ModelAndView();
 		List<Artist> allArtists = dao.getAllArtists();
-//		for (Artist artist : allArtists) {
-//			for (Photo photos : artist.getPhotos()) {
-//				System.out.println(photos.getUrl());
-//			}
-//		}
+		// for (Artist artist : allArtists) {
+		// for (Photo photos : artist.getPhotos()) {
+		// System.out.println(photos.getUrl());
+		// }
+		// }
 		mv.addObject("artist", allArtists);
 		mv.setViewName("ArtistList.jsp");
 		return mv;
@@ -96,7 +96,7 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user", user);
 		mv.setViewName("editUser.jsp");
-//		mv.setViewName("ArtistList.jsp");
+		// mv.setViewName("ArtistList.jsp");
 		return mv;
 
 	}
@@ -138,12 +138,26 @@ public class BandStandController {
 	}
 
 	@RequestMapping("addArtist.do")
-	public String addArtist(@RequestParam("artistName") String name, @RequestParam("artistEmail") String email,
+	public ModelAndView addArtist(@RequestParam("artistName") String name, @RequestParam("artistEmail") String email,
 			@RequestParam("artistPassword") String password) {
-		dao.addArtist(name, email, password);
+		ModelAndView mv = new ModelAndView();
+		if (name == "" || email == "" || password == "") {
+			String error = "Value required.";
+			mv.addObject(error);
+			System.out.println(error);
+			mv.setViewName("Admin.jsp");
+		} else {
+			int addArtistReturn = dao.addArtist(name, email, password);
+			if (addArtistReturn != 0) {
+				String duplicateError = "This email already exists for anothe user.";
+				mv.addObject(duplicateError);
+				System.out.println(duplicateError);
 
-		return "Admin.jsp";
+			}
+			mv.setViewName("Admin.jsp");
 
+		}
+		return mv;
 	}
 
 	@RequestMapping("deleteArtistById.do")
@@ -154,35 +168,54 @@ public class BandStandController {
 	}
 
 	@RequestMapping("addUserRegistration.do")
-	public String addUserRegistration(@RequestParam("userFirstName") String firstName,
+	public ModelAndView addUserRegistration(@RequestParam("userFirstName") String firstName,
 			@RequestParam("userLastName") String lastName, @RequestParam("userEmail") String email,
 			@RequestParam("userPassword") String password) {
-		
-		int addUserReturn = dao.addUser(firstName, lastName, email, password);
-		if(addUserReturn != 0){
-			return "index.jsp";
+		ModelAndView mv = new ModelAndView();
+		if (firstName == "" || lastName == "" || email == "" || password == "") {
+			String error = "Value required.";
+			mv.addObject(error);
+			System.out.println(error);
+			mv.setViewName("index.jsp");
+		} else {
+			int addUserReturn = dao.addUser(firstName, lastName, email, password);
+			if (addUserReturn != 0) {
+				String duplicateError = "This email already exists for anothe user.";
+				mv.addObject(duplicateError);
+				System.out.println(duplicateError);
+
+			}
+			mv.setViewName("index.jsp");
+
 		}
-
-		return "Admin.jsp";
-
+		return mv;
 	}
+
 	@RequestMapping("addUser.do")
 	public ModelAndView addUser(@RequestParam("userFirstName") String firstName,
 			@RequestParam("userLastName") String lastName, @RequestParam("userEmail") String email,
 			@RequestParam("userPassword") String password) {
 		ModelAndView mv = new ModelAndView();
-		int addUserReturn = dao.addUser(firstName, lastName, email, password);
-		if(addUserReturn != 0){
-			String duplicateError = "This email already exists for anothe user.";
-			mv.addObject(duplicateError);
-			System.out.println(duplicateError);
-			
-		}
-		mv.setViewName("Admin.jsp");
-		return mv;
 
+		if (firstName == "" || lastName == "" || email == "" || password == "") {
+			String error = "Value required.";
+			mv.addObject(error);
+			System.out.println(error);
+			mv.setViewName("Admin.jsp");
+		} else {
+			int addUserReturn = dao.addUser(firstName, lastName, email, password);
+			if (addUserReturn != 0) {
+				String duplicateError = "This email already exists for anothe user.";
+				mv.addObject(duplicateError);
+				System.out.println(duplicateError);
+
+			}
+			mv.setViewName("Admin.jsp");
+
+		}
+		return mv;
 	}
-	
+
 	@RequestMapping("deleteUserById.do")
 	public String deleteUserById(@RequestParam("userId") int userId) {
 		dao.deleteUserById(userId);
@@ -220,16 +253,29 @@ public class BandStandController {
 	// This is the template for updating fields for both user and artist. Save
 	// the id in a hidden field in the jsp
 	@RequestMapping("updateUser.do")
-	public ModelAndView updateUser(User user, @RequestParam("email") String email, @RequestParam("userId") int userId, @RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName, @RequestParam("password") String password, @RequestParam("photoUrl") String photoUrl) {
-		
-//		User user = dao.getUserById(userId);
-		ModelAndView mv = new ModelAndView();
-		dao.updateUser(userId, firstName, lastName, email, password, photoUrl);
-		
-//		mv.addObject("user",user);
-		mv.setViewName("Admin.jsp");;
+	public ModelAndView updateUser(User user, @RequestParam("email") String email, @RequestParam("userId") int userId,
+			@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
+			@RequestParam("password") String password, @RequestParam("photoUrl") String photoUrl) {
 
+		ModelAndView mv = new ModelAndView();
+
+		if (firstName == "" || lastName == "" || email == "" || password == "") {
+			String error = "Value required.";
+			mv.addObject(error);
+			System.out.println(error);
+			mv.setViewName("editUser.jsp");
+		} else {
+			int addUserReturn = dao.updateUser(userId, firstName, lastName, email, password, photoUrl);
+			if (addUserReturn != 0) {
+				String duplicateError = "This email already exists for another user.";
+				mv.addObject(duplicateError);
+				System.out.println(duplicateError);
+				mv.setViewName("editUser.jsp");
+			} else {
+				mv.setViewName("Admin.jsp");
+			}
+
+		}
 		return mv;
 	}
 
@@ -280,44 +326,44 @@ public class BandStandController {
 		return mv;
 	}
 
-//	@RequestMapping("addBooking.do")
-//	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("month") String month,
-//			@RequestParam("day") String day, @RequestParam("year") String year, @RequestParam("userID") int userID) {
-//		System.out.println("I'm in the add date method");
-//		Artist artist = dao.getArtistById(artistID);
-//		User user = dao.getUserById(userID);
-//		ModelAndView mv = new ModelAndView();
-//		// Date date = new Date();
-//		String dateString = year + "-" + month + "-" + day;
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-//		try {
-//			Date newdate = dateFormat.parse(dateString);
-//			System.out.println("Im going to try to add the booking now");
-//			dao.addBooking(artistID, newdate, userID);
-//			System.out.println("I've added the booking");
-//			// this is acting funky - showing a "01" for month of "10"
-//			mv.addObject("date", newdate);
-//			mv.addObject("user", user);
-//			mv.addObject("artist", artist);
-//			mv.setViewName("ArtistPage.jsp");
-//
-//		} catch (ParseException e) {
-//			System.out.println("I couldn't parse this");
-//			e.printStackTrace();
-//		}
-//		return mv;
-//	}
-	
-	
+	// @RequestMapping("addBooking.do")
+	// public ModelAndView addDate(@RequestParam("artistID") int artistID,
+	// @RequestParam("month") String month,
+	// @RequestParam("day") String day, @RequestParam("year") String year,
+	// @RequestParam("userID") int userID) {
+	// System.out.println("I'm in the add date method");
+	// Artist artist = dao.getArtistById(artistID);
+	// User user = dao.getUserById(userID);
+	// ModelAndView mv = new ModelAndView();
+	// // Date date = new Date();
+	// String dateString = year + "-" + month + "-" + day;
+	// SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+	// try {
+	// Date newdate = dateFormat.parse(dateString);
+	// System.out.println("Im going to try to add the booking now");
+	// dao.addBooking(artistID, newdate, userID);
+	// System.out.println("I've added the booking");
+	// // this is acting funky - showing a "01" for month of "10"
+	// mv.addObject("date", newdate);
+	// mv.addObject("user", user);
+	// mv.addObject("artist", artist);
+	// mv.setViewName("ArtistPage.jsp");
+	//
+	// } catch (ParseException e) {
+	// System.out.println("I couldn't parse this");
+	// e.printStackTrace();
+	// }
+	// return mv;
+	// }
+
 	@RequestMapping("addBooking.do")
-	public ModelAndView addDate(@RequestParam("artistID") int artistID, 
-			@RequestParam("date") String date, @RequestParam("userID") int userID) {
-		
+	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("date") String date,
+			@RequestParam("userID") int userID) {
+
 		Artist artist = dao.getArtistById(artistID);
 		User user = dao.getUserById(userID);
 		ModelAndView mv = new ModelAndView();
-		
-		
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 		try {
 			Date newdate = dateFormat.parse(date);
@@ -336,13 +382,14 @@ public class BandStandController {
 		}
 		return mv;
 	}
+
 	@RequestMapping("getBookingsByBand.do")
 	public ModelAndView getBookingsByBand(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
 		System.out.println("I enter the get all comments method");
 		User user = dao.getUserById(userID);
 		Artist artist = dao.getArtistById(artistID);
-		List<Booking> bookings = new ArrayList();
-		List<Booking> daoBookings = new ArrayList();
+		List<Booking> bookings = new ArrayList<>();
+		List<Booking> daoBookings = new ArrayList<>();
 		daoBookings = dao.getAllBookingsByArtist(artistID);
 		System.out.println("I get below the getAllComments method in the controller");
 		bookings.addAll(daoBookings);
@@ -385,8 +432,8 @@ public class BandStandController {
 		System.out.println("I enter the get all comments method");
 		User user = dao.getUserById(userID);
 		Artist artist = dao.getArtistById(artistID);
-		List<Rating> ratings = new ArrayList();
-		List<Rating> daoRatings = new ArrayList();
+		List<Rating> ratings = new ArrayList<>();
+		List<Rating> daoRatings = new ArrayList<>();
 		daoRatings = dao.getAllRatings(artistID);
 		System.out.println("I get below the getAllComments method in the controller");
 		ratings.addAll(daoRatings);
@@ -395,7 +442,7 @@ public class BandStandController {
 			addedRatings = addedRatings + rating.getNumber();
 			System.out.println(addedRatings);
 		}
-		double ratingAverage = ((double)addedRatings / daoRatings.size());
+		double ratingAverage = ((double) addedRatings / daoRatings.size());
 		System.out.println("I am the added ratings" + addedRatings);
 		System.out.println("I am the size of the list" + daoRatings.size());
 		System.out.println("I am the rating average" + ratingAverage);
@@ -407,12 +454,28 @@ public class BandStandController {
 		return mv;
 	}
 
+	@RequestMapping("getAllPhotosForArtist.do")
+	public ModelAndView getAllPhotosForArtist(@RequestParam("artistId") int id) {
+		System.out.println("in controller");
+		ModelAndView mv = new ModelAndView();
+		List<Photo> photoList = dao.getArtistPhotos(id);
+		System.out.println("back in controller");
+		for (Photo photo : photoList) {
+			System.out.println("inside for each");
+			System.out.println(photo.getUrl());
+		}
+		mv.addObject("photos", photoList);
+		mv.setViewName("ArtistPage.jsp");
+		return mv;
+
+	}
+
 	@RequestMapping("getUserByEmail.do")
 	public ModelAndView ValidatePassword(@RequestParam("email") String email,
 			@RequestParam("password") String password) {
 		ModelAndView mv = new ModelAndView();
 		User user = dao.getUserByEmail(email);
-		if (user == null){
+		if (user == null) {
 			mv.setViewName("index.jsp");
 			return mv;
 		}
@@ -429,17 +492,35 @@ public class BandStandController {
 		}
 
 	}
-	
+
 	// this method updates an artist
-	
+
 	@RequestMapping("updateArtist.do")
-	public ModelAndView updateArtist(Artist artist, @RequestParam("name") String name) {
-	System.out.println("I make it into the updateArtist.do method");
-	System.out.println(artist);
-		dao.updateArtist(artist);
+	public ModelAndView updateArtist(Artist artist) {
+
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("Admin.jsp");
-		mv.addObject("nameUpdated", name);
+		// mv.setViewName("Admin.jsp");
+		// mv.addObject("nameUpdated", name);
+		// return mv;
+
+		if (artist.getName() == "" || artist.getEmail() == "" || artist.getPassword() == ""
+				|| artist.getDescription() == "") {
+			String error = "Value required.";
+			mv.addObject(error);
+			System.out.println(error);
+			mv.setViewName("editArtist.jsp");
+		} else {
+			int updateArtistReturn = dao.updateArtist(artist);
+			if (updateArtistReturn != 0) {
+				String duplicateError = "This email already exists for another user.";
+				mv.addObject("error", duplicateError);
+				System.out.println(duplicateError);
+				mv.setViewName("editArtist.jsp");
+			} else {
+				mv.setViewName("Admin.jsp");
+			}
+
+		}
 		return mv;
 	}
 
@@ -455,7 +536,10 @@ public class BandStandController {
 			System.out.println(artist2.getName());
 		}
 		mv.addObject("all", allArtists);
-
+		for (Genre genre : artist.getGenres()) {
+			System.out.println(genre.getGenretype());
+		}
+		mv.addObject("genres", artist.getGenres());
 		mv.addObject("artist", artist);
 		mv.setViewName("index.jsp");
 		return mv;
@@ -467,7 +551,7 @@ public class BandStandController {
 		List<Booking> bookings = dao.getBookings(userId);
 		mv.addObject("bookings", bookings);
 		for (Booking booking : bookings) {
-			
+
 			System.out.println(booking.getId());
 			System.out.println(booking.getBookingDate());
 		}
@@ -479,38 +563,39 @@ public class BandStandController {
 	public ModelAndView searchByGenre(@RequestParam("genre") String genreType) {
 		ModelAndView mv = new ModelAndView();
 		List<Genre> genres = dao.searchByGenre(genreType);
-		
+
 		List<Artist> matchedArtists = new ArrayList();
 		for (Genre g : genres) {
 			matchedArtists.add(g.getArtist());
 		}
-		
+
 		mv.addObject("artist", matchedArtists);
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
-	
+
 	@RequestMapping("searchByRating.do")
 	public ModelAndView searchByRating(@RequestParam("rating") int passedRating, @RequestParam("userId") int userID) {
 		ModelAndView mv = new ModelAndView();
 		User user = dao.getUserById(userID);
-		List<Artist> artists = new ArrayList();
-		List<Artist> matchedArtists = new ArrayList();
+		List<Artist> artists = new ArrayList<>();
+		List<Artist> matchedArtists = new ArrayList<>();
 		artists = dao.getAllArtists();
 		for (Artist artist : artists) {
-		int averageRating = dao.getRatingsForArtist(artist);
-		System.out.println("controller average rating; " + averageRating);
-		if (averageRating == passedRating) {
-			matchedArtists.add(artist);
+			int averageRating = dao.getRatingsForArtist(artist);
+			System.out.println("controller average rating; " + averageRating);
+			if (averageRating == passedRating) {
+				matchedArtists.add(artist);
+
+			}
 		}
-		}
-		//List<Artist> artistRatingMatch = new ArrayList();
+		// List<Artist> artistRatingMatch = new ArrayList();
 
 		mv.addObject("artist", matchedArtists);
 		mv.addObject("user", user);
 		mv.setViewName("ArtistList.jsp");
-		return mv; 
-		
+		return mv;
+
 	}
 
 	@RequestMapping("initialLoad.do")

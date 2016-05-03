@@ -7,6 +7,7 @@ import entities.Artist;
 import entities.Booking;
 import entities.Comment;
 import entities.Genre;
+import entities.Photo;
 import entities.Rating;
 import entities.User;
 
@@ -25,7 +26,7 @@ public interface BandStandDAO {
 
 	public User getUserById(int userID);
 
-	public void addArtist(String name, String email, String password);
+	public int addArtist(String name, String email, String password);
 
 	public void deleteArtistById(int artistId);
 
@@ -47,7 +48,7 @@ public interface BandStandDAO {
 
 	public String matchUserPassword(String email);
 
-	public void updateUser(int userId, String firstName, String lastName, String email, String password,
+	public int updateUser(int userId, String firstName, String lastName, String email, String password,
 			String photoUrl);
 
 	public void addComment(int artistID, String description, int userID);
@@ -70,8 +71,12 @@ public interface BandStandDAO {
 	
 	public User getUserByEmail(String email);
 
-	public void updateArtist(Artist artist);
-	
+
+	public int updateArtist(Artist artist);
+
 	public int getRatingsForArtist(Artist artist);
+	
+	public List<Photo> getArtistPhotos(int id);
+
 
 }
