@@ -708,5 +708,34 @@ public class BandStandController {
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
+	
+	@RequestMapping("updateUserByUser.do")
+	public ModelAndView updateUserByUser(User user, @RequestParam("email") String email, @RequestParam("userId") int userId,
+			@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
+			@RequestParam("password") String password, @RequestParam("photoUrl") String photoUrl) {
+
+		System.out.println(email);
+		ModelAndView mv = new ModelAndView();
+
+		System.out.println(email);
+//		if (firstName == "" || lastName == "" || email == "" || password == "") {
+//			String error = "Value required.";
+//			mv.addObject(error);
+//			System.out.println(error);
+//			mv.setViewName("ArtistList.jsp");
+//		} else {
+		dao.updateUserByUser(userId, firstName, lastName, email, password, photoUrl);
+//			if (addUserReturn != 0) {
+//				String duplicateError = "This email already exists for another user.";
+//				mv.addObject(duplicateError);
+//				System.out.println(duplicateError);
+//				mv.setViewName("ArtistList.jsp");
+//			} else {
+				mv.setViewName("ArtistList.jsp");
+//			}
+
+//		}
+		return mv;
+	}
 
 }

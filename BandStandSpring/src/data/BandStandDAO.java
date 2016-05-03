@@ -77,6 +77,9 @@ public interface BandStandDAO {
 	public int getRatingsForArtist(Artist artist);
 	
 	public List<Photo> getArtistPhotos(int id);
+	
+	public int updateUserByUser(int userId, String firstName, String lastName, String email, String password,
+			String photoUrl);
 
 
 }
