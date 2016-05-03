@@ -60,7 +60,7 @@
 
 		I'd like to... <br> <br>
 
-<!-- <form class="form-inline">
+		<!-- <form class="form-inline">
  -->
 		<div class="row">
 			<div class="col-xs-2">
@@ -70,7 +70,7 @@
 					<input class="btn btn-default" type="submit"
 						value="See All Artists">
 				</form>
-		
+
 
 			</div>
 			<div class="col-xs-2">
@@ -131,22 +131,22 @@
 			</div>
 			<div class="col-xs-2">
 				<form action="searchBookingsByUserId.do" method="GET">
-
 					<input type="text" name="userId" value="${user.id }"> <input
 						class="btn btn-default" type="submit" value="See My Bookings">
 				</form>
-
 			</div>
 			<div class="col-xs-2">
-				<button class="btn btn-default" type="submit">Update My
-					Info</button>
+				<form action="updateMyInfoClick.do" method="GET">
+					<button class="btn btn-default" type="submit">Update My
+						Info</button>
+				</form>
 			</div>
 		</div>
 
 
 
 
-<!-- </form>
+		<!-- </form>
  -->
 
 		<br> <br> <br> <br>
@@ -154,35 +154,41 @@
 
 
 		<c:forEach var="artist2" items="${artist}">
-<%-- 			<c:forEach var="photos" items="${ artist2}">
- --%>				<table class="table">
-					<thead>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><a href="getArtistById.do?artistID=${artist2.id}&userID=${user.id}">
-							<img src="${artist2.photos[0].url}" height=200 width=200 class="img-rounded"/></a>
-							</td>
-							<td colspan="3">Artist: ${artist2.name} <br><br> ${artist2.email} <br><br> ${artist2.description } 
-							<br><br> </td>
-							<td></td>
-							<td colspan="3"></td>
-						</tr>
-					</tbody>
-				</table>
-<%--         ${artist2.photos}
- --%><%-- 			</c:forEach>
- --%>		</c:forEach>
+			<%-- 			<c:forEach var="photos" items="${ artist2}">
+ --%>
+			<table class="table">
+				<thead>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a
+							href="getArtistById.do?artistID=${artist2.id}&userID=${user.id}">
+								<img src="${artist2.photos[0].url}" height=200 width=200
+								class="img-rounded" />
+						</a></td>
+						<td colspan="3">Artist: ${artist2.name} <br> <br>
+							${artist2.email} <br> <br> ${artist2.description } <br>
+							<br>
+						</td>
+						<td></td>
+						<td colspan="3"></td>
+					</tr>
+				</tbody>
+			</table>
+			<%--         ${artist2.photos}
+ --%>
+			<%-- 			</c:forEach>
+ --%>
+		</c:forEach>
 
 
-		<br> <br> <br> <br>
 
 
 
@@ -209,13 +215,83 @@
 			</table>
 
 		</c:forEach>
-		<br> <br> <br> <br>
+
+
+		<c:if test="${showForm == 'true'}">
+
+			<div class="jumbotron text-center">
+
+
+				<div>
+
+					<img src="${user.photoUrl }" height=200 width=200
+						class="img-circle text-center">
+				</div>
+				<br>
+				<br>
+
+				<form class="text-center form-horizontal " action="updateUser.do"
+					method="GET">
+					<div class="form-group text-center">
+						<label for="inputEmail3" class="col-sm-2 control-label">First
+							Name </label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text"
+								name="firstName" value="${user.firstName }" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-2 control-label">Last
+							Name </label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" name="lastName"
+								value="${user.lastName }">
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-2 control-label">Email
+						</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" name="email"
+								value="${user.email }">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-2 control-label">Password
+						</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="password" name="password"
+								value="${user.password }">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-2 control-label">Photo
+							URL </label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" name="photoUrl"
+								value="${user.photoUrl }">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-3">
+							<button type="submit" class="btn btn-default">Update!</button>
+						</div>
+					</div>
+				</form>
 
 
 
-		<c:forEach var="artist" items="${ratingMatch}">
-        ${artist.name}: ${artist.email}
-    </c:forEach>
+			</div>
+
+
+
+
+		</c:if>
 
 
 
