@@ -28,10 +28,7 @@ body {
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="ArtistList.jsp">Home</a>
-
-
-
+				<a class="navbar-brand" href="ArtistList.jsp">Bandstand Home</a>
 			</div>
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
@@ -93,7 +90,7 @@ body {
 					<input type="text" name="artistEmail" value="">
 					<div>Artist Password</div>
 					<input type="password" name="artistPassword" value=""><br>
-					<input type="submit" value="Add New Artist">
+					<input style="margin-top: 10px;" class="btn btn-default" type="submit" value="Add New Artist">
 				</form>
 			</div>
 			<div class="col-sm-6">
@@ -106,8 +103,9 @@ body {
 					<div>email</div>
 					<input type="text" name="userEmail" value="">
 					<div>Password</div>
-					<input type="password" name="userPassword" value=""> <br>
-					<input type="submit" value="Add New User">
+					<input type="password" name="userPassword" value=""> <br >
+					
+					<input style="margin-top: 10px;" class="btn btn-default" type="submit" value="Add New User">
 				</form>
 			</div>
 		</div>
@@ -144,7 +142,7 @@ body {
 							<form action="setUserAccessToAdmin.do" method="GET">
 
 								<input type="hidden" name="userID" value="${user.id}"> <input
-									type="submit" value="Set as Admin">
+									class="btn btn-default" type="submit" value="Set as Admin">
 							</form>
 
 						</td>
@@ -152,20 +150,20 @@ body {
 							<form action="setUserAccessToUser.do" method="GET">
 
 								<input type="hidden" name="userID" value="${user.id }">
-								<input type="submit" value="Set as User">
+								<input class="btn btn-default" type="submit" value="Set as User">
 							</form>
 						</td>
 						<td>
 							<form action="deleteUserById.do" method="GET">
 								<input type="hidden" name="userId" value="${user.id }">
-								<input type="submit" value="Delete User">
+								<input class="btn btn-default" type="submit" value="Delete User">
 							</form>
 						</td>
 						<td>
 						<td>
 							<form action="loadUserEditPage.do">
 								<input type="hidden" name="userId" value="${user.id }">
-								<input type="submit" value="Update User">
+								<input class="btn btn-default" type="submit" value="Update User">
 							</form>
 						</td>
 					</tr>
@@ -198,13 +196,13 @@ body {
 					<td>
 						<form action="deleteArtistById.do" method="GET">
 							<input type="hidden" name="artistId" value="${artist.id }">
-							<input type="submit" value="Delete Artist">
+							<input  class="btn btn-default" type="submit" value="Delete Artist">
 						</form>
 					</td>
 					<td>
 						<form action="loadArtistEditPage.do">
 							<input type="hidden" name="artistId" value="${artist.id }">
-							<input type="submit" value="Update Artist">
+							<input class="btn btn-default" type="submit" value="Update Artist">
 						</form>
 					</td>
 				</tr>
@@ -239,14 +237,14 @@ body {
 						<form action="setConfirmedBooking.do" method="GET">
 
 							<input type="hidden" name="bookingId" value="${booking.id}">
-							<input type="submit" value="Confirm Booking">
+							<input class="btn btn-default" type="submit" value="Confirm Booking">
 						</form>
 					</td>
 					<td>
 						<form action="setUnConfirmedBooking.do" method="GET">
 
 							<input type="hidden" name="bookingId" value="${booking.id}">
-							<input type="submit" value="UNconfirm Booking">
+							<input class="btn btn-default" type="submit" value="UNconfirm Booking">
 						</form>
 					</td>
 				</tr>
@@ -278,7 +276,7 @@ body {
 						<form action="setUnConfirmedBooking.do" method="GET">
 
 							<input type="hidden" name="bookingId" value="${booking.id}">
-							<input type="submit" value="UNconfirm Booking">
+							<input class="btn btn-default" type="submit" value="UNconfirm Booking">
 						</form>
 					</td>
 				</tr>
@@ -310,7 +308,7 @@ body {
 						<form action="setConfirmedBooking.do" method="GET">
 
 							<input type="hidden" name="bookingId" value="${booking.id}">
-							<input type="submit" value="Confirm Booking">
+							<input class="btn btn-default" type="submit" value="Confirm Booking">
 						</form>
 					</td>
 				</tr>

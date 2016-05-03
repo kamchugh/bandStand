@@ -53,7 +53,7 @@ body {
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
-			Brand and toggle get grouped for better mobile display
+			
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#bs-example-navbar-collapse-1">
@@ -61,9 +61,9 @@ body {
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Start Bootstrap</a>
+				<a class="navbar-brand" href="#">BandStand</a>
 			</div>
-			Collect the nav links, forms, and other content for toggling
+			
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
@@ -77,9 +77,12 @@ body {
 
 	<!-- Page Content -->
 	
-	<br><br><br><br><br><br><br><br>
-	<div class="logmod">
+<!--  	<div class="mainPicture">
+	<h1> Make your party rock</h1>
+	</div>  -->
+	<div class="logmod"> 
         <div class="logmod__wrapper">
+         
             <!-- <span class="logmod__close">Close</span> -->
             <div class="logmod__container">
                 <ul class="logmod__tabs">
@@ -161,23 +164,7 @@ body {
             </div>
         </div>
     </div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 	<!-- jQuery Version 1.11.1 -->
 	<script src="js/jquery.js"></script>
@@ -187,13 +174,10 @@ body {
 
 </body>
 
-
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
     <script src="bootstrap/js/index.js"></script>
-
-
 </html>

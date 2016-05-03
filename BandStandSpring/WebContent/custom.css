@@ -63,3 +63,14 @@ link:active, link:hover {
 	text-align: center;
 	color: grey;
 }
+
+.mainPicture {
+	 background-image: url("http://sydneyfunkcollective.com.au/wp-content/uploads/461__MG_9181.jpg");
+	 background-repeat: no-repeat;
+	padding: 10px 10px 75px 10px;
+	background-size: 100%;
+	max-height: 600px;
+	margin-bottom: -100px;
+	background-attachment: fixed;
+	
+}
