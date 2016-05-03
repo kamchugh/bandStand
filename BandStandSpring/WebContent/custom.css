@@ -7,17 +7,39 @@
 	color: #FF9900;
 }
 
-.blackBorder {
+.orangeBorder {
 	padding-top: 15px; 
 	border-style: solid; 
-	border-color: black; 
+	border-color: #FF9900; 
 	border-radius: 20px; 
 	margin-top: 20px; 
 	margin-bottom: 20px;
 					
 }
 
+.blackBorder {
+	padding-top: 15px;
+	padding-bottom: 15px;  
+	border-style: solid; 
+	border-color: black; 
+	border-radius: 20px; 
+	margin-top: 20px; 
+	margin-bottom: 20px;
+}
+
 .sidePadding {
 	padding-left: 15px;
 	padding-right: 15px;
+}
+
+
+.scroll {
+    width: 150px;
+    height: 150px;
+    overflow: scroll;
+}
+
+.orangeGenre {
+	background-color: rgba (255,153,0, .5);
+	border-radius: 40px;
 }
