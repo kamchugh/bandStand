@@ -23,19 +23,19 @@ public class Artist {
 	private String email;
 	private String password;
 	
-	@OneToMany(mappedBy = "artist")  // one artist, many recordings
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "artist")  // one artist, many recordings
 	private List<Recording> recordings;
 	
-	@OneToMany(mappedBy = "artist")  // one artist, many bookings
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "artist")  // one artist, many bookings
 	private List<Booking> bookings;
 	
-	@OneToMany(mappedBy = "artist")  // one artist, many ratings
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "artist")  // one artist, many ratings
 	private List<Rating> ratings;
 	
-	@OneToMany(mappedBy = "artist")  // one artist, many genres
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "artist")  // one artist, many genres
 	private List<Genre> genres;
 	
-	@OneToMany(mappedBy = "artist")  // one artist, many comments
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "artist")  // one artist, many comments
 	private List<Comment> comments;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "artist")  // one artist, many photos

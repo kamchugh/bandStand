@@ -31,7 +31,7 @@
 			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
 			<span class="icon-bar"></span> <span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="ArtistList.jsp">Home</a>
+		<a class="navbar-brand" href="ArtistList.jsp">BandStand</a>
 	</div>
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -158,21 +158,22 @@
  --%>				<table class="table">
 					<thead>
 						<tr>
-							<td>Pic</td>
-							<td>Name</td>
-							<td>Description</td>
-							<td>Email</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
 							<td></td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>
-							<img src="${artist2.photos[0].url}" height=200 width=200/>
+							<td><a href="getArtistById.do?artistID=${artist2.id}&userID=${user.id}">
+							<img src="${artist2.photos[0].url}" height=200 width=200 class="img-rounded"/></a>
 							</td>
-							<td><a href="getArtistById.do?artistID=${artist2.id}&userID=${user.id}">${artist2.name}</a></td>
-							<td>${artist2.description}</td>
-							<td>${artist2.email}</td>
+							<td colspan="3">Artist: ${artist2.name} <br><br> ${artist2.email} <br><br> ${artist2.description } 
+							<br><br> </td>
+							<td></td>
+							<td colspan="3"></td>
 						</tr>
 					</tbody>
 				</table>

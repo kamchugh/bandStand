@@ -71,7 +71,6 @@ body {
 			<div class="col-lg-12 text-center">
 
 
-
 				<h1>${artist.name}</h1>
 				<p class="lead">display all genres here</p>
 				<div id="carousel-example-generic" class="carousel slide"

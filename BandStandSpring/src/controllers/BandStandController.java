@@ -56,13 +56,15 @@ public class BandStandController {
 	public ModelAndView getAllArtist() {
 		ModelAndView mv = new ModelAndView();
 		List<Artist> allArtists = dao.getAllArtists();
+		mv.addObject("allArtists", allArtists);
+		
 		// for (Artist artist : allArtists) {
 		// for (Photo photos : artist.getPhotos()) {
 		// System.out.println(photos.getUrl());
 		// }
 		// }
-		mv.addObject("artist", allArtists);
-		mv.setViewName("ArtistList.jsp");
+	
+		mv.setViewName("Admin.jsp");
 		return mv;
 	}
 
