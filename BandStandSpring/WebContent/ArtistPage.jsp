@@ -99,7 +99,7 @@ body {
 								style="width: 100%; height: 300px;">
 						</div> 
 
-						<c:forEach items="${photos}" var="photo">
+						<c:forEach items="${artist.photos}" var="photo">
 							<div class="item">
 								<img src="${photo.url}" style="width: 100%; height: 300px;">
 
