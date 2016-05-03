@@ -13,13 +13,12 @@ body {
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="startbootstrap-bare-1.0.4 2/css/bootstrap.css">
+	href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="startbootstrap-bare-1.0.4 2/css/bootstrap.css">
 <title>Administration Portal</title>
 </head>
 <body>
-
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
