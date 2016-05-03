@@ -116,6 +116,14 @@ public class BandStandController {
 		mv.setViewName("Admin.jsp");
 		return mv;
 	}
+	
+	@RequestMapping("updateMyInfoClick.do")
+	public ModelAndView updateMyInforClick() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("showForm", "true");
+		mv.setViewName("ArtistList.jsp");
+		return mv;
+	}
 
 	@RequestMapping("getUserById.do")
 	public ModelAndView getUserById(@RequestParam("userID") int userID) {
@@ -349,15 +357,19 @@ public class BandStandController {
 	@RequestMapping("addBooking.do")
 	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("date") String date,
 			@RequestParam("userID") int userID) {
+		Artist artist = dao.getArtistById(artistID);
+		System.out.println("date: " + date);
+		System.out.println("in add booking");
 		ModelAndView mv = new ModelAndView();
-		if (date == null) {
+		if (date == "") {
 			String dateError = "Please enter a date.";
+			mv.addObject("artist", artist);
 			mv.addObject("dateError", dateError);
 			mv.setViewName("ArtistPage.jsp");
 			return mv;
 
 		} else {
-			Artist artist = dao.getArtistById(artistID);
+			
 			User user = dao.getUserById(userID);
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 			try {
