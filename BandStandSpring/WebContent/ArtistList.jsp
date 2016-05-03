@@ -156,8 +156,7 @@
 
 
 		<c:forEach var="artist2" items="${artist}">
-			<%-- 			<c:forEach var="photos" items="${ artist2}">
- --%>
+
 			<table class="table">
 				<thead>
 					<tr>
@@ -184,10 +183,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<%--         ${artist2.photos}
- --%>
-			<%-- 			</c:forEach>
- --%>
+
 		</c:forEach>
 
 
@@ -229,12 +225,19 @@
 					<img src="${user.photoUrl }" height=200 width=200
 						class="img-circle text-center">
 				</div>
-				<br> <br>
 
-				<form class="text-center form-horizontal " action="updateUser.do"
+
+
+				<form class="text-center form-horizontal " action="updateUserByUser.do"
 					method="GET">
+				
+				<div>				
+				<input type="hidden" name="userId" value="${user.id } ">
+				</div>
+				
+				<br><br>
 					<div class="form-group text-center">
-						<label for="inputEmail3" class="col-sm-2 control-label">First
+						<label for="inputEmail3" class="col-sm-2 col-sm-offset-3 control-label">First
 							Name </label>
 						<div class="col-sm-3">
 							<input class="form-control" type="text" name="firstName"
@@ -242,7 +245,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">Last
+						<label for="inputPassword3" class="col-sm-2 col-sm-offset-3 control-label">Last
 							Name </label>
 						<div class="col-sm-3">
 							<input class="form-control" type="text" name="lastName"
@@ -252,7 +255,7 @@
 
 
 					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">Email
+						<label for="inputPassword3" class="col-sm-2 col-sm-offset-3 control-label">Email
 						</label>
 						<div class="col-sm-3">
 							<input class="form-control" type="text" name="email"
@@ -261,7 +264,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">Password
+						<label for="inputPassword3" class="col-sm-2 col-sm-offset-3 control-label">Password
 						</label>
 						<div class="col-sm-3">
 							<input class="form-control" type="password" name="password"
@@ -270,7 +273,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">Photo
+						<label for="inputPassword3" class="col-sm-2 col-sm-offset-3 control-label">Photo
 							URL </label>
 						<div class="col-sm-3">
 							<input class="form-control" type="text" name="photoUrl"
@@ -279,24 +282,15 @@
 					</div>
 
 					<div class="form-group">
-						<div class="col-sm-3">
+						<div class="col-sm-3 col-sm-offset-5">
 							<button type="submit" class="btn btn-default">Update!</button>
 						</div>
 					</div>
 				</form>
 
-
-
 			</div>
 
-
-
-
 		</c:if>
-
-
-
-
 		<br> <br> <br> <br>
 
 	</div>
