@@ -120,7 +120,7 @@ body {
 			<thead class="text-center">
 				<tr>
 					<c:if test="${not empty allUsers }">
-
+						<h2>Users</h2>
 						<th>First Name</th>
 						<th>Last name</th>
 						<th>ID</th>
@@ -132,8 +132,9 @@ body {
 			<tbody>
 
 				<c:forEach items="${allUsers}" var="user">
+					
 					<tr>
-
+						
 						<td>${user.firstName}</td>
 						<td>${user.lastName}</td>
 						<td>${user.id}</td>
@@ -177,7 +178,7 @@ body {
 		<thead class="text-center">
 			<tr>
 				<c:if test="${not empty allArtists }">
-
+					<h2>Artists</h2>
 					<th>Name</th>
 					<th>Description</th>
 					<th>ID</th>

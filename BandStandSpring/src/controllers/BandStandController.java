@@ -56,13 +56,15 @@ public class BandStandController {
 	public ModelAndView getAllArtist() {
 		ModelAndView mv = new ModelAndView();
 		List<Artist> allArtists = dao.getAllArtists();
+		mv.addObject("allArtists", allArtists);
+		
 		// for (Artist artist : allArtists) {
 		// for (Photo photos : artist.getPhotos()) {
 		// System.out.println(photos.getUrl());
 		// }
 		// }
-		mv.addObject("artist", allArtists);
-		mv.setViewName("ArtistList.jsp");
+	
+		mv.setViewName("Admin.jsp");
 		return mv;
 	}
 
@@ -123,10 +125,12 @@ public class BandStandController {
 		User user = dao.getUserById(userID);
 		Artist artist = dao.getArtistById(artistID);
 		System.out.println(artist.getName());
-		for (Genre genre : artist.getGenres()) {
-			System.out.println(genre.getGenretype());
-		}
-		mv.addObject("genres", artist.getGenres());
+//		for (Genre genre : artist.getGenres()) {
+//			System.out.println(genre.getGenretype());
+//		}
+//		mv.addObject("genres", artist.getGenres());
+		mv.addObject("photos", artist.getPhotos());
+		mv.addObject("recordings", artist.getRecordings());
 		mv.addObject("user", user);
 		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
