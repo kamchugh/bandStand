@@ -62,7 +62,13 @@ body {
 					<li><a href="userLogOut.do">Log out</a></li>
 					<li><a href="updateMyInfoClick.do">Edit my account</a></li>
 					<li><a href="searchBookingsByUserId.do">View my bookings</a></li>
-					
+					<li>
+					<c:if test="${user.accessLevel == 2}">
+						<form action="Admin.jsp">
+							<button type="submit" value="Admin Mode" class = "btn btn-link">Admin Portal</button>
+						</form>
+					</c:if>
+					</li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -199,7 +205,8 @@ body {
 
 
 						<ul class="list-inline" style="padding-top: 10px;">
-							<li><p class="lead sidePadding" style="padding-top: 10px;"> See what others had to say! </p></li>
+							<li><p class="lead sidePadding" style="padding-top: 10px;">
+									See what others had to say!</p></li>
 							<li>
 								<form action="getCommentsByBand.do" method="GET">
 									<!-- User ID test -->
