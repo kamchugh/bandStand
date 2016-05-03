@@ -40,6 +40,7 @@ public class BandStandController {
 		return mv;
 	}
 
+	
 	@RequestMapping("setUserAccessToAdmin.do")
 	public String setUserAccessToAdmin(@RequestParam("userID") int id) {
 		dao.setUserAccessLevelToAdmin(id);
@@ -506,6 +507,13 @@ public class BandStandController {
 
 	}
 
+	@RequestMapping("userLogOut.do")
+	public ModelAndView userLogOut(HttpSession session){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index.jsp");
+		session.removeAttribute("user");
+		return mv;
+	}
 	// User log in. Store user in session.
 	@RequestMapping("getUserByEmail.do")
 	public ModelAndView ValidatePassword(@RequestParam("email") String email, @RequestParam("password") String password,
