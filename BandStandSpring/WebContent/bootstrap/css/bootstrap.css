@@ -6,6 +6,16 @@
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
 
+div .overflow {
+    width: 150px;
+    height: 150px;
+    overflow: scroll;
+}
+
+
+input[type=submit] {
+	padding-left: 10px;
+}
 
 html {
   font-family: sans-serif;
@@ -1127,6 +1137,7 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+  content-align: center;
 }
 .img-rounded {
   border-radius: 6px;
@@ -6248,6 +6259,8 @@ button.close {
   position: relative;
   width: 100%;
   overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
 }
 .carousel-inner > .item {
   position: relative;

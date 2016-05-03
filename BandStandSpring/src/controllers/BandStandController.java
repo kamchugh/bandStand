@@ -532,7 +532,10 @@ public class BandStandController {
 			System.out.println(artist2.getName());
 		}
 		mv.addObject("all", allArtists);
-
+		for (Genre genre : artist.getGenres()) {
+			System.out.println(genre.getGenretype());
+		}
+		mv.addObject("genres", artist.getGenres());
 		mv.addObject("artist", artist);
 		mv.setViewName("index.jsp");
 		return mv;
@@ -562,6 +565,8 @@ public class BandStandController {
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
+	
+	
 
 	@RequestMapping("searchByRating.do")
 	public ModelAndView searchByRating(@RequestParam("rating") int passedRating, @RequestParam("userId") int userID) {

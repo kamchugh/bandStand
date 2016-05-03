@@ -69,6 +69,10 @@ body {
 
 		<div class="row">
 			<div class="col-lg-12 text-center">
+			<c:forEach items ="${genres}" var ="genre">
+			${genre.genretype} 
+			
+			</c:forEach>
 
 				<h1>${artist.name}</h1>
 				<p class="lead">display all genres here</p>
@@ -85,23 +89,17 @@ body {
 
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner">
+					
 						<div class="item active">
-							<img src="http://placehold.it/1200x315" alt="...">
-							<div class="carousel-caption">
-								<h3>Caption Text</h3>
-							</div>
+							<img src="http://static1.squarespace.com/static/51b5d84ce4b0830c27f5f7ec/t/51b64047e4b02b24a3e40ecb/1370898508799/The+A+Band+of+New+York+4.jpg"  style="width:100%;height:300px;">	
 						</div>
 						<div class="item">
-							<img src="http://placehold.it/1200x315" alt="...">
-							<div class="carousel-caption">
-								<h3>Caption Text</h3>
-							</div>
+							<img src="http://www.anewbandaday.com/wp-content/uploads/2015/11/strawbearelectric-e1446905612817.jpg" style="width:700px;height:300px;">
+							
 						</div>
 						<div class="item">
-							<img src="http://placehold.it/1200x315" alt="...">
-							<div class="carousel-caption">
-								<h3>Caption Text</h3>
-							</div>
+							<img src="https://dr56wvhu2c8zo.cloudfront.net/drafthouse/assets/images/product-2522-1403715539-1280x720.jpg" style="width:700px;height:300px;">
+							
 						</div>
 					</div>
 
@@ -116,11 +114,11 @@ body {
 				</div>
 				<!-- Carousel -->
 				<p class="lead" style="padding-top: 10px;">${artist.description}</p>
-				<p class="lead" style="padding-top: 10px;">
+				<p class="lead">
 				<form action="getRatingsByBand.do" method="GET">
 					<!-- User ID test -->
 					<input type="hidden" name="userID" value="${user.id}"> <input
-						type="hidden" name="artistID" value="${artist.id}"> <input
+						type="hidden" name="artistID" value="${artist.id}"> <input class="btn btn-default"
 						type="submit" name="RatingsByBand"
 						value="Get rating for this artist">
 				</form>
@@ -130,29 +128,29 @@ body {
 						<c:if test="${ratings <= 1}">
 							<img
 								src="http://fadmagazine.com/wp-content/uploads/one-star-rating.jpg"
-								alt="Smiley face" height="42" width="125">
-	${ratings}
-	</c:if>
+								alt="Smiley face" height="42" width="140">
+							<%-- ${ratings} --%>
+						</c:if>
 
 						<c:if test="${(ratings <= 2) && (ratings > 1)}">
 							<img
 								src="http://vignette3.wikia.nocookie.net/dickfiguresfanon/images/3/3a/Two-star-rating.png/revision/latest?cb=20140418000000"
-								alt="Smiley face" height="42" width="125">
-								
-	${ratings}
-	</c:if>
+								alt="Smiley face" height="42" width="140">
+
+							<%-- ${ratings} --%>
+						</c:if>
 						<c:if test="${(ratings <= 3) && (ratings > 2)}">
 							<img
 								src="http://www.gobblertown.com/wp-content/uploads/2015/08/Three-Stars.jpg"
-								alt="Smiley face" height="42" width="125">
-	${ratings}
-	</c:if>
+								alt="Smiley face" height="42" width="140">
+							<%-- ${ratings} --%>
+						</c:if>
 						<c:if test="${(ratings <= 5) && (ratings > 4)}">
 							<img
 								src="http://www.ecofleetuk.com/wp-content/uploads/4-star-rating.png"
-								alt="Smiley face" height="42" width="125">
-	${ratings}
-	</c:if>
+								alt="Smiley face" height="42" width="140">
+							<%-- ${ratings} --%>
+						</c:if>
 
 					</c:if>
 				</p>
@@ -167,29 +165,31 @@ body {
 							<!-- Month <input type="textarea" name="month" value="10"> Day <input
 		type="textarea" name="day" value="23"> Year <input
 		type="textarea" name="year" value="2010"> <input type="submit"> -->
-							<input type="date" name="date"> <input type="submit">
+							<input class="form-control" type="date" name="date"> </li><li> <input class="btn btn-default" type="submit"></li>
 						</form>
 					<li>
 				</ul>
 				<ul class="list-inline" style="padding-top: 10px;">
-					<li>Check their confirmed bookings, just in case</li>
+					<li>Check their confirmed bookings</li>
 					<li>
 						<form action="getBookingsByBand.do" method="GET">
 							<!-- User ID test -->
 							<input type="hidden" name="userID" value="${user.id}"> <input
-								type="hidden" name="artistID" value="${artist.id}"> <input
+								type="hidden" name="artistID" value="${artist.id}"> <input class="btn btn-default"
 								type="submit" name="bookingsByBand"
 								value="Get all bookings for this artist">
 						</form>
 					<li>
 				</ul>
 				<c:forEach var="booking" items="${bookings}">
- This artist is already booked on...
-	<c:if test="${! empty(booking)}">
-	
-	${booking.id}
-	${booking.bookingDate}
-	</c:if>
+
+					<c:if test="${! empty(booking)}">
+						<%-- ${booking.id} --%>
+						<p>
+							<b>${booking.bookingDate} </b>
+						</p>
+					</c:if>
+
 				</c:forEach>
 				<ul class="list-inline" style="padding-top: 10px;">
 					<li>See what others had to say!</li>
@@ -197,23 +197,26 @@ body {
 						<form action="getCommentsByBand.do" method="GET">
 							<!-- User ID test -->
 							<input type="hidden" name="userID" value="${user.id}"> <input
-								type="hidden" name="artistID" value="${artist.id}"> <input
+								type="hidden" name="artistID" value="${artist.id}"> <input class="btn btn-default"
 								type="submit" name="commentsByBand"
 								value="Get all comments for this artist">
 						</form>
 					<li>
 				</ul>
-
-				<c:forEach var="comment" items="${comments}">
-					<c:if test="${! empty(comment)}">
-						<dl class="dl-horizontal">
-							<dt>${comment.user.firstName}</dt>
-							<dd>${comment.body}</dd>
-						</dl>
-						<%-- 	${comment.body}
+				
+					<c:forEach var="comment" items="${comments}">
+						<c:if test="${! empty(comment)}">
+						<div class="overflow">
+							<dl class="dl-horizontal">
+								<dt>${comment.user.firstName}</dt>
+								<dd>${comment.body}</dd>
+							</dl>
+							</div>
+							<%-- 	${comment.body}
 	${comment.user.firstName} --%>
-					</c:if>
-				</c:forEach>
+						</c:if>
+					</c:forEach>
+				
 				<h3 style="padding-top: 10px; padding-bottom: 20px;">Did
 					${artist.name} perform at your event? Let us know what you thought!</h3>
 				<ul class="list-inline">
@@ -221,30 +224,31 @@ body {
 					<li>
 						<form action="addRating.do" method="GET">
 							<input type="hidden" name="userID" value="${user.id}"> <input
-								type="hidden" name="artistID" value="${artist.id}"> <select
+								type="hidden" name="artistID" value="${artist.id}"> <select class="form-control"
 								name="rating">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
 								<option value="5">5</option>
-							</select> <input type="submit">
+							</select> </li> <li> <input class="btn btn-default" type="submit"> </li>
 						</form>
-					<li>
+						<li>
+				
 				</ul>
-				<ul class="list-inline">
-					<li>Comment on ${artist.name}</li>
-					<li>
-						<form action="addComment.do" method="GET">
+				
+					<p>Comment on ${artist.name}</p>
+					<p>
+						
+				<form action="addComment.do" method="GET">
 							<input type="hidden" name="userID" value="${user.id}"> <input
-								type="hidden" name="artistID" value="${artist.id}"> <input
-								type="textarea" name="comment" value="comment"> <input
-								type="submit">
+						type="hidden" name="artistID" value="${artist.id}"> <textarea class="form-control"
+						type="text"  name="comment" value="comment"></textarea> 
+								<p style="padding-top: 10px;"> <input class="btn btn-default" type="submit"> </p>
 						</form>
-					<li>
-				</ul>
-
-
+						<p>
+				
+					</ul>
 
 			</div>
 		</div>
@@ -261,7 +265,7 @@ body {
 	</script>
 
 	<!-- jQuery Version 1.11.1 -->
-	<script src="js/jquery.js"></script>
+	<!-- <script src="js/jquery.js"></script> -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
@@ -353,10 +357,10 @@ body {
 	</footer>
 
 
-<form action = "getAllPhotosForArtist.do" method = "GET">
-	<input type = "hidden" name = "artistId" value = "${artist.id}">
-	<input type = "submit" value = "Get Photos">
-</form>
+	<form action="getAllPhotosForArtist.do" method="GET">
+		<input type="hidden" name="artistId" value="${artist.id}"> <input
+			type="submit" value="Get Photos">
+	</form>
 
 </body>
 </html>
