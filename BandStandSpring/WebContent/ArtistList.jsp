@@ -188,13 +188,15 @@
 
 
 		</div>
+		
+		
 
 
 
 
 		<!-- </form>
  -->
-		<c:if test="${ empty(filterArtist)}">
+		<c:if test="${ empty(filterArtist) || (showForm != 'true') }">
 			<br>
 			<br>
 			<br>

@@ -13,8 +13,10 @@ import entities.Artist;
 import entities.Booking;
 import entities.Comment;
 import entities.Genre;
+import entities.GenreType;
 import entities.Photo;
 import entities.Rating;
+import entities.Recording;
 import entities.User;
 
 @Component
@@ -168,6 +170,31 @@ public class BandStandJPADAO implements BandStandDAO {
 		System.out.println("I've set the commentBody to " + commentBody);
 		em.persist(comment);
 		System.out.println("I have persisted the comment");
+	}
+	
+	public void addRecording(int artistID, String recordingUrl) {
+		Artist artistRecording = getArtistById(artistID);
+		Recording recording = new Recording();
+		recording.setArtist(artistRecording);
+		recording.setUrl(recordingUrl);
+		em.persist(recording);
+	}
+	
+	public void addPhoto(int artistID, String photoUrl) {
+		Artist artistPhoto = getArtistById(artistID);
+		Photo photo = new Photo();
+		photo.setArtist(artistPhoto);
+		photo.setUrl(photoUrl);
+		em.persist(photo);
+		
+	}
+	
+	public void addGenre(int artistID, String genreType) {
+		Artist artistGenre = getArtistById(artistID);
+		Genre genre = new Genre();
+		genre.setArtist(artistGenre);
+		genre.setGenretype(GenreType.valueOf(genreType));
+		em.persist(genre);
 	}
 
 	public void addRating(int artistID, int rating, int userID) {

@@ -286,8 +286,6 @@ body {
 						<li><input class="btn btn-warning" type="submit"
 							value="Book this band"></li>
 						</form>
-
-
 					</ul>
 
 					<button style="margin-bottom: 10px" class="btn btn-default"

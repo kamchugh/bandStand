@@ -34,6 +34,11 @@
 	padding-bottom: 15px;
 	
 }
+
+.bottomMargin {
+	margin-bottom: 15px;
+	
+}
 .scroll {
 	width: 150px;
 	height: 150px;

@@ -317,6 +317,46 @@ public class BandStandController {
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
+	
+	// add recording, add photo, add genre to artist 
+	
+	@RequestMapping("addRecording.do")
+	public ModelAndView addRecording(@RequestParam("artistID") int artistID, 
+			@RequestParam("recording") String recording) {
+		Artist artist = dao.getArtistById(artistID);
+		dao.addRecording(artistID, recording);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("recording", recording);
+		mv.addObject("artist", artist);
+		mv.setViewName("editArtist.jsp" );
+		return mv;
+	}
+	
+	@RequestMapping("addPhoto.do")
+	public ModelAndView addPhoto(@RequestParam("artistID") int artistID,
+			@RequestParam("photo") String photo) {
+		Artist artist = dao.getArtistById(artistID);
+		dao.addPhoto(artistID, photo);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("photo", photo);
+		mv.addObject("artist", artist);
+		mv.setViewName("editArtist.jsp" );
+		return mv;
+	}
+	
+	@RequestMapping("addGenre.do") 
+	public ModelAndView addGenre(@RequestParam("artistID") int artistID,
+			@RequestParam("genre") String genre) {
+		Artist artist = dao.getArtistById(artistID);
+		dao.addGenre(artistID, genre);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("genre", genre);
+		mv.addObject("artist", artist);
+		mv.setViewName("editArtist.jsp");
+		return mv;
+	}
+	
+	
 
 	@RequestMapping("addRating.do")
 	public ModelAndView addRating(@RequestParam("artistID") int artistID, @RequestParam("rating") int rating,
