@@ -59,6 +59,24 @@
 
 	<div class="container">
 		<br> <br> <br> <br>
+		<c:if test="${! empty(noRating)}">
+					<%-- ${booking.id} --%>
+					<h3 class="orangeText">
+						You didn't select a rating!
+					</h3>
+				</c:if>
+				<c:if test="${! empty(noGenre)}">
+					<%-- ${booking.id} --%>
+					<h3 class="orangeText">
+						You didn't select a genre!
+					</h3>
+				</c:if>
+				<c:if test="${! empty(noName)}">
+					<%-- ${booking.id} --%>
+					<h3 class="orangeText">
+						You didn't select an artist!
+					</h3>
+				</c:if>
 
 		<%-- <h1>User id: ${user.id}</h1> --%>
 		<h1 style="padding-bottom: 20px">
@@ -170,49 +188,46 @@
 
 
 		</div>
+		
+		
 
 
 
 
 		<!-- </form>
  -->
-
-		<br> <br> <br> <br> This is the all artists test!
+		<c:if test="${ empty(filterArtist) || (showForm != 'true') }">
+			<br>
+			<br>
+			<br>
+			<br> This is the all artists test!
 		<c:forEach var="singleArtist" items="${all}">
 
-			<table class="table">
-				
-				<tbody>
-					<tr>
-						<td><a
-							href="getArtistById.do?artistID=${singleArtist.id}&userID=${user.id}">
-								<img src="${singleArtist.photos[0].url}" height=200 width=200
-								class="img-rounded" />
-						</a></td>
-						<td colspan="3">Artist: ${singleArtist.name} <br> <br>
-							${singleArtist.email} <br> <br>
-							${singleArtist.description } <br> <br>
-						</td>
-						<td></td>
-						<td colspan="3"></td>
-					</tr>
-				</tbody>
-			</table>
+				<table class="table">
 
-		</c:forEach>
+					<tbody>
+						<tr>
+							<td><a
+								href="getArtistById.do?artistID=${singleArtist.id}&userID=${user.id}">
+									<img src="${singleArtist.photos[0].url}" height=200 width=200
+									class="img-rounded" />
+							</a></td>
+							<td colspan="3">Artist: ${singleArtist.name} <br> <br>
+								${singleArtist.email} <br> <br>
+								${singleArtist.description } <br> <br>
+							</td>
+							<td></td>
+							<td colspan="3"></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</c:forEach>
+		</c:if>
 
 		<c:forEach var="artist2" items="${filterArtist}">
 
 			<table class="table">
-				<thead>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</thead>
 				<tbody>
 					<tr>
 						<td><a

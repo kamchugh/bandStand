@@ -14,10 +14,11 @@ body {
 	href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="startbootstrap-bare-1.0.4 2/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="custom.css">
 <title>Edit Artist</title>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -36,7 +37,7 @@ body {
 					<li><a class="nabvar-brand" href="ArtistList.jsp">Home</a></li>
 					<li><a class="navbar-brand" href="Admin.jsp">Admin Home</a></li>
 					</li>
-					
+
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -58,8 +59,51 @@ body {
 				<div>Artist Description</div>
 				<input type="text" name="description" value="${artist.description}">
 				<br>
-				<button style="margin-top: 10px;" class="btn btn-default" type="btn btn-default">Update Artist</button>
+				<button style="margin-top: 10px;" class="btn btn-default"
+					type="submit">Update Artist</button>
 			</form>
+			<form action="addRecording.do" method="GET">
+				<h3>Add Multiples</h3>
+				<input type="hidden" name="artistID" value="${artist.id} ">
+				<input type="placeholder" name="recording" value=" ">
+				<div>
+					<button style="margin-top: 10px;"
+						class="btn btn-default bottomMargin" type="submit">Add
+						Recording</button>
+				</div>
+			</form>
+			<form action="addPhoto.do" method="GET">
+
+				<input type="hidden" name="artistID" value="${artist.id} ">
+				<input type="placeholder" name="photo" value=" ">
+				<div>
+					<button style="margin-top: 10px;"
+						class="btn btn-default bottomMargin" type="submit">Add
+						photo</button>
+				</div>
+			</form>
+			<form action="addGenre.do" method="GET">
+				<input type="hidden" name="artistID" value="${artist.id} ">
+				<select class="form-control" name="genre">
+							<option selected="selected">Select Genre</option>
+
+							<option value="Jazz">Jazz</option>
+							<option value="Brass">Brass</option>
+							<option value="EDM">EDM</option>
+							<option value="Jazz">Jazz</option>
+							<option value="Reggae">Reggae</option>
+							<option value="Brass">Brass</option>
+							<option value="Piano">Piano</option>
+							<option value="Country">Country</option>
+							<option value="Alternative">Alternative</option>
+
+						</select>
+				<div>
+					<button style="margin-top: 10px;" class="btn btn-default"
+						type="submit">Add genre</button>
+				</div>
+			</form>
+
 		</div>
 	</div>
 </body>

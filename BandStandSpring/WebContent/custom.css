@@ -30,6 +30,15 @@
 	padding-right: 15px;
 }
 
+.bottomPadding {
+	padding-bottom: 15px;
+	
+}
+
+.bottomMargin {
+	margin-bottom: 15px;
+	
+}
 .scroll {
 	width: 150px;
 	height: 150px;
@@ -43,6 +52,10 @@
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-bottom: 15px;
+}
+
+.orange {
+	background-color: #FF9900;
 }
 
 link {

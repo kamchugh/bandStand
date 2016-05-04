@@ -23,6 +23,7 @@
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
     <link rel="stylesheet" href="bootstrap/css/style.css">
+    <link rel="stylesheet" href="custom.css">
 
 
 <title>BandStand Login</title>
@@ -136,7 +137,7 @@ body {
                     
                     <div class="logmod__tab lgm-2">
                         <div class="logmod__heading">
-                            <span class="logmod__heading-subtitle">Enter your email and password <strong>to sign in</strong></span>
+                            <span class="logmod__heading-subtitle"><strong> Are you a band? click here </strong> to login or sign up</span>
                         </div>
                         <div class="logmod__form">
                             <form accept-charset="utf-8" action="getUserByEmail.do" class="simform">
@@ -153,9 +154,16 @@ body {
                                         <span class="hide-password">Show</span>
                                     </div>
                                 </div>
+                                
                                 <div class="simform__actions">
-                                    <input class="sumbit" name="commit" type="submit" value="Log In" />
+                                    <input class="sumbit orange" name="commit" type="submit" value="Log In" />
                                 </div>
+                                <c:if test="${! empty(wrongPassword)}">
+                                <div class = "sidePadding bottomPadding"> That is not the right password for ${wrongPassword}</div>
+                                </c:if>
+                                 <c:if test="${! empty(wrongEmail)}">
+                                <div class = "sidePadding bottomPadding"> We can't find ${wrongEmail}. Are you sure it's the right email?</div>
+                                </c:if>
                             </form>
                         </div>
 

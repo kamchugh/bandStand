@@ -309,6 +309,46 @@ public class BandStandController {
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
+	
+	// add recording, add photo, add genre to artist 
+	
+	@RequestMapping("addRecording.do")
+	public ModelAndView addRecording(@RequestParam("artistID") int artistID, 
+			@RequestParam("recording") String recording) {
+		Artist artist = dao.getArtistById(artistID);
+		dao.addRecording(artistID, recording);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("recording", recording);
+		mv.addObject("artist", artist);
+		mv.setViewName("editArtist.jsp" );
+		return mv;
+	}
+	
+	@RequestMapping("addPhoto.do")
+	public ModelAndView addPhoto(@RequestParam("artistID") int artistID,
+			@RequestParam("photo") String photo) {
+		Artist artist = dao.getArtistById(artistID);
+		dao.addPhoto(artistID, photo);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("photo", photo);
+		mv.addObject("artist", artist);
+		mv.setViewName("editArtist.jsp" );
+		return mv;
+	}
+	
+	@RequestMapping("addGenre.do") 
+	public ModelAndView addGenre(@RequestParam("artistID") int artistID,
+			@RequestParam("genre") String genre) {
+		Artist artist = dao.getArtistById(artistID);
+		dao.addGenre(artistID, genre);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("genre", genre);
+		mv.addObject("artist", artist);
+		mv.setViewName("editArtist.jsp");
+		return mv;
+	}
+	
+	
 
 	@RequestMapping("addRating.do")
 	public ModelAndView addRating(@RequestParam("artistID") int artistID, @RequestParam("rating") int rating,
@@ -523,6 +563,7 @@ public class BandStandController {
 		User user = dao.getUserByEmail(email);
 
 		if (user == null) {
+			mv.addObject("wrongEmail", email);
 			mv.setViewName("index1.jsp");
 			return mv;
 		}
@@ -534,7 +575,8 @@ public class BandStandController {
 			return mv;
 		} else {
 			// mv.addObject("user", user);
-			mv.setViewName("index.jsp");
+			mv.addObject("wrongPassword", email);
+			mv.setViewName("index1.jsp");
 			return mv;
 		}
 
@@ -574,13 +616,18 @@ public class BandStandController {
 	@RequestMapping("searchByName.do")
 	public ModelAndView getArtistById(@RequestParam("name") String name) {
 		ModelAndView mv = new ModelAndView();
-		Artist artist = dao.searchByName(name);
-		System.out.println("This is the artist I have after going to the dao: " + artist);
-		List<Artist> matchedArtists = new ArrayList<>();
-		if (artist.getName().equals(name)) {
-			matchedArtists.add(artist);	
+		if (name.equals("Select Artist")) {
+			mv.addObject("noName", name);
+
+		} else {
+			Artist artist = dao.searchByName(name);
+			System.out.println("This is the artist I have after going to the dao: " + artist);
+			List<Artist> matchedArtists = new ArrayList<>();
+			if (artist.getName().equals(name)) {
+				matchedArtists.add(artist);
+			}
+			mv.addObject("filterArtist", matchedArtists);
 		}
-		mv.addObject("filterArtist", matchedArtists);
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
@@ -618,37 +665,46 @@ public class BandStandController {
 	@RequestMapping("searchByGenre.do")
 	public ModelAndView searchByGenre(@RequestParam("genre") String genreType) {
 		ModelAndView mv = new ModelAndView();
-		List<Genre> genres = dao.searchByGenre(genreType);
+		if (genreType.equals("Select Genre")) {
+			mv.addObject("noGenre", genreType);
+		} else {
+			List<Genre> genres = dao.searchByGenre(genreType);
 
-		List<Artist> matchedArtists = new ArrayList();
-		for (Genre g : genres) {
-			matchedArtists.add(g.getArtist());
+			List<Artist> matchedArtists = new ArrayList();
+			for (Genre g : genres) {
+				matchedArtists.add(g.getArtist());
+			}
+			mv.addObject("filterArtist", matchedArtists);
 		}
-
-		mv.addObject("filterArtist", matchedArtists);
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
 
 	@RequestMapping("searchByRating.do")
-	public ModelAndView searchByRating(@RequestParam("rating") int passedRating, @RequestParam("userId") int userID) {
+	public ModelAndView searchByRating(@RequestParam("rating") String passedRating,
+			@RequestParam("userId") int userID) {
 		ModelAndView mv = new ModelAndView();
-		User user = dao.getUserById(userID);
-		List<Artist> artists = new ArrayList<>();
-		List<Artist> matchedArtists = new ArrayList<>();
-		artists = dao.getAllArtists();
-		for (Artist artist : artists) {
-			int averageRating = dao.getRatingsForArtist(artist);
-			System.out.println("controller average rating; " + averageRating);
-			if (averageRating == passedRating) {
-				matchedArtists.add(artist);
+		if (passedRating.equals("Select Rating")) {
+			mv.addObject("noRating", passedRating);
+		} else {
+			User user = dao.getUserById(userID);
+			List<Artist> artists = new ArrayList<>();
+			List<Artist> matchedArtists = new ArrayList<>();
+			artists = dao.getAllArtists();
+			for (Artist artist : artists) {
+				int averageRating = dao.getRatingsForArtist(artist);
+				System.out.println("controller average rating; " + averageRating);
+				if (averageRating == Integer.parseInt(passedRating)) {
+					matchedArtists.add(artist);
+				}
 
 			}
-		}
-		// List<Artist> artistRatingMatch = new ArrayList();
 
-		mv.addObject("filterArtist", matchedArtists);
-		mv.addObject("user", user);
+			// List<Artist> artistRatingMatch = new ArrayList();
+
+			mv.addObject("filterArtist", matchedArtists);
+			mv.addObject("user", user);
+		}
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 
@@ -659,7 +715,9 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 
 		allArtists = dao.getAllArtists();
-		session.setAttribute("all",  allArtists);
+
+		session.setAttribute("all", allArtists);
+
 
 		mv.setViewName("index1.jsp");
 		return mv;

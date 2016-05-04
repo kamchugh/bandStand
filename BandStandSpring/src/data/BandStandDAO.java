@@ -82,6 +82,13 @@ public interface BandStandDAO {
 			String photoUrl);
 	
 	public Artist getArtistByEmail(String email);
+	
+	public void addRecording(int artistID, String recordingUrl); // add a recording to an artist
+	
+	public void addPhoto(int artistID, String photoUrl);
+	
+	public void addGenre(int artistID, String genreType);
+		
 
 
 }

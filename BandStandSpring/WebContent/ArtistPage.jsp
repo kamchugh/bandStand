@@ -63,9 +63,9 @@ body {
 					<li><a href="updateMyInfoClick.do">Edit my account</a></li>
 					<li><a href="searchBookingsByUserId.do">View my bookings</a></li>
 					<li><c:if test="${user.accessLevel == 2}">
-					<a href="Admin.jsp">Admin Portal</a>
-					</c:if></li>
-					
+							<a href="Admin.jsp">Admin Portal</a>
+						</c:if></li>
+
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -80,8 +80,8 @@ body {
 				<c:if test="${! empty(date)}">
 					<%-- ${booking.id} --%>
 					<h3 class="orangeText">
-						Your booking for <b>${date} </b> is being processed. ${artist.name}
-						will respond to you soon!
+						Your booking for <b>${date} </b> is being processed.
+						${artist.name} will respond to you soon!
 					</h3>
 				</c:if>
 				<c:if test="${! empty(comment)}">
@@ -109,8 +109,8 @@ body {
 				</c:if>
 						</c:forEach>
 					</p>
-					</div>
-				
+				</div>
+
 				<div id="carousel-example-generic" class="carousel slide"
 					data-ride="carousel" data-interval="8000">
 
@@ -200,9 +200,32 @@ body {
 						<li>
 							<h4 style="padding-bottom: -20px;">${ratings}</h4>
 						</li>
+						</ul>
+
+						<button style="margin-bottom: 10px" class="btn btn-default"
+							onclick="document.getElementById('id01').style.display='block'">
+							View comments from other users</button>
+
+						<div id="id01" class="w3-container w3-red" style="display: none">
+							<span onclick="this.parentElement.style.display='none'"
+								class="w3-closebtn">&times; Close comments</span>
+
+							<p class="lead">
+							<div class="elements">
+								<c:forEach var="comment" items="${artist.comments}">
+
+									<div class="bookingsBorder">${comment.user.firstName}
+										says ${comment.body}</div>
+
+								</c:forEach>
+							</div>
+							</p>
+						</div>
 
 
-						<ul class="list-inline" style="padding-top: 10px;">
+
+
+						<%-- 						<ul class="list-inline" style="padding-top: 10px;">
 							<li><p class="lead sidePadding" style="padding-top: 10px;">
 									See what others had to say!</p></li>
 							<li>
@@ -226,10 +249,10 @@ body {
 									</dl>
 
 								</div>
-								<%-- 	${comment.body}
-	${comment.user.firstName} --%>
+									${comment.body}
+	${comment.user.firstName}
 							</c:if>
-						</c:forEach>
+						</c:forEach> --%>
 				</div>
 				<h2 style="padding-top: 10px; padding-bottom: 20px;">Listen to
 					${artist.name}'s tunes</h2>
@@ -263,33 +286,27 @@ body {
 						<li><input class="btn btn-warning" type="submit"
 							value="Book this band"></li>
 						</form>
-
-
 					</ul>
 
-					<ul class="list-inline" style="padding-top: 10px;">
+					<button style="margin-bottom: 10px" class="btn btn-default"
+						onclick="document.getElementById('id02').style.display='block'">
+						View their Confirmed Bookings</button>
 
-						<li>
-							<form action="getBookingsByBand.do" method="GET">
-								<!-- User ID test -->
-								<input type="hidden" name="userID" value="${user.id}"> <input
-									type="hidden" name="artistID" value="${artist.id}"> <input
-									class="btn btn-default" type="submit" name="bookingsByBand"
-									value="Check their bookings first">
-							</form>
-						<li>
-					</ul>
+					<div id="id02" class="w3-container w3-red" style="display: none">
+						<span onclick="this.parentElement.style.display='none'"
+							class="w3-closebtn">&times; Close bookings</span>
 
-					<c:forEach var="booking" items="${bookings}">
-
-						<c:if test="${! empty(booking)}">
-							<%-- ${booking.id} --%>
-							<p>
-								<b>${booking.bookingDate} </b>
-							</p>
-						</c:if>
-
-					</c:forEach>
+						<p class="lead">
+						<div class="elements">
+							<c:forEach var="b" items="${artist.bookings}">
+								<c:if test="${! empty(b) && (b.confirmed == true)}">
+									<div class="bookingsBorder">${b.artist.name}is confirmed
+										for ${b.bookingDate}.</div>
+								</c:if>
+							</c:forEach>
+						</div>
+						</p>
+					</div>
 				</div>
 
 				<div class="jumbotron">
