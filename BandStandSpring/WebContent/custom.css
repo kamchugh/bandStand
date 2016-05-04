@@ -74,3 +74,16 @@ link:active, link:hover {
 	background-attachment: fixed;
 	
 }
+
+.elements {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.bookingsBorder {
+	padding: 15px;
+	border-style: solid;
+	border-color: #FF9900;
+	border-radius: 20px;
+	margin: 10px;
+}
