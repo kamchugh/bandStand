@@ -154,8 +154,8 @@ body {
 			<div class="item">
 				<img src="${photo.url}" style="width: 200px; height: 200px;">
 				<form action="deletePhoto.do" method="GET">
-				<input type="text" name="artistID" value="${artist.id}">
-				<input type="text" name="photo" value="${photo.id} ">
+				<input type="hidden" name="artistID" value="${artist.id}">
+				<input type="hidden" name="photo" value="${photo.id} ">
 					<button style="margin-top: 10px;"
 						class="btn btn-default bottomMargin" type="submit">Delete
 						photo</button>
@@ -179,11 +179,35 @@ body {
 			<div class="item">
 				${recording.url}
 				<form action="deleteRecording.do" method="GET">
-				<input type="text" name="artistID" value="${artist.id}">
-				<input type="text" name="recording" value="${recording.id} ">
+				<input type="hidden" name="artistID" value="${artist.id}">
+				<input type="hidden" name="recording" value="${recording.id} ">
 					<button style="margin-top: 10px;"
 						class="btn btn-default bottomMargin" type="submit">Delete
 						Recording</button>
+				</form>
+
+			</div>
+
+		</c:forEach>
+	</div>
+	
+		<button style="margin-bottom: 10px; margin-top: 30px; margin-left: 20px;" class="btn btn-default"
+		onclick="document.getElementById('id03').style.display='block'">
+		View Genres</button>
+
+	<div id="id03" class="w3-container w3-red" style="display: none">
+		<span onclick="this.parentElement.style.display='none'"
+			class="w3-closebtn">&times; Close genres</span>
+
+		<c:forEach items="${artist.genres}" var="genre">
+			<div class="item">
+				${genre.genretype}
+				<form action="deleteGenre.do" method="GET">
+				<input type="hidden" name="artistID" value="${artist.id}">
+				<input type="hidden" name="genre" value="${genre.id} ">
+					<button style="margin-top: 10px;"
+						class="btn btn-default bottomMargin" type="submit">Delete
+						Genre</button>
 				</form>
 
 			</div>

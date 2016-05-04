@@ -386,6 +386,18 @@ public class BandStandController {
 		return mv;		
 }
 	
+	@RequestMapping("deleteGenre.do") 
+	public ModelAndView deleteGenre(@RequestParam("artistID") int artistID, @RequestParam("genre") int genreID) {
+		Artist artist = dao.getArtistById(artistID);
+		dao.deleteGenre(genreID);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("removedGenre", genreID);
+		mv.addObject("artist", artist);
+		mv.setViewName("editArtist.jsp");
+		return mv;		
+}
+	
+	
 
 	// @RequestMapping("addBooking.do")
 	// public ModelAndView addDate(@RequestParam("artistID") int artistID,

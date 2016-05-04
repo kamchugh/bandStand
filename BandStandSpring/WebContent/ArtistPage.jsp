@@ -194,8 +194,6 @@ body {
 								<%-- 		<c:if test="${(ratings = NaN)}">
 								<p>Not yet rated</p>
 							</c:if> --%>
-
-
 							</c:if></li>
 						<li>
 							<h4 style="padding-bottom: -20px;">${ratings}</h4>

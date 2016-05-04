@@ -130,6 +130,11 @@ public class BandStandJPADAO implements BandStandDAO {
 		return photo;
 	}
 	
+	public Genre getGenrebyID(int genreID) {
+		Genre genre = em.createQuery("select g from Genre g WHERE g.id = " + genreID, Genre.class).getSingleResult();
+		return genre;
+	}
+	
 	public Recording getRecordingByID(int recordingID) {
 		Recording recording = em.createQuery("select r from Recording r WHERE r.id = " + recordingID, Recording.class).getSingleResult();
 		return recording;
@@ -210,6 +215,12 @@ public class BandStandJPADAO implements BandStandDAO {
 		System.out.println("I made it into the delete photo method with: " + photoID);
 		Photo photo = getPhotoByID(photoID);
 		em.remove(photo);	
+	}
+	
+	public void deleteGenre(int genreID) {
+		Genre genre = getGenrebyID(genreID);
+		em.remove(genre);
+		
 	}
 	
 	public void addGenre(int artistID, String genreType) {

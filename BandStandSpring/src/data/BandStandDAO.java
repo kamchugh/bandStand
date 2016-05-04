@@ -72,7 +72,6 @@ public interface BandStandDAO {
 	
 	public User getUserByEmail(String email);
 
-
 	public int updateArtist(Artist artist);
 
 	public int getRatingsForArtist(Artist artist);
@@ -97,6 +96,10 @@ public interface BandStandDAO {
 	public void deleteRecording(int recordingID);
 	
 	public Recording getRecordingByID(int recordingID);
+	
+	public Genre getGenrebyID(int genreID);
+	
+	public void deleteGenre(int genreID);
 		
 
 
