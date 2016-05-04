@@ -52,7 +52,7 @@ body {
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Bandstand</a>
+				<a class="navbar-brand" href="ArtistList.jsp">Bandstand</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
@@ -80,7 +80,7 @@ body {
 				<c:if test="${! empty(date)}">
 					<%-- ${booking.id} --%>
 					<h3 class="orangeText">
-						You booking for <b>${date} </b> is being processed. ${artist.name}
+						Your booking for <b>${date} </b> is being processed. ${artist.name}
 						will respond to you soon!
 					</h3>
 				</c:if>
