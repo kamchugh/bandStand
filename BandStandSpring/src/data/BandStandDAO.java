@@ -9,6 +9,7 @@ import entities.Comment;
 import entities.Genre;
 import entities.Photo;
 import entities.Rating;
+import entities.Recording;
 import entities.User;
 
 public interface BandStandDAO {
@@ -88,6 +89,14 @@ public interface BandStandDAO {
 	public void addPhoto(int artistID, String photoUrl);
 	
 	public void addGenre(int artistID, String genreType);
+	
+	public Photo getPhotoByID(int photoUrl);
+	
+	public void deletePhoto(int artistID, int photoUrl);
+	
+	public void deleteRecording(int recordingID);
+	
+	public Recording getRecordingByID(int recordingID);
 		
 
 

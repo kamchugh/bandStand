@@ -196,7 +196,7 @@
 
 		<!-- </form>
  -->
-		<c:if test="${ empty(filterArtist) || (showForm != 'true') }">
+		<c:if test="${ empty(filterArtist)}">
 			<br>
 			<br>
 			<br>

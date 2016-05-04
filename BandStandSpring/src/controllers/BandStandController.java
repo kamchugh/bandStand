@@ -356,7 +356,17 @@ public class BandStandController {
 		return mv;
 	}
 	
-	
+	@RequestMapping("deletePhoto.do") 
+		public ModelAndView deletePhoto(@RequestParam("artistID") int artistID,
+				@RequestParam("photo") int photoID) {
+			Artist artist = dao.getArtistById(artistID);
+			dao.deletePhoto(artistID, photoID);
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("removedPhoto", photoID);
+			mv.addObject("artist", artist);
+			mv.setViewName("editArtist.jsp");
+			return mv;		
+	}
 
 	@RequestMapping("addRating.do")
 	public ModelAndView addRating(@RequestParam("artistID") int artistID, @RequestParam("rating") int rating,
@@ -372,6 +382,18 @@ public class BandStandController {
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
+	
+	@RequestMapping("deleteRecording.do") 
+	public ModelAndView deleteRating(@RequestParam("artistID") int artistID, @RequestParam("recording") int recordingID) {
+		Artist artist = dao.getArtistById(artistID);
+		dao.deleteRecording(recordingID);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("removedRecording", recordingID);
+		mv.addObject("artist", artist);
+		mv.setViewName("editArtist.jsp");
+		return mv;		
+}
+	
 
 	// @RequestMapping("addBooking.do")
 	// public ModelAndView addDate(@RequestParam("artistID") int artistID,

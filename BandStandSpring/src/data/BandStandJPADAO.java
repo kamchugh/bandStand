@@ -123,6 +123,17 @@ public class BandStandJPADAO implements BandStandDAO {
 				.getSingleResult();
 		return artist;
 	}
+	
+	public Photo getPhotoByID(int photoID) {
+		System.out.println("I'm in getphotobyURL with: " + photoID + " as the photo url");
+		Photo photo = em.createQuery("select p from Photo p WHERE p.id = " + photoID, Photo.class).getSingleResult();
+		return photo;
+	}
+	
+	public Recording getRecordingByID(int recordingID) {
+		Recording recording = em.createQuery("select r from Recording r WHERE r.id = " + recordingID, Recording.class).getSingleResult();
+		return recording;
+	}
 
 	public Artist getArtistByEmail(String email){
 		Artist artist;
@@ -180,6 +191,11 @@ public class BandStandJPADAO implements BandStandDAO {
 		em.persist(recording);
 	}
 	
+	public void deleteRecording(int recordingID) {
+		Recording recording = getRecordingByID(recordingID);
+		em.remove(recording);
+	}
+	
 	public void addPhoto(int artistID, String photoUrl) {
 		Artist artistPhoto = getArtistById(artistID);
 		Photo photo = new Photo();
@@ -187,6 +203,13 @@ public class BandStandJPADAO implements BandStandDAO {
 		photo.setUrl(photoUrl);
 		em.persist(photo);
 		
+	}
+	
+	public void deletePhoto(int artistID, int photoID) {
+		Artist artistPhoto = getArtistById(artistID);
+		System.out.println("I made it into the delete photo method with: " + photoID);
+		Photo photo = getPhotoByID(photoID);
+		em.remove(photo);	
 	}
 	
 	public void addGenre(int artistID, String genreType) {

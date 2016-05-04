@@ -47,6 +47,8 @@ public class Artist {
 		
 	}
 	
+	
+	
 	public void removeRatings(List<Rating> ratingsList){
 		for(Rating rating: ratingsList)
 			if (ratings.contains(rating)){
