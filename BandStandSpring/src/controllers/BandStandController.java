@@ -685,7 +685,7 @@ public class BandStandController {
 	@RequestMapping("initialLoad.do")
 	public ModelAndView initalLoad(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		List<Artist> allArtists = dao.getAllArtists();
+		allArtists = dao.getAllArtists();
 		session.setAttribute("all",  allArtists);
 		//mv.addObject("all", allArtists);
 		mv.setViewName("index1.jsp");
