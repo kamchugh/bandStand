@@ -80,6 +80,8 @@ public interface BandStandDAO {
 	
 	public int updateUserByUser(int userId, String firstName, String lastName, String email, String password,
 			String photoUrl);
+	
+	public Artist getArtistByEmail(String email);
 
 
 }

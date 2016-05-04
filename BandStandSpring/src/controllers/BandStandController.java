@@ -148,11 +148,13 @@ public class BandStandController {
 		} else {
 			int addArtistReturn = dao.addArtist(name, email, password);
 			if (addArtistReturn != 0) {
-				String duplicateError = "This email already exists for anothe user.";
+				String duplicateError = "This email already exists for another user.";
 				mv.addObject(duplicateError);
 				System.out.println(duplicateError);
 
 			}
+			Artist artistToAdd = dao.getArtistByEmail(email);
+			allArtists.add(artistToAdd);
 			mv.setViewName("Admin.jsp");
 
 		}
@@ -161,6 +163,8 @@ public class BandStandController {
 
 	@RequestMapping("deleteArtistById.do")
 	public String deleteArtistById(@RequestParam("artistId") int artistId) {
+		Artist artistToDelete = dao.getArtistById(artistId);
+		allArtists.remove(artistToDelete);
 		dao.deleteArtistById(artistId);
 
 		return "Admin.jsp";
@@ -526,9 +530,9 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		User user = dao.getUserByEmail(email);
 
-		List<Artist> allArtists = dao.getAllArtists();
-
-		mv.addObject("all", allArtists);
+		allArtists = dao.getAllArtists();
+		
+		session.setAttribute("all", allArtists);
 
 		if (user == null) {
 			mv.setViewName("index1.jsp");
@@ -683,9 +687,11 @@ public class BandStandController {
 	@RequestMapping("initialLoad.do")
 	public ModelAndView initalLoad(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		List<Artist> allArtists = dao.getAllArtists();
-		session.setAttribute("all", allArtists);
-		// mv.addObject("all", allArtists);
+
+		allArtists = dao.getAllArtists();
+		session.setAttribute("all",  allArtists);
+		//mv.addObject("all", allArtists);
+
 		mv.setViewName("index1.jsp");
 		return mv;
 	}
