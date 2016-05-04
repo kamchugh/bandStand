@@ -581,30 +581,32 @@ public class BandStandController {
 
 	// bruno's methods
 
+	// @RequestMapping("searchByGenre.do")
+	// public ModelAndView searchByGenre(@RequestParam("genre") String
+	// genreType) {
+	// ModelAndView mv = new ModelAndView();
+	// List<Genre> genres = dao.searchByGenre(genreType);
+	//
+	// List<Artist> matchedArtists = new ArrayList();
+	// for (Genre g : genres) {
+	// matchedArtists.add(g.getArtist());
+	// }
+	//
+	// mv.addObject("all", matchedArtists);
+	// mv.setViewName("ArtistList.jsp");
+	// return mv;
+	// }
+
 	@RequestMapping("searchByName.do")
 	public ModelAndView getArtistById(@RequestParam("name") String name) {
 		ModelAndView mv = new ModelAndView();
 		Artist artist = dao.searchByName(name);
-
-		List<Artist> allArtists = dao.getAllArtists();
-		
-		List<Artist> singleArtist = new ArrayList<>();
-		
-		singleArtist.add(artist);
-		
-		
-		for (Artist artist2 : allArtists) {
-			System.out.println(artist2.getName());
+		System.out.println("This is the artist I have after going to the dao: " + artist);
+		List<Artist> matchedArtists = new ArrayList<>();
+		if (artist.getName().equals(name)) {
+			matchedArtists.add(artist);	
 		}
-		mv.addObject("all", allArtists);
-		for (Genre genre : artist.getGenres()) {
-			System.out.println(genre.getGenretype());
-		}
-		
-		
-		mv.addObject("genres", artist.getGenres());
-		mv.addObject("artist", singleArtist);
-//		mv.addObject("artist", artist);
+		mv.addObject("filterArtist", matchedArtists);
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
@@ -649,7 +651,7 @@ public class BandStandController {
 			matchedArtists.add(g.getArtist());
 		}
 
-		mv.addObject("artist", matchedArtists);
+		mv.addObject("filterArtist", matchedArtists);
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
@@ -671,7 +673,7 @@ public class BandStandController {
 		}
 		// List<Artist> artistRatingMatch = new ArrayList();
 
-		mv.addObject("artist", matchedArtists);
+		mv.addObject("filterArtist", matchedArtists);
 		mv.addObject("user", user);
 		mv.setViewName("ArtistList.jsp");
 		return mv;
@@ -682,8 +684,8 @@ public class BandStandController {
 	public ModelAndView initalLoad(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		List<Artist> allArtists = dao.getAllArtists();
-		session.setAttribute("all",  allArtists);
-		//mv.addObject("all", allArtists);
+		session.setAttribute("all", allArtists);
+		// mv.addObject("all", allArtists);
 		mv.setViewName("index1.jsp");
 		return mv;
 	}
@@ -703,33 +705,36 @@ public class BandStandController {
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
-	
+
 	@RequestMapping("updateUserByUser.do")
-	public ModelAndView updateUserByUser(User user, @RequestParam("email") String email, @RequestParam("userId") int userId,
-			@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
-			@RequestParam("password") String password, @RequestParam("photoUrl") String photoUrl) {
+	public ModelAndView updateUserByUser(User user, @RequestParam("email") String email,
+			@RequestParam("userId") int userId, @RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName, @RequestParam("password") String password,
+			@RequestParam("photoUrl") String photoUrl) {
 
 		System.out.println(email);
 		ModelAndView mv = new ModelAndView();
 
 		System.out.println(email);
-//		if (firstName == "" || lastName == "" || email == "" || password == "") {
-//			String error = "Value required.";
-//			mv.addObject(error);
-//			System.out.println(error);
-//			mv.setViewName("ArtistList.jsp");
-//		} else {
+		// if (firstName == "" || lastName == "" || email == "" || password ==
+		// "") {
+		// String error = "Value required.";
+		// mv.addObject(error);
+		// System.out.println(error);
+		// mv.setViewName("ArtistList.jsp");
+		// } else {
 		dao.updateUserByUser(userId, firstName, lastName, email, password, photoUrl);
-//			if (addUserReturn != 0) {
-//				String duplicateError = "This email already exists for another user.";
-//				mv.addObject(duplicateError);
-//				System.out.println(duplicateError);
-//				mv.setViewName("ArtistList.jsp");
-//			} else {
-				mv.setViewName("ArtistList.jsp");
-//			}
+		// if (addUserReturn != 0) {
+		// String duplicateError = "This email already exists for another
+		// user.";
+		// mv.addObject(duplicateError);
+		// System.out.println(duplicateError);
+		// mv.setViewName("ArtistList.jsp");
+		// } else {
+		mv.setViewName("ArtistList.jsp");
+		// }
 
-//		}
+		// }
 		return mv;
 	}
 
