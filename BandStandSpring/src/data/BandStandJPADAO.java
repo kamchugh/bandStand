@@ -269,14 +269,14 @@ public class BandStandJPADAO implements BandStandDAO {
 
 	public int updateUser(int userId, String firstName, String lastName, String email, String password,
 			String photoUrl) {
-
+		User user = em.find(User.class, userId);
 		List<User> users = getAllUsers();
-		for (User user : users) {
-			if (user.getEmail().equals(email)) {
+		for (User userInside : users) {
+			if (userInside.getEmail().equals(email) && !user.getEmail().equals(email)) {
 				return 1;
 			}
 		}
-		User user = em.find(User.class, userId);
+		
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
