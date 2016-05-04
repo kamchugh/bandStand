@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -54,17 +55,10 @@ public class BandStandController {
 	}
 
 	@RequestMapping("getAllArtists.do")
-	public ModelAndView getAllArtist() {
+	public ModelAndView getAllArtist(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		List<Artist> allArtists = dao.getAllArtists();
-		mv.addObject("allArtists", allArtists);
-
-		// for (Artist artist : allArtists) {
-		// for (Photo photos : artist.getPhotos()) {
-		// System.out.println(photos.getUrl());
-		// }
-		// }
-
+		List<Artist> allArtistsCopy = allArtists;
+		mv.addObject("allArtists", allArtistsCopy);
 		mv.setViewName("Admin.jsp");
 		return mv;
 	}
@@ -162,11 +156,12 @@ public class BandStandController {
 	}
 
 	@RequestMapping("deleteArtistById.do")
-	public String deleteArtistById(@RequestParam("artistId") int artistId) {
-		Artist artistToDelete = dao.getArtistById(artistId);
-		allArtists.remove(artistToDelete);
-		dao.deleteArtistById(artistId);
+	public String deleteArtistById(@RequestParam("artistId") int artistId, HttpSession session) {
 
+		session.removeAttribute("all");
+		dao.deleteArtistById(artistId);
+		allArtists = dao.getAllArtists();
+		session.setAttribute("all", allArtists);
 		return "Admin.jsp";
 	}
 
@@ -175,9 +170,6 @@ public class BandStandController {
 			@RequestParam("userLastName") String lastName, @RequestParam("userEmail") String email,
 			@RequestParam("userPassword") String password, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-
-		allArtists = dao.getAllArtists();
-		session.setAttribute("all", allArtists);
 		if (firstName == "" || lastName == "" || email == "" || password == "") {
 			String error = "Value required.";
 			mv.addObject(error);
@@ -530,10 +522,6 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		User user = dao.getUserByEmail(email);
 
-		allArtists = dao.getAllArtists();
-		
-		session.setAttribute("all", allArtists);
-
 		if (user == null) {
 			mv.setViewName("index1.jsp");
 			return mv;
@@ -582,24 +570,6 @@ public class BandStandController {
 		}
 		return mv;
 	}
-
-	// bruno's methods
-
-	// @RequestMapping("searchByGenre.do")
-	// public ModelAndView searchByGenre(@RequestParam("genre") String
-	// genreType) {
-	// ModelAndView mv = new ModelAndView();
-	// List<Genre> genres = dao.searchByGenre(genreType);
-	//
-	// List<Artist> matchedArtists = new ArrayList();
-	// for (Genre g : genres) {
-	// matchedArtists.add(g.getArtist());
-	// }
-	//
-	// mv.addObject("all", matchedArtists);
-	// mv.setViewName("ArtistList.jsp");
-	// return mv;
-	// }
 
 	@RequestMapping("searchByName.do")
 	public ModelAndView getArtistById(@RequestParam("name") String name) {
@@ -690,23 +660,15 @@ public class BandStandController {
 
 		allArtists = dao.getAllArtists();
 		session.setAttribute("all",  allArtists);
-		//mv.addObject("all", allArtists);
 
 		mv.setViewName("index1.jsp");
 		return mv;
 	}
 
 	@RequestMapping("getAllArtistsUser.do")
-	public ModelAndView getAllArtists() {
+	public ModelAndView getAllArtists(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		List<Artist> allArtists = dao.getAllArtists();
-		mv.addObject("artist", allArtists);
-
-		// for (Artist artist : allArtists) {
-		// for (Photo photos : artist.getPhotos()) {
-		// System.out.println(photos.getUrl());
-		// }
-		// }
+		allArtists = dao.getAllArtists();
 
 		mv.setViewName("ArtistList.jsp");
 		return mv;
