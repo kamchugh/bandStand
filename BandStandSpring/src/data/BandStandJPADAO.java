@@ -102,6 +102,7 @@ public class BandStandJPADAO implements BandStandDAO {
 			user = em.createQuery(search, User.class).getSingleResult();
 		} catch (Exception e) {
 			user = null;
+			
 		}
 		return user;
 	}

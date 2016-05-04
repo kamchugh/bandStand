@@ -531,10 +531,11 @@ public class BandStandController {
 		User user = dao.getUserByEmail(email);
 
 		allArtists = dao.getAllArtists();
-		
+
 		session.setAttribute("all", allArtists);
 
 		if (user == null) {
+			mv.addObject("wrongEmail", email);
 			mv.setViewName("index1.jsp");
 			return mv;
 		}
@@ -546,7 +547,8 @@ public class BandStandController {
 			return mv;
 		} else {
 			// mv.addObject("user", user);
-			mv.setViewName("index.jsp");
+			mv.addObject("wrongPassword", email);
+			mv.setViewName("index1.jsp");
 			return mv;
 		}
 
@@ -608,7 +610,7 @@ public class BandStandController {
 		System.out.println("This is the artist I have after going to the dao: " + artist);
 		List<Artist> matchedArtists = new ArrayList<>();
 		if (artist.getName().equals(name)) {
-			matchedArtists.add(artist);	
+			matchedArtists.add(artist);
 		}
 		mv.addObject("filterArtist", matchedArtists);
 		mv.setViewName("ArtistList.jsp");
@@ -661,27 +663,34 @@ public class BandStandController {
 	}
 
 	@RequestMapping("searchByRating.do")
-	public ModelAndView searchByRating(@RequestParam("rating") int passedRating, @RequestParam("userId") int userID) {
+	public ModelAndView searchByRating(@RequestParam("rating") String passedRating,
+			@RequestParam("userId") int userID) {
 		ModelAndView mv = new ModelAndView();
-		User user = dao.getUserById(userID);
-		List<Artist> artists = new ArrayList<>();
-		List<Artist> matchedArtists = new ArrayList<>();
-		artists = dao.getAllArtists();
-		for (Artist artist : artists) {
-			int averageRating = dao.getRatingsForArtist(artist);
-			System.out.println("controller average rating; " + averageRating);
-			if (averageRating == passedRating) {
-				matchedArtists.add(artist);
+		if (passedRating.equals("Select Rating")) {
+			mv.addObject("noRating", passedRating);
+		} else {
+			System.out.println(passedRating);
+			User user = dao.getUserById(userID);
+			List<Artist> artists = new ArrayList<>();
+			List<Artist> matchedArtists = new ArrayList<>();
+			artists = dao.getAllArtists();
+			for (Artist artist : artists) {
+				int averageRating = dao.getRatingsForArtist(artist);
+				System.out.println("controller average rating; " + averageRating);
+				if (averageRating == Integer.parseInt(passedRating)) {
+					matchedArtists.add(artist);
+				}
 
 			}
-		}
-		// List<Artist> artistRatingMatch = new ArrayList();
+			List<Artist> artistRatingMatch = new ArrayList();
 
-		mv.addObject("filterArtist", matchedArtists);
-		mv.addObject("user", user);
+			mv.addObject("filterArtist", matchedArtists);
+			mv.addObject("user", user);
+			mv.setViewName("ArtistList.jsp");
+
+		}
 		mv.setViewName("ArtistList.jsp");
 		return mv;
-
 	}
 
 	@RequestMapping("initialLoad.do")
@@ -689,8 +698,8 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 
 		allArtists = dao.getAllArtists();
-		session.setAttribute("all",  allArtists);
-		//mv.addObject("all", allArtists);
+		session.setAttribute("all", allArtists);
+		// mv.addObject("all", allArtists);
 
 		mv.setViewName("index1.jsp");
 		return mv;
