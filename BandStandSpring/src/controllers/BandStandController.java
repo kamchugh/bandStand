@@ -24,8 +24,8 @@ import entities.Rating;
 import entities.User;
 
 @Controller
-
 public class BandStandController {
+	private List<Artist> allArtists;
 
 	@Autowired
 	private BandStandDAO dao;
@@ -172,11 +172,8 @@ public class BandStandController {
 			@RequestParam("userPassword") String password, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 
-		List<Artist> allArtists = dao.getAllArtists();
-		for (Artist artist2 : allArtists) {
-			System.out.println(artist2.getName());
-		}
-		mv.addObject("all", allArtists);
+		allArtists = dao.getAllArtists();
+		session.setAttribute("all", allArtists);
 		if (firstName == "" || lastName == "" || email == "" || password == "") {
 			String error = "Value required.";
 			mv.addObject(error);
@@ -184,12 +181,10 @@ public class BandStandController {
 			mv.setViewName("index1.jsp");
 		} else {
 			int addUserReturn = dao.addUser(firstName, lastName, email, password);
-
 			if (addUserReturn != 0) {
-				String duplicateError = "This email already exists for anothe user.";
+				String duplicateError = "This email already exists for another user.";
 				mv.addObject(duplicateError);
 				System.out.println(duplicateError);
-
 			}
 			User user = dao.getUserByEmail(email);
 			session.setAttribute("user", user);
