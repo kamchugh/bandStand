@@ -606,13 +606,18 @@ public class BandStandController {
 	@RequestMapping("searchByName.do")
 	public ModelAndView getArtistById(@RequestParam("name") String name) {
 		ModelAndView mv = new ModelAndView();
-		Artist artist = dao.searchByName(name);
-		System.out.println("This is the artist I have after going to the dao: " + artist);
-		List<Artist> matchedArtists = new ArrayList<>();
-		if (artist.getName().equals(name)) {
-			matchedArtists.add(artist);
+		if (name.equals("Select Artist")) {
+			mv.addObject("noName", name);
+
+		} else {
+			Artist artist = dao.searchByName(name);
+			System.out.println("This is the artist I have after going to the dao: " + artist);
+			List<Artist> matchedArtists = new ArrayList<>();
+			if (artist.getName().equals(name)) {
+				matchedArtists.add(artist);
+			}
+			mv.addObject("filterArtist", matchedArtists);
 		}
-		mv.addObject("filterArtist", matchedArtists);
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
@@ -650,14 +655,17 @@ public class BandStandController {
 	@RequestMapping("searchByGenre.do")
 	public ModelAndView searchByGenre(@RequestParam("genre") String genreType) {
 		ModelAndView mv = new ModelAndView();
-		List<Genre> genres = dao.searchByGenre(genreType);
+		if (genreType.equals("Select Genre")) {
+			mv.addObject("noGenre", genreType);
+		} else {
+			List<Genre> genres = dao.searchByGenre(genreType);
 
-		List<Artist> matchedArtists = new ArrayList();
-		for (Genre g : genres) {
-			matchedArtists.add(g.getArtist());
+			List<Artist> matchedArtists = new ArrayList();
+			for (Genre g : genres) {
+				matchedArtists.add(g.getArtist());
+			}
+			mv.addObject("filterArtist", matchedArtists);
 		}
-
-		mv.addObject("filterArtist", matchedArtists);
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
@@ -669,7 +677,6 @@ public class BandStandController {
 		if (passedRating.equals("Select Rating")) {
 			mv.addObject("noRating", passedRating);
 		} else {
-			System.out.println(passedRating);
 			User user = dao.getUserById(userID);
 			List<Artist> artists = new ArrayList<>();
 			List<Artist> matchedArtists = new ArrayList<>();
@@ -682,15 +689,15 @@ public class BandStandController {
 				}
 
 			}
-			List<Artist> artistRatingMatch = new ArrayList();
+
+			// List<Artist> artistRatingMatch = new ArrayList();
 
 			mv.addObject("filterArtist", matchedArtists);
 			mv.addObject("user", user);
-			mv.setViewName("ArtistList.jsp");
-
 		}
 		mv.setViewName("ArtistList.jsp");
 		return mv;
+
 	}
 
 	@RequestMapping("initialLoad.do")

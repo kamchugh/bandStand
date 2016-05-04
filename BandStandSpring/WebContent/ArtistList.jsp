@@ -59,6 +59,24 @@
 
 	<div class="container">
 		<br> <br> <br> <br>
+		<c:if test="${! empty(noRating)}">
+					<%-- ${booking.id} --%>
+					<h3 class="orangeText">
+						You didn't select a rating!
+					</h3>
+				</c:if>
+				<c:if test="${! empty(noGenre)}">
+					<%-- ${booking.id} --%>
+					<h3 class="orangeText">
+						You didn't select a genre!
+					</h3>
+				</c:if>
+				<c:if test="${! empty(noName)}">
+					<%-- ${booking.id} --%>
+					<h3 class="orangeText">
+						You didn't select an artist!
+					</h3>
+				</c:if>
 
 		<%-- <h1>User id: ${user.id}</h1> --%>
 		<h1 style="padding-bottom: 20px">
