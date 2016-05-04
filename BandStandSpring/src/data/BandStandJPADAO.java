@@ -118,14 +118,20 @@ public class BandStandJPADAO implements BandStandDAO {
 	public Artist getArtistById(int artistID) {
 		Artist artist = em.createQuery("select a from Artist a WHERE a.id = " + artistID, Artist.class)
 				.getSingleResult();
-		// Artist artist = em.find(Artist.class, artistID);
-		for (Genre g : artist.getGenres()) {
-			System.out.println(g.getGenretype());
-		}
-
 		return artist;
 	}
 
+	public Artist getArtistByEmail(String email){
+		Artist artist;
+		try{
+			 artist = em.createQuery("select a from Artist a where a.email = " + "'"+email+"'", Artist.class).getSingleResult();
+		}catch(Exception e){
+			 artist = null;
+			 System.out.println(e);
+			System.out.println("Error in getting artist by email");
+		}
+		return artist;
+	}
 	public User getUserById(int userID) {
 		User user = em.find(User.class, userID);
 		return user;
