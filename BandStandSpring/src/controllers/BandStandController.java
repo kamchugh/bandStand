@@ -1,5 +1,11 @@
 package controllers;
 
+
+
+
+/*This is a Spring MVC(Model View Controller) controller(Controller).  This functions as a bridge between various
+ * .jsp views (View) and the Data Access Objects (Model). 
+ */
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,12 +57,14 @@ public class BandStandController {
 		return mv;
 	}
 
+	//Used by the admin (accessLevel = 2) to make a user an admin (change their accessLevel from 1 (default) to 2)
 	@RequestMapping("setUserAccessToAdmin.do")
 	public String setUserAccessToAdmin(@RequestParam("userID") int id) {
 		dao.setUserAccessLevelToAdmin(id);
 		return "Admin.jsp";
 	}
 
+	//Used by the admin (accessLevel = 2) to make an admin a user(change their accessLevel from 2 to 1)
 	@RequestMapping("setUserAccessToUser.do")
 	public String setUserAccessToUser(@RequestParam("userID") int id) {
 		dao.setUserAccessLevelToUser(id);
@@ -64,7 +72,8 @@ public class BandStandController {
 	}
 
 	// get a list of all artists in the database
-
+	//This differs from getAllArtistsForUser.do by the viewName
+	//This is intended to be used by an admin in the admin portal
 	@RequestMapping("getAllArtists.do")
 	public ModelAndView getAllArtist(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -74,15 +83,17 @@ public class BandStandController {
 		return mv;
 	}
 
+	/*
+	 * get a list of all artists in the database
+		This differs from getAllArtists.do by the viewName
+	 */
 	@RequestMapping("getAllArtistsforUser.do")
 	public ModelAndView getAllArtistsforUser(@RequestParam("userID") int userID) {
 		System.out.println("I get into the get all artist for user method");
 		User user = dao.getUserById(userID);
-		List<Artist> allArtistsforUser = new ArrayList();
+		List<Artist> allArtistsforUser = new ArrayList<>();
 		allArtistsforUser.addAll(dao.getAllArtists());
-		for (Artist artist : allArtistsforUser) {
-			System.out.println("Artists I have in the controller" + artist);
-		}
+
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("allArtistsforUser", allArtistsforUser);
 		mv.addObject("user", user);
@@ -90,6 +101,7 @@ public class BandStandController {
 		return mv;
 	}
 
+	//Method for passing Artist information to editArtist.jsp
 	@RequestMapping("loadArtistEditPage.do")
 	public ModelAndView loadArtistEditPage(@RequestParam("artistId") int artistID) {
 		Artist artist = dao.getArtistById(artistID);
