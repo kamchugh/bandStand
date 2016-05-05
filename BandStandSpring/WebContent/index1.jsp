@@ -116,7 +116,7 @@ body {
                                 <div class="sminputs">
                                     <div class="input full">
                                         <label class="string optional" for="user-pw">Password *</label>
-                                        <input class="string optional" maxlength="255" id="user-pw" name="password" type="password" size="50" />
+                                        <input class="string optional" maxlength="255" id="user-pw" name="userPassword" type="password" size="50" />
                                         <span class="hide-password">Show</span>
                                     </div>
                                   <!--   <div class="input string optional">
