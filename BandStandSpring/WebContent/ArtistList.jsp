@@ -60,23 +60,17 @@
 	<div class="container">
 		<br> <br> <br> <br>
 		<c:if test="${! empty(noRating)}">
-					<%-- ${booking.id} --%>
-					<h3 class="orangeText">
-						You didn't select a rating!
-					</h3>
-				</c:if>
-				<c:if test="${! empty(noGenre)}">
-					<%-- ${booking.id} --%>
-					<h3 class="orangeText">
-						You didn't select a genre!
-					</h3>
-				</c:if>
-				<c:if test="${! empty(noName)}">
-					<%-- ${booking.id} --%>
-					<h3 class="orangeText">
-						You didn't select an artist!
-					</h3>
-				</c:if>
+			<%-- ${booking.id} --%>
+			<h3 class="orangeText">You didn't select a rating!</h3>
+		</c:if>
+		<c:if test="${! empty(noGenre)}">
+			<%-- ${booking.id} --%>
+			<h3 class="orangeText">You didn't select a genre!</h3>
+		</c:if>
+		<c:if test="${! empty(noName)}">
+			<%-- ${booking.id} --%>
+			<h3 class="orangeText">You didn't select an artist!</h3>
+		</c:if>
 
 		<%-- <h1>User id: ${user.id}</h1> --%>
 		<h1 style="padding-bottom: 20px">
@@ -188,8 +182,8 @@
 
 
 		</div>
-		
-		
+
+
 
 
 
@@ -212,12 +206,13 @@
 									<img src="${singleArtist.photos[0].url}" height=200 width=200
 									class="img-rounded" />
 							</a></td>
-							<td colspan="3">Artist: ${singleArtist.name} <br> <br>
-								${singleArtist.email} <br> <br>
+							<td colspan="3">
+								<h4 class="orangeText">${singleArtist.name}</h4> <br> <br>
+
 								${singleArtist.description } <br> <br>
 							</td>
-							<td></td>
-							<td colspan="3"></td>
+
+
 						</tr>
 					</tbody>
 				</table>
@@ -235,12 +230,18 @@
 								<img src="${artist2.photos[0].url}" height=200 width=200
 								class="img-rounded" />
 						</a></td>
-						<td colspan="3">Artist: ${artist2.name} <br> <br>
-							${artist2.email} <br> <br> ${artist2.description } <br>
-							<br>
+						<td colspan="3">
+							<h4 class="orangeText">${artist2.name}</h4> 
+							<div class = "ellipsis">
+								${artist2.description } <br> 
+								<a
+							href="getArtistById.do?artistID=${artist2.id}&userID=${user.id}"> <h4> Read more </h4> </a>
+								
+								
+							</div>
 						</td>
-						<td></td>
-						<td colspan="3"></td>
+
+
 					</tr>
 				</tbody>
 			</table>

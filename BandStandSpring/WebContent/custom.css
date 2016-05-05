@@ -15,6 +15,18 @@
 	margin-bottom: 20px;
 }
 
+.ellipsis {
+	height: 150px;
+	overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2; // max nb lines to show
+-webkit-box-orient: vertical;
+   
+
+	
+}
+
 .blackBorder {
 	padding-top: 15px;
 	padding-bottom: 15px;
