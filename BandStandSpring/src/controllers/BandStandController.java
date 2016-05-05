@@ -737,9 +737,10 @@ public class BandStandController {
 
 	@RequestMapping("deletePhoto.do")
 	public ModelAndView deletePhoto(@RequestParam("artistID") int artistID, @RequestParam("photo") int photoID) {
-		Artist artist = dao.getArtistById(artistID);
+		
 		dao.deletePhoto(artistID, photoID);
 		ModelAndView mv = new ModelAndView();
+		Artist artist = dao.getArtistById(artistID);
 		mv.addObject("removedPhoto", photoID);
 		mv.addObject("artist", artist);
 		mv.setViewName("editArtist.jsp");
@@ -749,8 +750,8 @@ public class BandStandController {
 	@RequestMapping("deleteRecording.do")
 	public ModelAndView deleteRating(@RequestParam("artistID") int artistID,
 			@RequestParam("recording") int recordingID) {
-		Artist artist = dao.getArtistById(artistID);
 		dao.deleteRecording(recordingID);
+		Artist artist = dao.getArtistById(artistID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("removedRecording", recordingID);
 		mv.addObject("artist", artist);
@@ -759,9 +760,9 @@ public class BandStandController {
 	}
 
 	@RequestMapping("deleteGenre.do")
-	public ModelAndView deleteGenre(@RequestParam("artistID") int artistID, @RequestParam("genre") int genreID) {
-		Artist artist = dao.getArtistById(artistID);
+	public ModelAndView deleteGenre(@RequestParam("artistID") int artistID, @RequestParam("genre") int genreID) {	
 		dao.deleteGenre(genreID);
+		Artist artist = dao.getArtistById(artistID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("removedGenre", genreID);
 		mv.addObject("artist", artist);
