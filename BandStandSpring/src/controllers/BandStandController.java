@@ -340,6 +340,18 @@ public class BandStandController {
 		List<Comment> comments = dao.getAllComments(artistID);
 		mv.addObject("artistComments", comments);
 		mv.setViewName("ArtistPage.jsp");
+		List<Rating> daoRatings = dao.getAllRatings(artist.getId());
+		int daoRatingsSum = 0;
+		for (Rating rating2 : daoRatings) {
+			daoRatingsSum += rating2.getNumber();
+		}
+		double ratingAverage = 0;
+		if (daoRatings.size()>0){
+			ratingAverage = ((double) daoRatingsSum / daoRatings.size());
+		}
+		daoRatings = dao.getAllRatings(artistID);
+		mv.addObject("ratings", ratingAverage);
+		
 		return mv;
 	}
 
@@ -393,11 +405,41 @@ public class BandStandController {
 		System.out.println("I get into the add rating method");
 		dao.addRating(artistID, rating, userID);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("rating", rating);
+//		List<Rating> ratings = new ArrayList<>();
+		List<Rating> daoRatings = dao.getAllRatings(artist.getId());
+		int daoRatingsSum = 0;
+		for (Rating rating2 : daoRatings) {
+			daoRatingsSum += rating2.getNumber();
+		}
+		double ratingAverage = 0;
+		if (daoRatings.size()>0){
+			ratingAverage = ((double) daoRatingsSum / daoRatings.size());
+		}
+		daoRatings = dao.getAllRatings(artistID);
+		mv.addObject("ratings", ratingAverage);
 		mv.addObject("user", user);
 		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
+		
+		
+		
+		
+		
+		
+//		System.out.println("I get below the getAllComments method in the controller");
+//		ratings.addAll(daoRatings);
+//		int addedRatings = 0;
+//		for (Rating rating : daoRatings) {
+//			addedRatings = addedRatings + rating.getNumber();
+//			System.out.println(addedRatings);
+//		}
+//		
+//		System.out.println("I am the added ratings" + addedRatings);
+//		System.out.println("I am the size of the list" + daoRatings.size());
+//		System.out.println("I am the rating average" + ratingAverage);
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("ratings", ratingAverage);
 	}
 
 	// @RequestMapping("addBooking.do")
@@ -540,7 +582,7 @@ public class BandStandController {
 		System.out.println("I am the rating average" + ratingAverage);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("ratings", ratingAverage);
-		mv.addObject("user", user);
+		mv.addObject("user", user); 
 		mv.addObject("artist", artist);
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
@@ -565,12 +607,18 @@ public class BandStandController {
 			addedRatings = addedRatings + rating.getNumber();
 			System.out.println(addedRatings);
 		}
-		double ratingAverage = ((double) addedRatings / daoRatings.size());
+		
+		double ratingAverage = 0;
+		if (daoRatings.size()>0){
+			ratingAverage = ((double) addedRatings / daoRatings.size());
+		}
+		
 		System.out.println("I am the added ratings" + addedRatings);
 		System.out.println("I am the size of the list" + daoRatings.size());
 		System.out.println("I am the rating average" + ratingAverage);
 		mv.addObject("ratings", ratingAverage);
-
+		List<Comment> comments = dao.getAllComments(artistID);
+		mv.addObject("artistComments", comments);
 		mv.addObject("user", user);
 		mv.addObject("artist", artist);
 
@@ -689,9 +737,10 @@ public class BandStandController {
 
 	@RequestMapping("deletePhoto.do")
 	public ModelAndView deletePhoto(@RequestParam("artistID") int artistID, @RequestParam("photo") int photoID) {
-		Artist artist = dao.getArtistById(artistID);
+		
 		dao.deletePhoto(artistID, photoID);
 		ModelAndView mv = new ModelAndView();
+		Artist artist = dao.getArtistById(artistID);
 		mv.addObject("removedPhoto", photoID);
 		mv.addObject("artist", artist);
 		mv.setViewName("editArtist.jsp");
@@ -701,8 +750,8 @@ public class BandStandController {
 	@RequestMapping("deleteRecording.do")
 	public ModelAndView deleteRating(@RequestParam("artistID") int artistID,
 			@RequestParam("recording") int recordingID) {
-		Artist artist = dao.getArtistById(artistID);
 		dao.deleteRecording(recordingID);
+		Artist artist = dao.getArtistById(artistID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("removedRecording", recordingID);
 		mv.addObject("artist", artist);
@@ -711,9 +760,9 @@ public class BandStandController {
 	}
 
 	@RequestMapping("deleteGenre.do")
-	public ModelAndView deleteGenre(@RequestParam("artistID") int artistID, @RequestParam("genre") int genreID) {
-		Artist artist = dao.getArtistById(artistID);
+	public ModelAndView deleteGenre(@RequestParam("artistID") int artistID, @RequestParam("genre") int genreID) {	
 		dao.deleteGenre(genreID);
+		Artist artist = dao.getArtistById(artistID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("removedGenre", genreID);
 		mv.addObject("artist", artist);
