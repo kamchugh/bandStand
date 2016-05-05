@@ -210,9 +210,15 @@ body {
 
 							<p class="lead">
 							<div class="elements">
-								<c:forEach var="comment" items="${artist.comments}">
+							<%-- 	<c:forEach var="comment" items="${artist.comments}">
 
 									<div class="bookingsBorder">${comment.user.firstName}
+										says ${comment.body}</div>
+
+								</c:forEach> --%>
+									<c:forEach var="comment" items="${artistComments}">
+
+									<div class="bookingsBorder">
 										says ${comment.body}</div>
 
 								</c:forEach>

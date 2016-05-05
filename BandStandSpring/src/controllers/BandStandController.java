@@ -26,11 +26,17 @@ import entities.User;
 
 @Controller
 public class BandStandController {
+	//A lost of all artists that gets stored in the session initially during the initalLoad().  
+	//Stored in the session as "all"
 	private List<Artist> allArtists;
 
+	//Dependency injection
 	@Autowired
 	private BandStandDAO dao;
 
+	//Gets the user access level (1 = regular user, 2 = admin, 3 = artist)
+	//Access level is set to 1 by default (for users) and 3 (for artists).  The access level
+	//can be changed to 2 in the admin portal (Admin.jsp/setAccessLevelAdmin.do);
 	@RequestMapping("getUserAccess.do")
 	public ModelAndView getUserAccessLevel(@RequestParam("userID") int id) {
 		ModelAndView mv = new ModelAndView();
@@ -170,6 +176,9 @@ public class BandStandController {
 			@RequestParam("userLastName") String lastName, @RequestParam("userEmail") String email,
 			@RequestParam("userPassword") String password, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		allArtists = dao.getAllArtists();
+
+		session.setAttribute("all", allArtists);
 		if (firstName == "" || lastName == "" || email == "" || password == "") {
 			String error = "Value required.";
 			mv.addObject(error);
@@ -298,14 +307,13 @@ public class BandStandController {
 			@RequestParam("userID") int userID) {
 		Artist artist = dao.getArtistById(artistID);
 		User user = dao.getUserById(userID);
-
-		System.out.println("I get into the add comment method");
-		System.out.println("This is the userID I have: " + userID);
 		dao.addComment(artistID, comment, userID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("comment", comment);
 		// mv.addObject("user", user);
 		mv.addObject("artist", artist);
+		List<Comment> comments = dao.getAllComments(artistID);
+		mv.addObject("artistComments", comments);
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
@@ -348,17 +356,7 @@ public class BandStandController {
 		return mv;
 	}
 	
-	@RequestMapping("deletePhoto.do") 
-		public ModelAndView deletePhoto(@RequestParam("artistID") int artistID,
-				@RequestParam("photo") int photoID) {
-			Artist artist = dao.getArtistById(artistID);
-			dao.deletePhoto(artistID, photoID);
-			ModelAndView mv = new ModelAndView();
-			mv.addObject("removedPhoto", photoID);
-			mv.addObject("artist", artist);
-			mv.setViewName("editArtist.jsp");
-			return mv;		
-	}
+	
 
 	@RequestMapping("addRating.do")
 	public ModelAndView addRating(@RequestParam("artistID") int artistID, @RequestParam("rating") int rating,
@@ -374,30 +372,6 @@ public class BandStandController {
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
-	
-	@RequestMapping("deleteRecording.do") 
-	public ModelAndView deleteRating(@RequestParam("artistID") int artistID, @RequestParam("recording") int recordingID) {
-		Artist artist = dao.getArtistById(artistID);
-		dao.deleteRecording(recordingID);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("removedRecording", recordingID);
-		mv.addObject("artist", artist);
-		mv.setViewName("editArtist.jsp");
-		return mv;		
-}
-	
-	@RequestMapping("deleteGenre.do") 
-	public ModelAndView deleteGenre(@RequestParam("artistID") int artistID, @RequestParam("genre") int genreID) {
-		Artist artist = dao.getArtistById(artistID);
-		dao.deleteGenre(genreID);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("removedGenre", genreID);
-		mv.addObject("artist", artist);
-		mv.setViewName("editArtist.jsp");
-		return mv;		
-}
-	
-	
 
 	// @RequestMapping("addBooking.do")
 	// public ModelAndView addDate(@RequestParam("artistID") int artistID,
@@ -595,7 +569,9 @@ public class BandStandController {
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = dao.getUserByEmail(email);
+		allArtists = dao.getAllArtists();
 
+		session.setAttribute("all", allArtists);
 		if (user == null) {
 			mv.addObject("wrongEmail", email);
 			mv.setViewName("index1.jsp");
