@@ -66,14 +66,6 @@ body {
 				<a class="navbar-brand" href="#">BandStand</a>
 			</div>
 
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="#">About</a></li>
-					<li><a href="#">Services</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-			</div>
 		</div>
 	</nav>
 
@@ -186,12 +178,8 @@ body {
                                     </div> -->
 								</div>
 								<div class="simform__actions">
-									<input class="submit" name="commit" type="submit"
-										value="Create A Band Account" /> <span
-										class="simform__actions-sidetext">By creating an
-										account you agree to our <a class="special" href="#"
-										target="_blank" role="link">Terms & Privacy</a>
-									</span>
+									<input class="sumbit orange" name="commit" type="submit"
+										value="Create a Band Account" />
 								</div>
 
 							</form>
