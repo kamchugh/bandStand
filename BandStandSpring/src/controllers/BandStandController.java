@@ -199,11 +199,13 @@ public class BandStandController {
 				String duplicateError = "This email already exists for another user.";
 				mv.addObject(duplicateError);
 				System.out.println(duplicateError);
-			}
-			User user = dao.getUserByEmail(email);
-			session.setAttribute("user", user);
-			mv.setViewName("ArtistList.jsp");
+				mv.setViewName("index1.jsp");
 
+			} else {
+				User user = dao.getUserByEmail(email);
+				session.setAttribute("user", user);
+				mv.setViewName("ArtistList.jsp");
+			}
 		}
 		return mv;
 	}
