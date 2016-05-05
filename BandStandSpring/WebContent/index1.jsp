@@ -158,16 +158,11 @@ body {
 						<div class="logmod__form">
 							<form accept-charset="utf-8" action="addUserRegistration.do"
 								class="simform">
-								<div class="sminputs">
-									<div class="input string optional">
-										<label class="string optional" for="user-pw">First
-											Name *</label> <input class="string optional" maxlength="255"
-											name="userFirstName" id="user-pw" type="text" size="50" />
-									</div>
-									<div class="input string optional">
-										<label class="string optional" for="user-pw-repeat">Last
-											Name *</label> <input class="string optional" maxlength="255"
-											name="userLastName" id="user-pw-repeat" type="text" size="50" />
+							<div class="sminputs">
+									<div class="input full">
+										<label class="string optional" for="user-name">Band Name*</label>
+										<input class="string optional" maxlength="255"
+											name="userEmail" id="user-email" type="email" size="50" />
 									</div>
 								</div>
 								<div class="sminputs">
@@ -177,6 +172,7 @@ body {
 											name="userEmail" id="user-email" type="email" size="50" />
 									</div>
 								</div>
+								
 								<div class="sminputs">
 									<div class="input full">
 										<label class="string optional" for="user-pw">Password
