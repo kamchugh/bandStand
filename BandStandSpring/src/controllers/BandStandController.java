@@ -153,8 +153,33 @@ public class BandStandController {
 		return mv;
 	}
 
-	// add an artist
-
+	//Adds an artist from the registration page
+	//Difference from addArtist.do by the views returned.
+	@RequestMapping("addArtistRegistration.do")
+	public ModelAndView addArtistRegistration(@RequestParam("artistName") String name, @RequestParam("artistEmail") String email,
+			@RequestParam("artistPassword") String password) {
+		ModelAndView mv = new ModelAndView();
+		if (name == "" || email == "" || password == "") {
+			String error = "Value required.";
+			mv.addObject(error);
+			System.out.println(error);
+			mv.setViewName("index1.jsp");
+			return mv;
+		} else {
+			int addArtistReturn = dao.addArtist(name, email, password);
+			if (addArtistReturn != 0) {
+				String duplicateError = "This email already exists for another user.";
+				mv.addObject(duplicateError);
+				mv.setViewName("index1.jsp");
+				return mv;
+			}
+			Artist artistToAdd = dao.getArtistByEmail(email);
+			allArtists.add(artistToAdd);
+			mv.setViewName("editArtist.jsp");
+			mv.addObject("artist", artistToAdd);
+			return mv;
+		}	
+	}
 	@RequestMapping("addArtist.do")
 	public ModelAndView addArtist(@RequestParam("artistName") String name, @RequestParam("artistEmail") String email,
 			@RequestParam("artistPassword") String password) {

@@ -156,20 +156,20 @@ body {
 							</span>
 						</div>
 						<div class="logmod__form">
-							<form accept-charset="utf-8" action="addUserRegistration.do"
+							<form accept-charset="utf-8" action="addArtistRegistration.do"
 								class="simform">
 							<div class="sminputs">
 									<div class="input full">
 										<label class="string optional" for="user-name">Band Name*</label>
 										<input class="string optional" maxlength="255"
-											name="userEmail" id="user-email" type="email" size="50" />
+											name="artistName" id="user-email" type="email" size="50" />
 									</div>
 								</div>
 								<div class="sminputs">
 									<div class="input full">
 										<label class="string optional" for="user-name">Email*</label>
 										<input class="string optional" maxlength="255"
-											name="userEmail" id="user-email" type="email" size="50" />
+											name="artistEmail" id="user-email" type="email" size="50" />
 									</div>
 								</div>
 								
@@ -177,7 +177,7 @@ body {
 									<div class="input full">
 										<label class="string optional" for="user-pw">Password
 											*</label> <input class="string optional" maxlength="255" id="user-pw"
-											name="userPassword" type="password" size="50" /> <span
+											name="artistPassword" type="password" size="50" /> <span
 											class="hide-password">Show</span>
 									</div>
 									<!--   <div class="input string optional">
@@ -186,7 +186,7 @@ body {
                                     </div> -->
 								</div>
 								<div class="simform__actions">
-									<input class="sumbit" name="commit" type="submit"
+									<input class="submit" name="commit" type="submit"
 										value="Create A Band Account" /> <span
 										class="simform__actions-sidetext">By creating an
 										account you agree to our <a class="special" href="#"
