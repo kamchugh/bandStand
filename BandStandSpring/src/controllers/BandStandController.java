@@ -340,6 +340,18 @@ public class BandStandController {
 		List<Comment> comments = dao.getAllComments(artistID);
 		mv.addObject("artistComments", comments);
 		mv.setViewName("ArtistPage.jsp");
+		List<Rating> daoRatings = dao.getAllRatings(artist.getId());
+		int daoRatingsSum = 0;
+		for (Rating rating2 : daoRatings) {
+			daoRatingsSum += rating2.getNumber();
+		}
+		double ratingAverage = 0;
+		if (daoRatings.size()>0){
+			ratingAverage = ((double) daoRatingsSum / daoRatings.size());
+		}
+		daoRatings = dao.getAllRatings(artistID);
+		mv.addObject("ratings", ratingAverage);
+		
 		return mv;
 	}
 
@@ -605,7 +617,8 @@ public class BandStandController {
 		System.out.println("I am the size of the list" + daoRatings.size());
 		System.out.println("I am the rating average" + ratingAverage);
 		mv.addObject("ratings", ratingAverage);
-
+		List<Comment> comments = dao.getAllComments(artistID);
+		mv.addObject("artistComments", comments);
 		mv.addObject("user", user);
 		mv.addObject("artist", artist);
 
