@@ -197,7 +197,7 @@ public class BandStandController {
 			int addUserReturn = dao.addUser(firstName, lastName, email, password);
 			if (addUserReturn != 0) {
 				String duplicateError = "This email already exists for another user.";
-				mv.addObject(duplicateError);
+				mv.addObject("duplicateError", duplicateError);
 				System.out.println(duplicateError);
 				mv.setViewName("index1.jsp");
 

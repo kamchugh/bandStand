@@ -47,6 +47,11 @@ display: -webkit-box;
 	
 }
 
+.bottomPadding10 {
+	padding-bottom: 10px;
+	
+}
+
 .bottomMargin {
 	margin-bottom: 15px;
 	
