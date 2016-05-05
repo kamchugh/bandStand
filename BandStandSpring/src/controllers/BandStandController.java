@@ -164,20 +164,20 @@ public class BandStandController {
 			mv.addObject(error);
 			System.out.println(error);
 			mv.setViewName("Admin.jsp");
+			return mv;
 		} else {
 			int addArtistReturn = dao.addArtist(name, email, password);
 			if (addArtistReturn != 0) {
 				String duplicateError = "This email already exists for another user.";
 				mv.addObject(duplicateError);
-				System.out.println(duplicateError);
-
+				mv.setViewName("Admin.jsp");
+				return mv;
 			}
 			Artist artistToAdd = dao.getArtistByEmail(email);
 			allArtists.add(artistToAdd);
 			mv.setViewName("Admin.jsp");
-
-		}
-		return mv;
+			return mv;
+		}	
 	}
 
 	// delete an artist
