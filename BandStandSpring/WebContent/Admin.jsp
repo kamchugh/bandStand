@@ -80,7 +80,7 @@ body {
 			</div>
 		</div>
 		<hr>
-
+<h3 style="text-align: center;"> Search</h3>
 		<ul class="list-inline" style="text-align: center;" style="padding-top: 10px;">
 			<li>
 				<form class="navbar-brand" action="getAllUsers.do" method="GET">

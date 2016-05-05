@@ -35,15 +35,19 @@ body {
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a class="nabvar-brand" href="ArtistList.jsp">User Interface</a></li>
-					<li><a class="nabvar-brand" href="Admin.jsp">Admin Home</a></li>
+				<li><c:if test="${user.accessLevel == 2}">
+					<a class="nabvar-brand" href="ArtistList.jsp">User Interface</a>
+					</c:if>
+					<li><c:if test="${user.accessLevel == 2}">
+					<a class="nabvar-brand" href="Admin.jsp">Admin Home</a></c:if>
+					<li><a href="userLogOut.do">Log out</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container -->
 	</nav>
-
+<div class="col-lg-12 text-center">
 	<c:if test="${! empty(genre)}">
 		<%-- ${booking.id} --%>
 		<h3 class="orangeText">You've successfully added a genre to
@@ -70,6 +74,7 @@ body {
 		<h3 class="orangeText">You've successfully removed a recording from
 			${artist.name}!</h3>
 	</c:if>
+	</div>
 	
 	
 	<div class="row text-center">
@@ -229,6 +234,58 @@ body {
 	</div>
 	</li>
 	</ul>
+	
+	<h3 style="text-align: center;"> Your bookings</h3>
+	
+	<table class="table table-hover">
+			<thead class="text-center">
+				<tr>
+					<c:if test="${not empty artist.bookings}">
+
+						<th>ID</th>
+						<th>Date</th>
+						<th>User</th>
+						<th>User Email</th>
+						<th>Confirmed</th>
+					</c:if>
+				<tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${artist.bookings}" var="booking">
+					<tr>
+
+						<td>${booking.id}</td>
+						<td>${booking.bookingDate}</td>
+						<td>${booking.user.firstName}</td>
+						<td>${booking.user.email}</td>
+						<td>${booking.confirmed}</td>
+						<c:if test="${booking.confirmed == false}">
+						<td>
+							<form action="setConfirmedBookingtoArtist.do" method="GET">
+
+								<input type="hidden" name="bookingId" value="${booking.id}">
+								<input type="hidden" name="artistId" value="${artist.id}">
+								<input class="btn btn-default" type="submit"
+									value="Confirm Booking">
+							</form>
+						</td>
+						</c:if>
+						<c:if test="${booking.confirmed == true}">
+						<td>
+							<form action="setUnConfirmedBookingtoArtist.do" method="GET">
+
+								<input type="hidden" name="bookingId" value="${booking.id}">
+								<input type="hidden" name="artistId" value="${artist.id}">
+								<input class="btn btn-default" type="submit"
+									value="UNconfirm Booking">
+							</form>
+						</td>
+						</c:if>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		
 
 </body>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>

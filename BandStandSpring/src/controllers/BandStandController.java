@@ -315,6 +315,7 @@ public class BandStandController {
 		dao.setConfirmedBooking(id);
 		return "Admin.jsp";
 	}
+	
 
 	// this lets the admin set a booking as unconfirmed
 
@@ -322,6 +323,30 @@ public class BandStandController {
 	public String setUnConfirmedBooking(@RequestParam("bookingId") int id) {
 		dao.setUnConfirmedBooking(id);
 		return "Admin.jsp";
+	}
+	
+	// these methods are for when the artist logs in to their portal
+	
+	@RequestMapping("setConfirmedBookingtoArtist.do")
+	public ModelAndView setConfirmedBookingtoArtist(@RequestParam("bookingId") int id,
+			@RequestParam("artistId") int artistid) {
+		Artist artist = dao.getArtistById(artistid);
+		dao.setConfirmedBooking(id);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("artist", artist);
+		mv.setViewName("editArtist.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("setUnConfirmedBookingtoArtist.do")
+	public ModelAndView setUnConfirmedBookingtoArtist(@RequestParam("bookingId") int id,
+			@RequestParam("artistId") int artistid) {	
+		Artist artist = dao.getArtistById(artistid);
+		dao.setUnConfirmedBooking(id);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("artist", artist);
+		mv.setViewName("editArtist.jsp");
+		return mv;
 	}
 
 	// add a comment to an artist
@@ -373,8 +398,8 @@ public class BandStandController {
 
 	@RequestMapping("addPhoto.do")
 	public ModelAndView addPhoto(@RequestParam("artistID") int artistID, @RequestParam("photo") String photo) {
-		Artist artist = dao.getArtistById(artistID);
 		dao.addPhoto(artistID, photo);
+		Artist artist = dao.getArtistById(artistID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("photo", photo);
 		mv.addObject("artist", artist);
@@ -386,8 +411,8 @@ public class BandStandController {
 
 	@RequestMapping("addGenre.do")
 	public ModelAndView addGenre(@RequestParam("artistID") int artistID, @RequestParam("genre") String genre) {
-		Artist artist = dao.getArtistById(artistID);
 		dao.addGenre(artistID, genre);
+		Artist artist = dao.getArtistById(artistID);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("genre", genre);
 		mv.addObject("artist", artist);
@@ -660,10 +685,21 @@ public class BandStandController {
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = dao.getUserByEmail(email);
-		allArtists = dao.getAllArtists();
-
 		session.setAttribute("all", allArtists);
 		if (user == null) {
+			allArtists = dao.getAllArtists();
+			for (Artist artist : allArtists) {
+				if(artist.getEmail().equals(email)){
+					if(!artist.getPassword().equals(password)){
+						mv.setViewName("index1.jsp");
+						mv.addObject("wrongPassword", email);
+						return mv;
+					}
+					mv.addObject(artist);
+					mv.setViewName("editArtist.jsp");
+					return mv;
+				}
+			}
 			mv.addObject("wrongEmail", email);
 			mv.setViewName("index1.jsp");
 			return mv;
