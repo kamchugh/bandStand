@@ -93,7 +93,7 @@ body {
                 <div class="logmod__tab-wrapper">
                     <div class="logmod__tab lgm-1">
                         <div class="logmod__heading">
-                            <span class="logmod__heading-subtitle">Enter your personal details <strong>to create an acount</strong></span>
+                            <span class="logmod__heading-subtitle">Enter your personal details <strong>to create an account</strong></span>
                         </div>
                         <div class="logmod__form">
                             <form accept-charset="utf-8" action="addUserRegistration.do" class="simform">
@@ -116,7 +116,8 @@ body {
                                 <div class="sminputs">
                                     <div class="input full">
                                         <label class="string optional" for="user-pw">Password *</label>
-                                        <input class="string optional" maxlength="255" name="userPassword" id="user-pw" type="text" size="50" />
+                                        <input class="string optional" maxlength="255" id="user-pw" name="password" type="password" size="50" />
+                                        <span class="hide-password">Show</span>
                                     </div>
                                   <!--   <div class="input string optional">
                                         <label class="string optional" for="user-pw-repeat">Repeat password *</label>
@@ -163,6 +164,9 @@ body {
                                 </c:if>
                                  <c:if test="${! empty(wrongEmail)}">
                                 <div class = "sidePadding bottomPadding"> We can't find ${wrongEmail}. Are you sure it's the right email?</div>
+                                </c:if>
+                                  <c:if test="${! empty(duplicateError)}">
+                                <div class = "sidePadding bottomPadding"> ${duplicateError}</div>
                                 </c:if>
                             </form>
                         </div>

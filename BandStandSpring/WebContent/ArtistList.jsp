@@ -88,6 +88,7 @@
 
 			<p class="lead">
 			<div class="elements">
+			<c:if test="${! empty(user.bookings)}">
 				<c:forEach var="b" items="${user.bookings}">
 					<c:if test="${! empty(b)}">
 						<div class="bookingsBorder">
@@ -101,8 +102,14 @@
 						</div>
 					</c:if>
 				</c:forEach>
+				</c:if>
+				<c:if test="${empty(user.bookings)}">
+				You don't have any booking yet.
+				</c:if>
+				
 			</div>
 			</p>
+			
 		</div>
 
 		<!-- <form class="form-inline">
