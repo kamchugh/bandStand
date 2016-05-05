@@ -88,28 +88,28 @@
 
 			<p class="lead">
 			<div class="elements">
-			<c:if test="${! empty(user.bookings)}">
-				<c:forEach var="b" items="${user.bookings}">
-					<c:if test="${! empty(b)}">
-						<div class="bookingsBorder">
-							${b.artist.name} for ${b.bookingDate} is
-							<c:if test="${b.confirmed == true}">
+				<c:if test="${! empty(user.bookings)}">
+					<c:forEach var="b" items="${user.bookings}">
+						<c:if test="${! empty(b)}">
+							<div class="bookingsBorder">
+								${b.artist.name} for ${b.bookingDate} is
+								<c:if test="${b.confirmed == true}">
 										confirmed.
 								</c:if>
-							<c:if test="${b.confirmed == false}">
+								<c:if test="${b.confirmed == false}">
 										unconfirmed.
 								</c:if>
-						</div>
-					</c:if>
-				</c:forEach>
+							</div>
+						</c:if>
+					</c:forEach>
 				</c:if>
 				<c:if test="${empty(user.bookings)}">
 				You don't have any booking yet.
 				</c:if>
-				
+
 			</div>
 			</p>
-			
+
 		</div>
 
 		<!-- <form class="form-inline">
@@ -199,31 +199,26 @@
  -->
 		<c:if test="${ empty(filterArtist)}">
 			<br>
-			<br>
-			<br>
-			<br> This is the all artists test!
-		<c:forEach var="singleArtist" items="${all}">
+			<c:forEach var="singleArtist" items="${all}">
+				<a
+					href="getArtistById.do?artistID=${singleArtist.id}&userID=${user.id}">
+					<table class="table">
 
-				<table class="table">
-
-					<tbody>
-						<tr>
-							<td><a
-								href="getArtistById.do?artistID=${singleArtist.id}&userID=${user.id}">
-									<img src="${singleArtist.photos[0].url}" height=200 width=200
-									class="img-rounded" />
-							</a></td>
-							<td colspan="3">
-								<h4 class="orangeText">${singleArtist.name}</h4> <br> <br>
-
-								${singleArtist.description } <br> <br>
-							</td>
+						<tbody>
+							<tr>
+								<td><img src="${singleArtist.photos[0].url}" height=200
+									width=200 class="img-rounded" /></td>
+								<td colspan="3">
+									<h4 class="orangeText bottomPadding10">${singleArtist.name}</h4> 
+<div class="ellipsis">
+									<p style = "color: black;"> ${singleArtist.description } </p> </div>
+								</td>
 
 
-						</tr>
-					</tbody>
-				</table>
-
+							</tr>
+						</tbody>
+					</table>
+				</a>
 			</c:forEach>
 		</c:if>
 
@@ -238,13 +233,14 @@
 								class="img-rounded" />
 						</a></td>
 						<td colspan="3">
-							<h4 class="orangeText">${artist2.name}</h4> 
-							<div class = "ellipsis">
-								${artist2.description } <br> 
-								<a
-							href="getArtistById.do?artistID=${artist2.id}&userID=${user.id}"> <h4> Read more </h4> </a>
-								
-								
+							<h4 class="orangeText">${artist2.name}</h4>
+							<div class="ellipsis">
+								${artist2.description } <br> <a
+									href="getArtistById.do?artistID=${artist2.id}&userID=${user.id}">
+									<h4>Read more</h4>
+								</a>
+
+
 							</div>
 						</td>
 
