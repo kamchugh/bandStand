@@ -59,6 +59,8 @@ public class BandStandController {
 		dao.setUserAccessLevelToUser(id);
 		return "Admin.jsp";
 	}
+	
+	// get a list of all artists in the database
 
 	@RequestMapping("getAllArtists.do")
 	public ModelAndView getAllArtist(HttpSession session) {
@@ -135,6 +137,8 @@ public class BandStandController {
 		mv.setViewName("index.jsp");
 		return mv;
 	}
+	
+	// add an artist
 
 	@RequestMapping("addArtist.do")
 	public ModelAndView addArtist(@RequestParam("artistName") String name, @RequestParam("artistEmail") String email,
@@ -161,6 +165,8 @@ public class BandStandController {
 		return mv;
 	}
 
+	// delete an artist
+	
 	@RequestMapping("deleteArtistById.do")
 	public String deleteArtistById(@RequestParam("artistId") int artistId, HttpSession session) {
 
@@ -198,6 +204,8 @@ public class BandStandController {
 		}
 		return mv;
 	}
+	
+	// add a user
 
 	@RequestMapping("addUser.do")
 	public ModelAndView addUser(@RequestParam("userFirstName") String firstName,
@@ -223,6 +231,8 @@ public class BandStandController {
 		}
 		return mv;
 	}
+	
+	// delete a user
 
 	@RequestMapping("deleteUserById.do")
 	public String deleteUserById(@RequestParam("userId") int userId) {
@@ -230,6 +240,8 @@ public class BandStandController {
 
 		return "Admin.jsp";
 	}
+	
+	// allows you to get al bookings
 
 	@RequestMapping("getAllBookings.do")
 	public ModelAndView getAllBookings() {
@@ -239,6 +251,8 @@ public class BandStandController {
 		mv.setViewName("Admin.jsp");
 		return mv;
 	}
+	
+	// allows you to get all confirmed bookings
 
 	@RequestMapping("getConfirmedBookings.do")
 	public ModelAndView getConfirmedBookings() {
@@ -248,6 +262,8 @@ public class BandStandController {
 		mv.setViewName("Admin.jsp");
 		return mv;
 	}
+	
+	// allows you to get all unconfirmed bookings
 
 	@RequestMapping("getUnConfirmedBookings.do")
 	public ModelAndView getUnConfirmedBookings() {
@@ -286,12 +302,16 @@ public class BandStandController {
 		}
 		return mv;
 	}
+	
+	// this lets the admin set a booking as confirmed 
 
 	@RequestMapping("setConfirmedBooking.do")
 	public String setConfirmedBooking(@RequestParam("bookingId") int id) {
 		dao.setConfirmedBooking(id);
 		return "Admin.jsp";
 	}
+	
+	// this lets the admin set a booking as unconfirmed 
 
 	@RequestMapping("setUnConfirmedBooking.do")
 	public String setUnConfirmedBooking(@RequestParam("bookingId") int id) {
@@ -299,7 +319,7 @@ public class BandStandController {
 		return "Admin.jsp";
 	}
 
-	// Kaylee's methods
+	// add a comment to an artist 
 
 	@RequestMapping("addComment.do")
 
@@ -318,7 +338,7 @@ public class BandStandController {
 		return mv;
 	}
 	
-	// add recording, add photo, add genre to artist 
+	// add recording to an artist 
 	
 	@RequestMapping("addRecording.do")
 	public ModelAndView addRecording(@RequestParam("artistID") int artistID, 
@@ -332,6 +352,8 @@ public class BandStandController {
 		return mv;
 	}
 	
+	// this allows you to add a photo to an artist 
+	
 	@RequestMapping("addPhoto.do")
 	public ModelAndView addPhoto(@RequestParam("artistID") int artistID,
 			@RequestParam("photo") String photo) {
@@ -343,6 +365,8 @@ public class BandStandController {
 		mv.setViewName("editArtist.jsp" );
 		return mv;
 	}
+	
+	// this allows you to add a genre to an artist 
 	
 	@RequestMapping("addGenre.do") 
 	public ModelAndView addGenre(@RequestParam("artistID") int artistID,
@@ -356,7 +380,7 @@ public class BandStandController {
 		return mv;
 	}
 	
-	
+	// this allows you to add a rating to an artist 
 
 	@RequestMapping("addRating.do")
 	public ModelAndView addRating(@RequestParam("artistID") int artistID, @RequestParam("rating") int rating,
@@ -402,6 +426,8 @@ public class BandStandController {
 	// }
 	// return mv;
 	// }
+	
+	// this allows you to add a booking to an artist and user
 
 	@RequestMapping("addBooking.do")
 	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("date") String date,
@@ -439,6 +465,8 @@ public class BandStandController {
 			return mv;
 		}
 	}
+	
+	// this gives you all the bookings for an artist 
 
 	@RequestMapping("getBookingsByBand.do")
 	public ModelAndView getBookingsByBand(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
@@ -461,6 +489,8 @@ public class BandStandController {
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
+	
+	// this gives you all the comments for an artist 
 
 	@RequestMapping("getCommentsByBand.do")
 	public ModelAndView getCommentsByBand(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
@@ -483,6 +513,8 @@ public class BandStandController {
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
+	
+	// this gives you the average rating of a band
 
 	@RequestMapping("getRatingsByBand.do")
 	public ModelAndView getRatingsByBand(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
@@ -510,6 +542,9 @@ public class BandStandController {
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
+	
+	// this gives you the information for an artist just based off of their id, it also gives 
+	// you their average star rating
 
 	@RequestMapping("getArtistById.do")
 	public ModelAndView getArtistById(@RequestParam("artistID") int artistID, @RequestParam("userID") int userID) {
@@ -538,6 +573,8 @@ public class BandStandController {
 		mv.setViewName("ArtistPage.jsp");
 		return mv;
 	}
+	
+	// this gives you all the photos for a particular artist 
 
 	@RequestMapping("getAllPhotosForArtist.do")
 	public ModelAndView getAllPhotosForArtist(@RequestParam("artistId") int id) {
@@ -554,6 +591,8 @@ public class BandStandController {
 		return mv;
 
 	}
+	
+	// this method logs you out and brings you back to our index page 
 
 	@RequestMapping("userLogOut.do")
 	public ModelAndView userLogOut(HttpSession session) {
@@ -622,6 +661,8 @@ public class BandStandController {
 		}
 		return mv;
 	}
+	
+	// this allows you to search by artist name on the artist list page 
 
 	@RequestMapping("searchByName.do")
 	public ModelAndView getArtistById(@RequestParam("name") String name) {
@@ -656,6 +697,8 @@ public class BandStandController {
 	// return mv;
 	// }
 
+	// this displays the bookings of a user on the artist list page 
+	
 	@RequestMapping("searchBookingsByUserId.do")
 	public ModelAndView getBookings(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -671,6 +714,8 @@ public class BandStandController {
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
+	
+	// this allows you to search by genre on the artist list page
 
 	@RequestMapping("searchByGenre.do")
 	public ModelAndView searchByGenre(@RequestParam("genre") String genreType) {
@@ -690,6 +735,9 @@ public class BandStandController {
 		return mv;
 	}
 
+	
+	// this allows you to search for an artist by their average rating
+	
 	@RequestMapping("searchByRating.do")
 	public ModelAndView searchByRating(@RequestParam("rating") String passedRating,
 			@RequestParam("userId") int userID) {
@@ -710,8 +758,6 @@ public class BandStandController {
 
 			}
 
-			// List<Artist> artistRatingMatch = new ArrayList();
-
 			mv.addObject("filterArtist", matchedArtists);
 			mv.addObject("user", user);
 		}
@@ -719,6 +765,8 @@ public class BandStandController {
 		return mv;
 
 	}
+	
+	// this initially loads a list of artists to be displayed on  the "artist list" page 
 
 	@RequestMapping("initialLoad.do")
 	public ModelAndView initalLoad(HttpSession session) {
@@ -741,6 +789,8 @@ public class BandStandController {
 		mv.setViewName("ArtistList.jsp");
 		return mv;
 	}
+	
+	// this is when a user updates their information on their main page 
 
 	@RequestMapping("updateUserByUser.do")
 	public ModelAndView updateUserByUser(User user, @RequestParam("email") String email,
