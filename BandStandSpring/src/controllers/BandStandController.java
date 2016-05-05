@@ -202,7 +202,7 @@ public class BandStandController {
 		session.setAttribute("all", allArtists);
 		if (firstName == "" || lastName == "" || email == "" || password == "") {
 			String error = "Value required.";
-			mv.addObject(error);
+			mv.addObject("valueMissing", error);
 			System.out.println(error);
 			mv.setViewName("index1.jsp");
 		} else {

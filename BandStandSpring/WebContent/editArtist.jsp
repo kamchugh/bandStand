@@ -35,10 +35,8 @@ body {
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a class="nabvar-brand" href="ArtistList.jsp">Home</a></li>
-					<li><a class="navbar-brand" href="Admin.jsp">Admin Home</a></li>
-					</li>
-
+					<li><a class="nabvar-brand" href="ArtistList.jsp">User Interface</a></li>
+					<li><a class="nabvar-brand" href="Admin.jsp">Admin Home</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -72,32 +70,38 @@ body {
 		<h3 class="orangeText">You've successfully removed a recording from
 			${artist.name}!</h3>
 	</c:if>
-	<div class="elements">
-		<div class="container">
-			<div class="row text-center">
-				<form action="updateArtist.do" method="GET">
-					<h3>Edit Artist</h3>
+	
+	
+	<div class="row text-center">
+	<div class="bottomMargin">
+	<h2 class="bottomBorder"> Edit ${artist.name}'s page</h2>
+	</div>
+	
+	
+		<div class="col-sm-6 topBottomMargin10">
+		
+				<form  action="updateArtist.do" method="GET">
+					<h3 >Edit Information</h3>
 					<div>Id</div>
-					<input type="placeholder" name="id" value="${artist.id}">
+					<input class="topBottomMargin10" type="placeholder" name="id" value="${artist.id}">
 					<div>Artist Name</div>
-					<input type="text" name="name" value="${artist.name}">
+					<input class="topBottomMargin10" type="text" name="name" value="${artist.name}">
 					<div>Artist Email</div>
-					<input type="text" name="email" value="${artist.email}">
+					<input class="topBottomMargin10" type="text" name="email" value="${artist.email}">
 					<div>Artist Password</div>
-					<input type="text" name="password" value="${artist.password}">
+					<input class="topBottomMargin10" type="text" name="password" value="${artist.password}">
 					<div>Artist Description</div>
-					<input type="text" name="description" value="${artist.description}">
+					<input class="topBottomMargin10" type="text" name="description" value="${artist.description}">
 					<br>
 					<button style="margin-top: 10px;" class="btn btn-default"
 						type="submit">Update Artist</button>
 				</form>
-			</div>
+		
 		</div>
-		<div class="container">
-			<div class="row text-center">
+	<div  class="col-sm-6 topBottomMargin10">
 
 				<h3 style="padding-bottom: 25px;"> Add Multiples</h3>
-				<form action="addRecording.do" method="GET">
+				<form  action="addRecording.do" method="GET">
 
 					<input type="hidden" name="artistID" value="${artist.id} ">
 					<input type="placeholder" name="recording" value=" ">
@@ -116,6 +120,7 @@ body {
 							class="btn btn-default bottomMargin" type="submit">Add
 							photo</button>
 					</div>
+					
 				</form>
 				<form action="addGenre.do" method="GET">
 					<input type="hidden" name="artistID" value="${artist.id} ">
@@ -138,9 +143,13 @@ body {
 							type="submit">Add genre</button>
 					</div>
 				</form>
-			</div>
-		</div>
+		</div>	
+		
 	</div>
+	<h3 style="text-align: center;"> Delete</h3>
+	
+	<ul class="list-inline" style="text-align: center;" style="padding-top: 10px;">
+	<li>
 
 	<button style="margin-bottom: 10px; margin-top: 30px; margin-left: 20px;" class="btn btn-default"
 		onclick="document.getElementById('id01').style.display='block'">
@@ -165,6 +174,8 @@ body {
 
 		</c:forEach>
 	</div>
+	</li>
+	<li>
 	
 	
 	<button style="margin-bottom: 10px; margin-top: 30px; margin-left: 20px;" class="btn btn-default"
@@ -190,6 +201,8 @@ body {
 
 		</c:forEach>
 	</div>
+	</li>
+	<li>
 	
 		<button style="margin-bottom: 10px; margin-top: 30px; margin-left: 20px;" class="btn btn-default"
 		onclick="document.getElementById('id03').style.display='block'">
@@ -214,6 +227,8 @@ body {
 
 		</c:forEach>
 	</div>
+	</li>
+	</ul>
 
 </body>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>

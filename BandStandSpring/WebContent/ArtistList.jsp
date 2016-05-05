@@ -18,7 +18,7 @@
 	rel="icon" type="image/x-icon" />
 
 <!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="stylesheet.css">
 <link rel="stylesheet" href="custom.css">
 
@@ -251,32 +251,6 @@
 
 		</c:forEach>
 
-
-		<%-- <c:forEach var="booking" items="${bookings}">
-
-	<table class="table">
-		<thead>
-			<tr>
-				<td>Booking ID</td>
-				<td>Booking Date</td>
-				<td>Confirmed Status</td>
-				<td>Artist Booked</td>
-			</tr>
-		</thead>
-		<tr>
-			<td>${booking.id }</td>
-			<td>${booking.bookingDate }</td>
-			<td>${booking.confirmed }</td>
-			<td>${booking.artist.name }</td>
-		</tr>
-		<tbody>
-		</tbody>
-
-	</table>
-
-</c:forEach> --%>
-
-
 		<c:if test="${showForm == 'true'}">
 
 			<div class="jumbotron text-center">
@@ -365,6 +339,9 @@
 	<footer class="panel-footer">
 	<div class="container footerText">Copyright BandStand 2016</div>
 	</footer>
+	
 </body>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
 
 </html>

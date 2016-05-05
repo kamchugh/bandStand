@@ -27,6 +27,13 @@ display: -webkit-box;
 	
 }
 
+.bottomBorder {
+	padding-bottom: 15px;
+    border-bottom: thick solid #FF9900;
+    display: inline;
+    margin-bottom: 20px;
+}
+
 .blackBorder {
 	padding-top: 15px;
 	padding-bottom: 15px;
@@ -45,6 +52,11 @@ display: -webkit-box;
 .bottomPadding {
 	padding-bottom: 15px;
 	
+}
+
+.topBottomMargin10 {
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
 
 .bottomPadding10 {

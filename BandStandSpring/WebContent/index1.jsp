@@ -18,12 +18,13 @@
 	href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAmpqaAHx8fACMjIwA4eHhAKenpwDHx8cATU1NALKysgDw8PAA6enpAGhoaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQACCgAAAAAAAAAAAAAACgAAAAEAAAkECQAAAAAAAAAGAAcAAAMAAAAKAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAoIBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOH/AADBjwAA4QcAAP0HAAD9hwAA/fcAAP33AAD99wAA/fcAAPz3AAD8BwAA/AcAAP/HAAD//wAA//8AAP//AAA="
 	rel="icon" type="image/x-icon" />
 
-  <link rel="stylesheet" href="bootstrap/css/normalize.css">
+<link rel="stylesheet" href="bootstrap/css/normalize.css">
 
-    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+<link rel='stylesheet prefetch'
+	href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
-    <link rel="stylesheet" href="bootstrap/css/style.css">
-    <link rel="stylesheet" href="custom.css">
+<link rel="stylesheet" href="bootstrap/css/style.css">
+<link rel="stylesheet" href="custom.css">
 
 
 <title>BandStand Login</title>
@@ -54,7 +55,7 @@ body {
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
-			
+
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#bs-example-navbar-collapse-1">
@@ -64,7 +65,7 @@ body {
 				</button>
 				<a class="navbar-brand" href="#">BandStand</a>
 			</div>
-			
+
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
@@ -74,108 +75,131 @@ body {
 				</ul>
 			</div>
 		</div>
-	</nav> 
+	</nav>
 
 	<!-- Page Content -->
-	
-<!--  	<div class="mainPicture">
+
+	<!--  	<div class="mainPicture">
 	<h1> Make your party rock</h1>
 	</div>  -->
-	<div class="logmod"> 
-        <div class="logmod__wrapper">
-         
-            <!-- <span class="logmod__close">Close</span> -->
-            <div class="logmod__container">
-                <ul class="logmod__tabs">
-                    <li data-tabtar="lgm-2"><a href="#">Login</a></li>
-                    <li data-tabtar="lgm-1"><a href="#">Sign Up</a></li>
-                </ul>
-                <div class="logmod__tab-wrapper">
-                    <div class="logmod__tab lgm-1">
-                        <div class="logmod__heading">
-                            <span class="logmod__heading-subtitle">Enter your personal details <strong>to create an account</strong></span>
-                        </div>
-                        <div class="logmod__form">
-                            <form accept-charset="utf-8" action="addUserRegistration.do" class="simform">
-                              <div class="sminputs">
-                                    <div class="input string optional">
-                                        <label class="string optional" for="user-pw">First Name *</label>
-                                        <input class="string optional" maxlength="255" name="userFirstName" id="user-pw" type="text" size="50" />
-                                    </div>
-                                    <div class="input string optional">
-                                        <label class="string optional" for="user-pw-repeat">Last Name *</label>
-                                        <input class="string optional" maxlength="255" name="userLastName" id="user-pw-repeat" type="text" size="50" />
-                                    </div>
-                                </div>
-                                <div class="sminputs">
-                                    <div class="input full">
-                                        <label class="string optional" for="user-name">Email*</label>
-                                        <input class="string optional" maxlength="255" name="userEmail" id="user-email" type="email" size="50" />
-                                    </div>
-                                </div>
-                                <div class="sminputs">
-                                    <div class="input full">
-                                        <label class="string optional" for="user-pw">Password *</label>
-                                        <input class="string optional" maxlength="255" id="user-pw" name="userPassword" type="password" size="50" />
-                                        <span class="hide-password">Show</span>
-                                    </div>
-                                  <!--   <div class="input string optional">
+	<div class="logmod">
+		<div class="logmod__wrapper">
+
+			<!-- <span class="logmod__close">Close</span> -->
+			<div class="logmod__container">
+				<ul class="logmod__tabs">
+					<li data-tabtar="lgm-2"><a href="#">Login</a></li>
+					<li data-tabtar="lgm-1"><a href="#">Sign Up</a></li>
+				</ul>
+				<div class="logmod__tab-wrapper">
+					<div class="logmod__tab lgm-1">
+						<div class="logmod__heading">
+							<span class="logmod__heading-subtitle">Enter your personal
+								details <strong>to create an account</strong>
+							</span>
+						</div>
+						<div class="logmod__form">
+							<form accept-charset="utf-8" action="addUserRegistration.do"
+								class="simform">
+								<div class="sminputs">
+									<div class="input string optional">
+										<label class="string optional" for="user-pw">First
+											Name *</label> <input class="string optional" maxlength="255"
+											name="userFirstName" id="user-pw" type="text" size="50" />
+									</div>
+									<div class="input string optional">
+										<label class="string optional" for="user-pw-repeat">Last
+											Name *</label> <input class="string optional" maxlength="255"
+											name="userLastName" id="user-pw-repeat" type="text" size="50" />
+									</div>
+								</div>
+								<div class="sminputs">
+									<div class="input full">
+										<label class="string optional" for="user-name">Email*</label>
+										<input class="string optional" maxlength="255"
+											name="userEmail" id="user-email" type="email" size="50" />
+									</div>
+								</div>
+								<div class="sminputs">
+									<div class="input full">
+										<label class="string optional" for="user-pw">Password
+											*</label> <input class="string optional" maxlength="255" id="user-pw"
+											name="userPassword" type="password" size="50" /> <span
+											class="hide-password">Show</span>
+									</div>
+									<!--   <div class="input string optional">
                                         <label class="string optional" for="user-pw-repeat">Repeat password *</label>
                                         <input class="string optional" maxlength="255" name="userPassword" id="user-pw-repeat" type="text" size="50" />
                                     </div> -->
-                                </div>
-                                <div class="simform__actions">
-                                    <input class="sumbit" name="commit" type="submit" value="Create Account" />
-                                    <span class="simform__actions-sidetext">By creating an account you agree to our <a class="special" href="#" target="_blank" role="link">Terms & Privacy</a></span>
-                                </div>
-                            </form>
-                        </div>
+								</div>
+								<div class="simform__actions">
+									<input class="sumbit" name="commit" type="submit"
+										value="Create Account" /> <span
+										class="simform__actions-sidetext">By creating an
+										account you agree to our <a class="special" href="#"
+										target="_blank" role="link">Terms & Privacy</a>
+									</span>
+								</div>
 
-                    </div>
-                    
-                    
-                    <!-- LOG IN  -->
-                    
-                    <div class="logmod__tab lgm-2">
-                        <div class="logmod__heading">
-                            <span class="logmod__heading-subtitle"><strong> Are you a band? click here </strong> to login or sign up</span>
-                        </div>
-                        <div class="logmod__form">
-                            <form accept-charset="utf-8" action="getUserByEmail.do" class="simform">
-                                <div class="sminputs">
-                                    <div class="input full">
-                                        <label class="string optional" for="user-name">Email*</label>
-                                        <input class="string optional" maxlength="255" id="user-email" name ="email" type="email" size="50" />
-                                    </div>
-                                </div>
-                                <div class="sminputs">
-                                    <div class="input full">
-                                        <label class="string optional" for="user-pw">Password *</label>
-                                        <input class="string optional" maxlength="255" id="user-pw" name="password" type="password" size="50" />
-                                        <span class="hide-password">Show</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="simform__actions">
-                                    <input class="sumbit orange" name="commit" type="submit" value="Log In" />
-                                </div>
-                                <c:if test="${! empty(wrongPassword)}">
-                                <div class = "sidePadding bottomPadding"> That is not the right password for ${wrongPassword}</div>
-                                </c:if>
-                                 <c:if test="${! empty(wrongEmail)}">
-                                <div class = "sidePadding bottomPadding"> We can't find ${wrongEmail}. Are you sure it's the right email?</div>
-                                </c:if>
-                                  <c:if test="${! empty(duplicateError)}">
-                                <div class = "sidePadding bottomPadding"> ${duplicateError}</div>
-                                </c:if>
-                            </form>
-                        </div>
+							</form>
+						</div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					</div>
+
+
+					<!-- LOG IN  -->
+
+					<div class="logmod__tab lgm-2">
+						<div class="logmod__heading">
+							<span class="logmod__heading-subtitle"><strong>
+									Are you a band? click here </strong> to login or sign up</span>
+						</div>
+						<div class="logmod__form">
+							<form accept-charset="utf-8" action="getUserByEmail.do"
+								class="simform">
+								<div class="sminputs">
+									<div class="input full">
+										<label class="string optional" for="user-name">Email*</label>
+										<input class="string optional" maxlength="255" id="user-email"
+											name="email" type="email" size="50" />
+									</div>
+								</div>
+								<div class="sminputs">
+									<div class="input full">
+										<label class="string optional" for="user-pw">Password
+											*</label> <input class="string optional" maxlength="255" id="user-pw"
+											name="password" type="password" size="50" /> <span
+											class="hide-password">Show</span>
+									</div>
+								</div>
+
+								<div class="simform__actions">
+									<input class="sumbit orange" name="commit" type="submit"
+										value="Log In" />
+								</div>
+								<c:if test="${! empty(wrongPassword)}">
+									<div class="sidePadding bottomPadding">That is not the
+										right password for ${wrongPassword}</div>
+								</c:if>
+								<c:if test="${! empty(wrongEmail)}">
+									<div class="sidePadding bottomPadding">We can't find
+										${wrongEmail}. Are you sure it's the right email?</div>
+								</c:if>
+								<c:if test="${! empty(duplicateError)}">
+									<div class="sidePadding bottomPadding">${duplicateError}</div>
+								</c:if>
+								<c:if test="${! empty(valueMissing)}">
+									<div class="sidePadding bottomPadding"> ${valueMissing}</div>
+								</c:if>
+
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- jQuery Version 1.11.1 -->
@@ -189,7 +213,8 @@ body {
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script
+	src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
-    <script src="bootstrap/js/index.js"></script>
+<script src="bootstrap/js/index.js"></script>
 </html>
