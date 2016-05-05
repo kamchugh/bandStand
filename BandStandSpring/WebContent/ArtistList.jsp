@@ -200,7 +200,7 @@
 		<c:if test="${ empty(filterArtist)}">
 			<br>
 			<c:forEach var="singleArtist" items="${all}">
-				<a
+				<a style="text-decoration: none;"
 					href="getArtistById.do?artistID=${singleArtist.id}&userID=${user.id}">
 					<table class="table">
 
@@ -237,7 +237,7 @@
 							<div class="ellipsis">
 								${artist2.description } <br> <a
 									href="getArtistById.do?artistID=${artist2.id}&userID=${user.id}">
-									<h4>Read more</h4>
+									
 								</a>
 
 
