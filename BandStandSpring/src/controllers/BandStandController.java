@@ -546,7 +546,7 @@ public class BandStandController {
 
 	@RequestMapping("addBooking.do")
 	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("date") String date,
-			@RequestParam("userID") int userID) {
+			@RequestParam("userID") int userID, HttpSession session) {
 		Artist artist = dao.getArtistById(artistID);
 		System.out.println("date: " + date);
 		System.out.println("in add booking");
@@ -577,6 +577,11 @@ public class BandStandController {
 				System.out.println("I couldn't parse this");
 				e.printStackTrace();
 			}
+			session.removeAttribute("all");
+			allArtists = dao.getAllArtists();
+			session.setAttribute("all",  allArtists);
+			session.removeAttribute("user");
+			session.setAttribute("user",  user);
 			return mv;
 		}
 	}
