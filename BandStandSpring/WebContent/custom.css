@@ -95,19 +95,17 @@ display: -webkit-box;
 .indexHeaderText {
 	color: #FF9900;
 	font-size: 60px;
-	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-	text-align: center;
-	margin: 0 auto;
+	font-family: 'Oswald', sans-serif;
+
+	
 
 }
 
 .indexHeaderTextSmall {
 	color: #FF9900;
 	font-size: 30px;
-	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-	text-align: center;
-	margin: 0 auto;
-	padding-bottom: 20px;
+	font-family: 'Oswald', sans-serif;
+	
 	
 	
 }
@@ -115,10 +113,11 @@ display: -webkit-box;
 
 .whiteBackground {
 	text-align: center;
-	margin-top: 200px;
-	background-color:rgba(255, 255, 255, .75); 
+	background-color:rgba(255, 255, 255, .9); 
 	border-radius: 20px;
 	padding-bottom: 15px;
+	margin-left: 75px;
+	margin-right: 75px;
 	
 }
 
