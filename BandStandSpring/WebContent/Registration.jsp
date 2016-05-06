@@ -8,5 +8,10 @@
 </head>
 <body>
 
+	<form action="deleteArtistById.do" method="GET">
+								<input type="hidden" name="artistId" value="${artist.id }">
+								<input class="btn btn-default" type="submit"
+									value="Delete Artist">
+							</form>
 </body>
 </html>

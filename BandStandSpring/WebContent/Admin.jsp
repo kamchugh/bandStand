@@ -94,8 +94,9 @@ body {
 			</div>
 		</div>
 		<hr>
-<h3 style="text-align: center;"> Search</h3>
-		<ul class="list-inline" style="text-align: center;" style="padding-top: 10px;">
+		<h3 style="text-align: center;">Search</h3>
+		<ul class="list-inline" style="text-align: center;"
+			style="padding-top: 10px;">
 			<li>
 				<form class="navbar-brand" action="getAllUsers.do" method="GET">
 
@@ -134,10 +135,10 @@ body {
 				</form>
 			</li>
 		</ul>
-	
+
 	</div>
 
-<hr>
+	<hr>
 	<div class="container-fluid">
 		<table class="table table-hover ">
 			<thead class="text-center">
@@ -219,11 +220,16 @@ body {
 						<td>${artist.id}</td>
 						<td>${artist.email}</td>
 						<td>
-							<form action="deleteArtistById.do" method="GET">
+							<%-- <form action="deleteArtistLoad.do" method="GET">
 								<input type="hidden" name="artistId" value="${artist.id }">
 								<input class="btn btn-default" type="submit"
 									value="Delete Artist">
-							</form>
+							</form> --%>
+							 <form action="deleteArtistById.do" method="GET">
+								<input type="hidden" name="artistId" value="${artist.id }">
+								<input class="btn btn-default" type="submit"
+									value="Delete Artist">
+							</form> 
 						</td>
 						<td>
 							<form action="loadArtistEditPage.do">
@@ -260,24 +266,24 @@ body {
 						<td>${booking.user.id}</td>
 						<td>${booking.confirmed}</td>
 						<c:if test="${booking.confirmed == false}">
-						<td>
-							<form action="setConfirmedBooking.do" method="GET">
+							<td>
+								<form action="setConfirmedBooking.do" method="GET">
 
-								<input type="hidden" name="bookingId" value="${booking.id}">
-								<input class="btn btn-default" type="submit"
-									value="Confirm Booking">
-							</form>
-						</td>
+									<input type="hidden" name="bookingId" value="${booking.id}">
+									<input class="btn btn-default" type="submit"
+										value="Confirm Booking">
+								</form>
+							</td>
 						</c:if>
 						<c:if test="${booking.confirmed == true}">
-						<td>
-							<form action="setUnConfirmedBooking.do" method="GET">
+							<td>
+								<form action="setUnConfirmedBooking.do" method="GET">
 
-								<input type="hidden" name="bookingId" value="${booking.id}">
-								<input class="btn btn-default" type="submit"
-									value="UNconfirm Booking">
-							</form>
-						</td>
+									<input type="hidden" name="bookingId" value="${booking.id}">
+									<input class="btn btn-default" type="submit"
+										value="UNconfirm Booking">
+								</form>
+							</td>
 						</c:if>
 					</tr>
 				</c:forEach>
