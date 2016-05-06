@@ -11,6 +11,7 @@ body {
 	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 </style>
+<link rel="stylesheet" href="custom.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css"
 	href="bootstrap/css/bootstrap.min.css">
@@ -39,6 +40,19 @@ body {
 		</div>
 
 	</nav>
+		
+	<div class="col-lg-12 text-center">
+	<c:if test="${! empty(duplicateError)}">
+		<%-- ${booking.id} --%>
+		<h3 class="orangeText">
+			${duplicateError}</h3>
+	</c:if>
+	<c:if test="${! empty(error)}">
+		<%-- ${booking.id} --%>
+		<h3 class="orangeText">
+			${error}</h3>
+	</c:if>
+	</div>
 
 	<div class="continer-fluid">
 		<div class="row text-center">

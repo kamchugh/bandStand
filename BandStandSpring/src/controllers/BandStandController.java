@@ -186,7 +186,7 @@ public class BandStandController {
 		ModelAndView mv = new ModelAndView();
 		if (name == "" || email == "" || password == "") {
 			String error = "Value required.";
-			mv.addObject(error);
+			mv.addObject("error", error);
 			System.out.println(error);
 			mv.setViewName("Admin.jsp");
 			return mv;
@@ -194,7 +194,7 @@ public class BandStandController {
 			int addArtistReturn = dao.addArtist(name, email, password);
 			if (addArtistReturn != 0) {
 				String duplicateError = "This email already exists for another user.";
-				mv.addObject(duplicateError);
+				mv.addObject("duplicateError", duplicateError);
 				mv.setViewName("Admin.jsp");
 				return mv;
 			}
@@ -990,5 +990,25 @@ public class BandStandController {
 		// }
 		return mv;
 	}
+	
+	@RequestMapping("gotoDummyPage.do")
+	public ModelAndView gotoDummyPage(@RequestParam("id") int id) {
+	Artist artist = dao.getArtistById(id);
+	ModelAndView mv = new ModelAndView();
+	mv.addObject("artist", artist);
+	mv.setViewName("DummyArtistPage.jsp");
+	return mv;
+	}
+	
+	@RequestMapping("leaveDummyPage.do")
+	public ModelAndView leaveDummyPage(@RequestParam("id") int id) {
+	Artist artist = dao.getArtistById(id);
+	ModelAndView mv = new ModelAndView();
+	mv.addObject("artist", artist);
+	mv.setViewName("editArtist.jsp");
+	return mv;
+	}
+	
+	
 
 }

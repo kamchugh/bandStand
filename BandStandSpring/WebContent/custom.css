@@ -44,9 +44,27 @@ display: -webkit-box;
 	margin-bottom: 20px;
 }
 
+.blackBorderAdmin {
+	border-color: black;
+	border-style: solid;
+	border-radius: 20px;
+	padding-bottom: 15px;
+	
+}
+
 .sidePadding {
 	padding-left: 15px;
 	padding-right: 15px;
+}
+
+.sideMargin {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.topBottomPadding {
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 
 .bottomPadding {
@@ -120,6 +138,7 @@ link:active, link:hover {
 .elements {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .bookingsBorder {
