@@ -165,29 +165,34 @@ body {
 					</p> --%>
 					<ul class="list-inline" style="padding-top: 10px;">
 						<li><c:if test="${! empty(ratings)}">
-								<c:if test="${ratings <= 1}">
+							<c:if test="${ratings < 2}">
 									<img
 										src="http://fadmagazine.com/wp-content/uploads/one-star-rating.jpg"
 										alt="Smiley face" height="42" width="140">
 									<%-- ${ratings} --%>
 								</c:if>
 
-								<c:if test="${(ratings <= 2) && (ratings > 1)}">
+								<c:if test="${(ratings >= 2) && (ratings < 3)}">
 									<img
 										src="http://vignette3.wikia.nocookie.net/dickfiguresfanon/images/3/3a/Two-star-rating.png/revision/latest?cb=20140418000000"
 										alt="Smiley face" height="42" width="140">
 
 									<%-- ${ratings} --%>
 								</c:if>
-								<c:if test="${(ratings <= 3) && (ratings > 2)}">
+								<c:if test="${(ratings < 4) && (ratings >=3)}">
 									<img
 										src="http://www.gobblertown.com/wp-content/uploads/2015/08/Three-Stars.jpg"
 										alt="Smiley face" height="42" width="140">
 									<%-- ${ratings} --%>
 								</c:if>
-								<c:if test="${(ratings <= 5) && (ratings > 4)}">
+								<c:if test="${(ratings >= 4) && (ratings < 5) }">
 									<img
-										src="http://www.ecofleetuk.com/wp-content/uploads/4-star-rating.png"
+										src = "http://1.bp.blogspot.com/-agUeAp6no-s/VDC-hZ6UtYI/AAAAAAAAG8s/WVgxZ7wvi1o/s1600/4-stars-out-of-5.png"
+										alt = "Smiley face" height="42" width="140">
+								</c:if>
+								<c:if test="${(ratings >=5)}">
+									<img
+										src=http://www.arborviewdentalgroup.com/wp-content/uploads/2013/09/5-Gold-Stars1.jpg
 										alt="Smiley face" height="42" width="140">
 									<%-- ${ratings} --%>
 								</c:if>

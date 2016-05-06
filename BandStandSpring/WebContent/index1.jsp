@@ -154,7 +154,7 @@ body {
 									<div class="input full">
 										<label class="string optional" for="user-name">Band Name*</label>
 										<input class="string optional" maxlength="255"
-											name="artistName" id="user-email" type="email" size="50" />
+											name="artistName" id="user-email" type="text" size="50" />
 									</div>
 								</div>
 								<div class="sminputs">
