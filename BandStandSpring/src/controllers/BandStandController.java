@@ -274,6 +274,14 @@ public class BandStandController {
 		return mv;
 	}
 
+	@RequestMapping("deleteArtistLoad.do")
+	public ModelAndView deleteArtistLoad(@RequestParam("artistId") int artistId){
+		ModelAndView mv = new ModelAndView();
+		Artist artist = dao.getArtistById(artistId);
+		mv.addObject("artist", artist);
+		mv.setViewName("Registration.jsp");
+		return mv;
+	}
 	// delete a user
 
 	@RequestMapping("deleteUserById.do")

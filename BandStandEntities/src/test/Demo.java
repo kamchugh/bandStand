@@ -18,12 +18,24 @@ public class Demo {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("awesomebandsdb");
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		Artist artist = new Artist();
-		artist.setEmail("newArtistEmail@email.com");
-		artist.setPassword("password");
-		artist.setName("Bruno's Phat Band");
-		em.persist(artist);
+//		Artist artist = new Artist();
+//		artist.setEmail("newArtistEmail@email.com");
+//		artist.setPassword("password");
+//		artist.setName("Bruno's Phat Band");
+//		em.persist(artist);
+		
+		
+		Artist artist = em.find(Artist.class,  44);
+		artist.removeRatings(artist.getRatings());
+		em.remove(artist);
+		
+		
+		
+		
+		
+		
 		em.getTransaction().commit();
+		
 		
 //		Artist updateArtist = em.find(Artist.class, 5);
 //		updateArtist.setDescription("This is a much better description");

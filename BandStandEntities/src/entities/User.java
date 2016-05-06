@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -38,28 +39,42 @@ public class User {
 	private List<Comment> comments;
 
 	
+	public void removeRating(Rating rating){
+		ratings.remove(rating);
+	}
 	
-	
+//	
 	public void removeBookings(List<Booking> bookingsList){
+		List<Booking> bookingHolder = new ArrayList<>();
 		for(Booking booking: bookingsList)
 			if (bookings.contains(booking)){
-				bookings.remove(booking);
+				bookingHolder.add(booking);
+				booking.setUser(null);
 		}
+		bookings.removeAll(bookingHolder);
 	}
 	
 	
 	public void removeRatings(List<Rating> ratingsList){
+		List<Rating> ratingHolder = new ArrayList<>();
+		System.out.println("inside user ratingsList Before: " + ratingsList.size());
+		System.out.println("inside user ratings before: " + ratings.size());
 		for(Rating rating: ratingsList)
 			if (ratings.contains(rating)){
-				ratings.remove(rating);
+				ratingHolder.add(rating);
+				rating.setUser(null);
 		}
+		ratings.removeAll(ratingHolder);
 	}
 	
 	public void removeComments(List<Comment> commentList){
+		List<Comment> commentsHolder = new ArrayList<>();
 		for(Comment comment: commentList)
 			if (comments.contains(comment)){
-				comments.remove(comment);
+				commentsHolder.add(comment);
+				comment.setUser(null);
 		}
+		comments.removeAll(commentsHolder);
 	}
 	public User() {
 		super();

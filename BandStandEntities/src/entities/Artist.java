@@ -1,7 +1,9 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -50,45 +52,65 @@ public class Artist {
 	
 	
 	public void removeRatings(List<Rating> ratingsList){
+		List<Rating> ratingListHolder = new ArrayList<>();
 		for(Rating rating: ratingsList)
 			if (ratings.contains(rating)){
-				ratings.remove(rating);
+				ratingListHolder.add(rating);
+				rating.setArtist(null);
 		}
-	}
+		ratings.removeAll(ratingListHolder);
 	
+	}
 	public void removeBookings(List<Booking> bookingsList){
+		List<Booking> bookingListHolder = new ArrayList<>();
 		for(Booking booking: bookingsList)
 			if (bookings.contains(booking)){
-				bookings.remove(booking);
+				bookingListHolder.add(booking);
+				booking.setArtist(null);
 		}
+		
+		bookings.removeAll(bookingsList);
+		
 	}
 	
 	public void removePhotos(List<Photo> photosList){
+		List<Photo> photoListHolder = new ArrayList<>();
 		for(Photo photo: photosList)
 			if (photos.contains(photo)){
-				photos.remove(photo);
+				photoListHolder.add(photo);
+				photo.setArtist(null);
 		}
+		photosList.removeAll(photoListHolder);
 	}
 	
 	public void removeRecordings(List<Recording> recordingsList){
+		List<Recording> recordingListHolder = new ArrayList<>();
 		for(Recording recording: recordingsList)
 			if (recordings.contains(recording)){
-				recordings.remove(recording);
+				recordingListHolder.add(recording);
+				recording.setArtist(null);
 		}
+		recordingsList.removeAll(recordingListHolder);
 	}
 	
 	public void removeComments(List<Comment> commentList){
+		List<Comment> commentListHolder = new ArrayList<>();
 		for(Comment comment: commentList)
 			if (comments.contains(comment)){
-				comments.remove(comment);
+				commentListHolder.add(comment);
+				comment.setArtist(null);
 		}
+		commentList.removeAll(commentListHolder);
 	}
 	
 	public void removeGenres(List<Genre> genresList){
+		List<Genre> genreListHolder = new ArrayList<>();
 		for(Genre genre: genresList)
 			if (genres.contains(genre)){
-				genres.remove(genre);
+				genreListHolder.add(genre);
+				genre.setArtist(null);
 		}
+		genresList.removeAll(genreListHolder);
 	}
 	public Artist(int id, String name, String description, String email, String password) {
 		super();
