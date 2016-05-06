@@ -544,6 +544,16 @@ public class BandStandController {
 
 	// this allows you to add a booking to an artist and user
 
+	@RequestMapping("reloadUser")
+	public ModelAndView reloadUser(int userId, HttpSession session){
+		ModelAndView mv = new ModelAndView();
+		User user = dao.getUserById(userId);
+		session.removeAttribute("user");
+		session.setAttribute("user",  user);
+		mv.setViewName("ArtistList.jsp");
+		return mv;
+		
+	}
 	@RequestMapping("addBooking.do")
 	public ModelAndView addDate(@RequestParam("artistID") int artistID, @RequestParam("date") String date,
 			@RequestParam("userID") int userID, HttpSession session) {
